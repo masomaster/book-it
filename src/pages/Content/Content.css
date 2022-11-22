@@ -1,0 +1,8 @@
+.content {
+    grid-area: content;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 80% 20%;
+    align-content: center;
+    height: 100%;
+  }
