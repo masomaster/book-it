@@ -1,5 +1,17 @@
 aside {
-    height: 75%;
+    height: 80%;
     background-color: grey;
     align-self: center;
+}
+
+aside label, aside .btn {
+    display: block;
+}
+
+aside form input:valid {
+    color: green;
+}
+
+aside form input:invalid {
+    color: red;
 }

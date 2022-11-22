@@ -1,3 +1,7 @@
+.summary-pane {
+    height: 85vh;
+}
+
 .content {
     grid-area: content;
     display: grid;

@@ -19,6 +19,11 @@ const userSchema = new Schema({
         minLength: 3,
         required: true,
     },
+    googleId: {
+        type: String,
+    },
+    avatar: String,
+    readingSpeed: Number,
 }, {
     timestamps: true,
     toJSON: {
