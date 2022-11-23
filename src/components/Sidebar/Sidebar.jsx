@@ -1,11 +1,16 @@
 import NewBookForm from '../NewBookForm/NewBookForm';
 import './Sidebar.css';
 
-export default function Sidebar({ user }) {
+export default function Sidebar({ user, bookshelves, library }) {
     return (
         <aside>
             <p>This is the sidebar</p>
-            <NewBookForm user = {user}/>
+            
+            { true ?
+                <NewBookForm />
+                :
+                <div>asdf</div>
+            }
         </aside>
     )
 }

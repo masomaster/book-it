@@ -6,6 +6,8 @@ import NavBar from '../../components/NavBar/NavBar';
 import Home from '../Home/Home';
 import AuthPage from "../AuthPage/AuthPage";
 import BookList from '../BookList/BookList';
+import BookshelfList from '../BookshelfList/BookshelfList';
+
 import './App.css';
 
 export default function App() {
@@ -19,6 +21,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home user = {user}/>} />
             <Route path="/books" element={<BookList user = {user}/>} />
+            <Route path="/bookshelves" element={<BookshelfList user = {user}/>} />
           </Routes>
         </>
           :

@@ -10,5 +10,8 @@ const bookshelfSchema = new Schema({
     timestamps: true,
 })
 
+bookshelfSchema.statics.getBookshelves = function(userId) {
+    return this.find({user: userId});
+}
 
 module.exports = mongoose.model('Bookshelf', bookshelfSchema);
