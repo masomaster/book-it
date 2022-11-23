@@ -1,12 +1,20 @@
 const AdminJS = require('adminjs')
 const AdminJSExpress = require('@adminjs/express')
+AdminJS.registerAdapter(require('@adminjs/mongoose'));
+
 const express = require('express');
-// const Connect = require('connect-pg-simple')
-// const session = require('express-session')
+const Connect = require('connect-pg-simple')
+const session = require('express-session')
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const ensureLoggedIn = require('./config/ensureLoggedIn')
+
+// Must require models for AdminJS
+const Category = require('./models/category')
+const Book = require('./models/book')
+const Bookshelf = require('./models/bookshelf')
+const User = require('./models/user')
 
 require('dotenv').config();
 require('./config/database');
@@ -42,19 +50,24 @@ app.listen(port, function() {
   console.log(`Express app running on port ${port}`)
 });
 
-// const PORT = 3000
 
-// const start = async () => {
-//   const app = express()
+/* --- Extra middleware for AdminJS --- */
+const PORT = 3000
 
-//   const admin = new AdminJS({})
+const start = async () => {
+  const app = express()
 
-//   const adminRouter = AdminJSExpress.buildRouter(admin)
-//   app.use(admin.options.rootPath, adminRouter)
+  const admin = new AdminJS({
+    resources: [Category, Book, Bookshelf, User],
+    rootPath: '/admin',
+  })
 
-//   app.listen(PORT, () => {
-//     console.log(`AdminJS started on http://localhost:${PORT}${admin.options.rootPath}`)
-//   })
-// }
+  const adminRouter = AdminJSExpress.buildRouter(admin)
+  app.use(admin.options.rootPath, adminRouter)
 
-// start()
+  app.listen(PORT, () => {
+    console.log(`AdminJS started on http://localhost:${PORT}${admin.options.rootPath}`)
+  })
+}
+
+start()
