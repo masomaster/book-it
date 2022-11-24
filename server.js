@@ -11,7 +11,6 @@ const logger = require('morgan');
 const ensureLoggedIn = require('./config/ensureLoggedIn')
 
 // Must require models for AdminJS
-const Category = require('./models/category')
 const Book = require('./models/book')
 const Bookshelf = require('./models/bookshelf')
 const User = require('./models/user')
@@ -52,13 +51,13 @@ app.listen(port, function() {
 
 
 /* --- Extra middleware for AdminJS --- */
-const PORT = 3000
+const PORT = 8000
 
 const start = async () => {
   const app = express()
 
   const admin = new AdminJS({
-    resources: [Category, Book, Bookshelf, User],
+    resources: [Book, Bookshelf, User],
     rootPath: '/admin',
   })
 
