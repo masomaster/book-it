@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import * as booksAPI from '../../utilities/books-api';
+import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 import '../Sidebar/Sidebar.css';
 
-export default function NewBookForm({ user, library, setLibrary }) {
+
+export default function NewBookForm({ user, library, setLibrary, selectedBook, handlePopulateForm }) {
     const [newBookForm, setNewBookForm] = useState({
         title: '',
         authors: '',
@@ -13,6 +14,7 @@ export default function NewBookForm({ user, library, setLibrary }) {
         pagesRead: '',
         category: '',
         url: '',
+        description: '',
         course: '',
         dueDate: '',
         pinned: false,
@@ -20,8 +22,23 @@ export default function NewBookForm({ user, library, setLibrary }) {
         bookshelf: '',
         owned: true,
         error: '',
+        user: '',
+        img: '',
     });
-    const navigate = useNavigate()
+    const [bookshelves, setBookshelves] = useState([])
+
+    useEffect(function() {
+        if (selectedBook) {
+            setNewBookForm(selectedBook)
+        }
+    }, [handlePopulateForm, selectedBook])
+    
+    useEffect(function() {
+        (async function getBookshelves(){
+            const bookshelfSet = await bookshelvesAPI.getBookshelves();
+            setBookshelves(bookshelfSet);
+        })();
+    }, [])
 
     function handleChange(evt) {
         const newFormData = { ...newBookForm, [evt.target.name]: evt.target.value, error: ''}
@@ -42,7 +59,6 @@ export default function NewBookForm({ user, library, setLibrary }) {
             formDataCopy.user = user._id;
 
             const newBook = await booksAPI.addBook(formDataCopy);
-            console.log(newBook)
             setNewBookForm({
                 title: '',
                 authors: '',
@@ -52,6 +68,7 @@ export default function NewBookForm({ user, library, setLibrary }) {
                 pagesRead: '',
                 category: '',
                 url: '',
+                description: '',
                 course: '',
                 dueDate: '',
                 pinned: false,
@@ -59,8 +76,10 @@ export default function NewBookForm({ user, library, setLibrary }) {
                 bookshelf: '',
                 owned: true,
                 error: '',
+                user: '',
+                img: '',
             })
-            setLibrary([...library, newBook]);
+            // setLibrary([...library, newBook]); Might need this later if NewBookForm is on the BookList page
         } catch {
             setNewBookForm({
                 ...newBookForm, 
@@ -89,6 +108,8 @@ export default function NewBookForm({ user, library, setLibrary }) {
                     <input type="text" name="category" value={newBookForm.category} onChange={handleChange}/>
                     <label>Website</label>
                     <input type="text" name="url" value={newBookForm.url} onChange={handleChange}/>
+                    <label>Description</label>
+                    <textarea rows="3" cols="16" name="description" value={newBookForm.description} onChange={handleChange}/>
                     <label>Course</label>
                     <input type="text" name="course" value={newBookForm.course} onChange={handleChange}/>
                     <label>Due Date</label>
@@ -103,8 +124,7 @@ export default function NewBookForm({ user, library, setLibrary }) {
                     <label>Add to Bookshelf</label>
                     <select name="bookshelf" value={newBookForm.bookshelf} onChange={handleChange}>
                         <option></option>
-                        <option>Placeholder</option>
-                        <option>Other Placeholder</option>
+                        {bookshelves?.map(b => <option key={b._id} value={b._id}>{b.title}</option>)}
                     </select>
                     <label>Owned?</label>
                     <select name="owned" value={newBookForm.owned} onChange={handleChange}>

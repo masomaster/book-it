@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import BookListItem from '../../components/BookListItem/BookListItem';
+import SearchResultItem from '../../components/SearchResultItem/SearchResultItem';
 import Sidebar from "../../components/Sidebar/Sidebar";
 import './Home.css';
 
 export default function Home({ user }) {
     const [searchResults, setSearchResults] = useState("");
     const [queryText, setQueryText] = useState("");
+    const [selectedBook, setSelectedBook] = useState(null);
 
     function handleQuery(evt) {
         evt.preventDefault();
@@ -15,7 +16,6 @@ export default function Home({ user }) {
         .then((res) => res.json())
         .then((content) => {
             setSearchResults(content.items)
-            console.log(searchResults);
             setQueryText("");
         })
         .catch((err) => {
@@ -23,8 +23,23 @@ export default function Home({ user }) {
         });
     }
 
-    function handlePopulateForm(evt){
-        console.log(evt.target);
+    function handlePopulateForm(book){        
+        // Manipulate data to fit NewBookForm (=== model)
+        const transformedBook = {
+            title: book.volumeInfo.title ? book.volumeInfo.title : '',
+            authors: book.volumeInfo.authors ? book.volumeInfo.authors[0] : '',
+            pubYear: book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate.slice(0, 4) : '',
+            publisher: book.volumeInfo.publisher ? book.volumeInfo.publisher : '',
+            totalPages: book.volumeInfo.pageCount ? book.volumeInfo.pageCount : '',
+            category: book.volumeInfo.categories ? book.volumeInfo.categories[0] : '',
+            url: book.volumeInfo.previewLink ? book.volumeInfo.previewLink : '',
+            description: book.volumeInfo.description ? book.volumeInfo.description : '',
+            course: '',
+            pagesRead: '',
+            dueDate: '',
+            img: book.volumeInfo.imageLinks?.smallThumbnail,
+        }
+        setSelectedBook(transformedBook)
     }
 
     return (
@@ -44,17 +59,15 @@ export default function Home({ user }) {
                     { searchResults ?
                         <div>
                             {searchResults.map(book => (
-                                <div className="book-list-item" onClick={handlePopulateForm}>
-                                    <button key={book.volumeInfo.id}>{book.volumeInfo.title}</button>
-                                </div>                        
+                                <SearchResultItem book={book} handlePopulateForm={handlePopulateForm} key={book.id}/>                                
                             ))}
                         </div>
                     :
-                        <div></div>
+                        <div>Search for a book to add it to your library!</div>
                     }
                 </div>
             </div>
-            <Sidebar user = {user}/>
+            <Sidebar user = {user} selectedBook={selectedBook} handlePopulateForm={handlePopulateForm}/>
         </div>
     )
 }

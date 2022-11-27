@@ -6,8 +6,6 @@ import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 export default function BookshelfList({ user }) {
     const [bookshelves, setBookshelves] = useState([])
 
-    const userId = user._id;
-
     useEffect(function() {
         (async function getBookshelves(){
             const bookshelfSet = await bookshelvesAPI.getBookshelves();
@@ -20,7 +18,7 @@ export default function BookshelfList({ user }) {
             <div className="bookshelf-list">
                 <h2>Your Bookshelves</h2>
                 {bookshelves.map(shelf => (
-                    <BookshelfListItem bookshelf={shelf} key={shelf.id} />
+                    <BookshelfListItem bookshelf={shelf} key={shelf._id} />
                     ))}
             </div>
             <NewBookshelfForm user={user} bookshelves={bookshelves} setBookshelves={setBookshelves}/>
