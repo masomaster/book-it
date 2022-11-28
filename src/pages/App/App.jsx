@@ -7,8 +7,9 @@ import Home from '../Home/Home';
 import AuthPage from "../AuthPage/AuthPage";
 import BookList from '../BookList/BookList';
 import BookshelfList from '../BookshelfList/BookshelfList';
+import NewBook from '../NewBook/NewBook';
 
-// import './App.css';
+import './App.css';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -21,6 +22,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home user = {user}/>} />
             <Route path="/books" element={<BookList user = {user}/>} />
+            <Route path="/books/new" element={<NewBook user = {user}/>} />
             <Route path="/bookshelves" element={<BookshelfList user = {user}/>} />
           </Routes>
         </>

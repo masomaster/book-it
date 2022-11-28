@@ -29,14 +29,29 @@ const bookSchema = new Schema({
 
 bookSchema.virtual('percentRead').get(function() {
     if (this.pagesRead && this.totalPages){
-        let percent = parseInt((this.pagesRead / this.totalPages)*100).toString() + "%";
+        let percent = parseInt((this.pagesRead / this.totalPages)*100);
         return percent;
     }
     else return "Not started";
 })
 
+bookSchema.virtual('remainingPages').get(function() {
+    if (this.totalPages){
+        const remainingPages = this.totalPages - this.pagesRead;
+        return remainingPages;
+    }
+    else return 0;
+})
+
 bookSchema.statics.getLibrary = function(userId) {
     return this.find({user: userId});
+}
+
+bookSchema.statics.getNextUp = function(userId) {
+    return this.findOne({
+        user: userId,
+        pinned: true
+    })
 }
 
 module.exports = mongoose.model('Book', bookSchema);

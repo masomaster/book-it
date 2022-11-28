@@ -3,6 +3,7 @@ const Book = require('../../models/book');
 module.exports = {
   getLibrary,
   addBook,
+  getNextUp,
 };
 
 async function getLibrary(req, res) {
@@ -12,5 +13,10 @@ async function getLibrary(req, res) {
 
 async function addBook(req, res) {
   const book = await Book.create(req.body);
+  res.json(book)
+}
+
+async function getNextUp(req, res) {
+  const book = await Book.getNextUp(req.user._id)
   res.json(book)
 }

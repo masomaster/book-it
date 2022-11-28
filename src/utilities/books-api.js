@@ -9,3 +9,7 @@ export async function addBook(newBook) {
 export async function getLibrary() {
     return sendRequest(`${BASE_URL}/`);
 }
+
+export async function getNextUp() {
+    return sendRequest(`${BASE_URL}/next`)
+}
