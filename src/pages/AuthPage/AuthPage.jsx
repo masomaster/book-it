@@ -1,6 +1,7 @@
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { useState } from 'react';
+import "./AuthPage.css";
 
 export default function AuthPage({setUser}) {
     const [login, setLogin] = useState(true)
@@ -10,7 +11,7 @@ export default function AuthPage({setUser}) {
     }
 
     return (
-        <main>
+        <main className="auth-page">
             { login ? 
                 <>
                     <h1>Log In</h1>

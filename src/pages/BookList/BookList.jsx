@@ -13,7 +13,6 @@ export default function BookList({ user }) {
     })
 
     const speed = user.readingSpeed;
-    console.log(user)
     const totalHours = totalPages / speed;
 
     useEffect(function() {
@@ -28,7 +27,7 @@ export default function BookList({ user }) {
             <div className="book-list">
                 <p>You've read {totalHours ? `for {totalHours} hours totalling` : ''} {totalPages} pages!</p>
                 <h2>Your Library</h2>
-                <div className="book=list-item">
+                <div className="book-list-item">
                     {library.map(book => (
                     <BookListItem book={book} key={book.id}/>
                     ))}

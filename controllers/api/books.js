@@ -4,6 +4,7 @@ module.exports = {
   getLibrary,
   addBook,
   getNextUp,
+  getInProgressBooks
 };
 
 async function getLibrary(req, res) {
@@ -19,4 +20,9 @@ async function addBook(req, res) {
 async function getNextUp(req, res) {
   const book = await Book.getNextUp(req.user._id)
   res.json(book)
+}
+
+async function getInProgressBooks(req, res) {
+  const books = await Book.getInProgressBooks(req.user._id)
+  res.json(books)
 }

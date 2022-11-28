@@ -13,3 +13,7 @@ export async function getLibrary() {
 export async function getNextUp() {
     return sendRequest(`${BASE_URL}/next`)
 }
+
+export async function getInProgressBooks() {
+    return sendRequest(`${BASE_URL}/current`)
+}

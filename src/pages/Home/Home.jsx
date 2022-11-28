@@ -10,7 +10,7 @@ export default function Home({ user }) {
     return (
         <div className="content home">
             <div className="home">
-                <NextUp user = {user}/>
+                <NextUp />
                 <CurrentlyReading />
                 <HighlightedBookshelf />
                 <ReadingStats />

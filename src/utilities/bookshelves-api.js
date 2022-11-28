@@ -9,3 +9,7 @@ export async function getBookshelves() {
 export async function addBookshelf(newBookshelf) {
     return sendRequest(`${BASE_URL}/new`, 'POST', newBookshelf);
 }
+
+export async function getHighlightedBookshelf() {
+    return sendRequest(`${BASE_URL}/highlighted`);
+}

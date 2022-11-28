@@ -14,4 +14,11 @@ bookshelfSchema.statics.getBookshelves = function(userId) {
     return this.find({user: userId});
 }
 
+bookshelfSchema.statics.getHighlightedBookshelf = function(userId) {
+    return this.findOne({
+        user: userId,
+        pinned: true
+    });
+}
+
 module.exports = mongoose.model('Bookshelf', bookshelfSchema);
