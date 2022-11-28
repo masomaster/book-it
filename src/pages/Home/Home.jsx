@@ -1,4 +1,6 @@
 import { useState } from 'react';
+// import api from 'zotero-api-client';
+
 import SearchResultItem from '../../components/SearchResultItem/SearchResultItem';
 import Sidebar from "../../components/Sidebar/Sidebar";
 import './Home.css';
@@ -42,10 +44,31 @@ export default function Home({ user }) {
         setSelectedBook(transformedBook)
     }
 
+    /*-- Testing Zotero API -- */
+    
+    // const userID = 936323;
+    // const AUTH_KEY = 'WSc3Li6IhumS3IPwLkHeqrBf';
+    // const myapi = api(AUTH_KEY).library('user', userID);
+
+
+    // async function getZoteroInfo() {
+    //     const response = await api().library('user', 475425).collections('X42A7DEE').items().get();
+    //     const response = 'https://api.zotero.org/users/475425/items/X42A7DEE?v=3';
+    //     fetch(response)
+    //     .then((res) => res.json())
+    //     .then((content) => {
+    //         console.log(content)
+    //     })
+    //     const items = response.getData();
+    //     console.log(items);
+    //     const itemsResponse = await myapi.items().get();
+    //     console.log(itemsResponse);
+    // }
+    // getZoteroInfo()
+
     return (
         <div className="content home">
             <div className="home">
-                <p>This is the home page</p>
                 <div>
                     <h3>Testing Area for Google API</h3>
                     <form onSubmit={handleQuery}>

@@ -27,13 +27,12 @@ const bookSchema = new Schema({
     toJSON: { virtuals: true },
 })
 
-bookSchema.virtual('hrsToComplete').get(function() {
-
-})
-
 bookSchema.virtual('percentRead').get(function() {
-    if (this.pagesRead && this.totalPages) return this.pagesRead / this.totalPages;
-    else return 0;
+    if (this.pagesRead && this.totalPages){
+        let percent = parseInt((this.pagesRead / this.totalPages)*100).toString() + "%";
+        return percent;
+    }
+    else return "Not started";
 })
 
 bookSchema.statics.getLibrary = function(userId) {

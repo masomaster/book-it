@@ -8,11 +8,11 @@ import AuthPage from "../AuthPage/AuthPage";
 import BookList from '../BookList/BookList';
 import BookshelfList from '../BookshelfList/BookshelfList';
 
-import './App.css';
+// import './App.css';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
-
+  console.log('user', user)
   return (
     <main className="App">
       { user ? 

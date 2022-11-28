@@ -1,7 +1,9 @@
 export default function BookListItem({ book }) {
     return (
         <div className="book-list-item">
-            <p>Title: {book.title}</p>
+            <div><img src={book.img} /></div>
+            <p>{book.title} by {book.authors}</p>
+            <p>{book.percentRead}</p>
         </div>
     )
 }

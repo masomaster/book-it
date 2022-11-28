@@ -7,7 +7,14 @@ import NewBookForm from '../../components/NewBookForm/NewBookForm';
 export default function BookList({ user }) {
     const [library, setLibrary] = useState([])
     
-    const userId = user._id;
+    let totalPages = 0;
+    library.forEach(function(b) {
+        totalPages += b.pagesRead;
+    })
+
+    const speed = user.readingSpeed;
+    console.log(user)
+    const totalHours = totalPages / speed;
 
     useEffect(function() {
         (async function getLibrary(){
@@ -19,6 +26,7 @@ export default function BookList({ user }) {
     return (
         <div className="content">
             <div className="book-list">
+                <p>You've read {totalHours ? `for {totalHours} hours totalling` : ''} {totalPages} pages!</p>
                 <h2>Your Library</h2>
                 <div className="book=list-item">
                     {library.map(book => (
