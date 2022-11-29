@@ -8,14 +8,14 @@ import './Home.css';
 export default function Home({ user }) {
     
     return (
-        <div className="content home">
-            <div className="home">
+        <div className="content">
+            <div className="summary-pane">
                 <NextUp />
                 <CurrentlyReading />
                 <HighlightedBookshelf />
                 <ReadingStats />
             </div>
-            <Sidebar user = {user}/>
+            {/* <Sidebar user = {user}/> */}
         </div>
     )
 }

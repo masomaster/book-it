@@ -4,7 +4,7 @@
     grid-template-rows: repeat(4, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    max-width: 500px; /* change this later using skeleton grid, ensure mobile compatibility */
+    /* max-width: 500px; change this later using skeleton grid, ensure mobile compatibility */
     background-color: darkgrey;
 }
 .book-img {

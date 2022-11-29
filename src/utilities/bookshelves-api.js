@@ -13,3 +13,7 @@ export async function addBookshelf(newBookshelf) {
 export async function getHighlightedBookshelf() {
     return sendRequest(`${BASE_URL}/highlighted`);
 }
+
+export async function addBook(newBookID, bookshelfID) {
+    return sendRequest(`${BASE_URL}/addbook`, 'POST', {newBookID, bookshelfID});
+}

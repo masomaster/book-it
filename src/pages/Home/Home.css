@@ -1,12 +1,14 @@
 .summary-pane {
-    height: 85vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
 
-.content {
+/* .content {
     grid-area: content;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 80% 20%;
     align-content: center;
     height: 100%;
-}
+} */

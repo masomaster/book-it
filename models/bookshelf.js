@@ -6,6 +6,7 @@ const bookshelfSchema = new Schema({
     description: String,
     pinned: { type: Boolean, default: false },
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    books: [{type: Schema.Types.ObjectId, ref: "Book"}]
 }, {
     timestamps: true,
 })
