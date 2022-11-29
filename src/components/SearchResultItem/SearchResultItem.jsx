@@ -5,7 +5,12 @@ export default function SearchResultItem({ book, handlePopulateForm }) {
     
     return (
         <div className="book-list-item">
-            <p>Title: {book.volumeInfo.title}</p><button onClick={handleClick}>This is it!</button>
+            <div>
+                <img src={book.volumeInfo.imageLinks?.smallThumbnail} alt="book cover"/>
+            </div>
+            <p>{book.volumeInfo.title}</p>
+            <p>{book.volumeInfo.authors[0]}</p>
+            <button onClick={handleClick}>This is it!</button>
         </div>
     )
 }                                    
