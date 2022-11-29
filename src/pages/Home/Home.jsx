@@ -5,7 +5,7 @@ import ReadingStats from "../../components/ReadingStats/ReadingStats";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import './Home.css';
 
-export default function Home({ user }) {
+export default function Home({ user, library }) {
     
     return (
         <div className="content">
@@ -13,7 +13,7 @@ export default function Home({ user }) {
                 <NextUp />
                 <CurrentlyReading />
                 <HighlightedBookshelf />
-                <ReadingStats />
+                <ReadingStats user={user} library={library}/>
             </div>
             {/* <Sidebar user = {user}/> */}
         </div>

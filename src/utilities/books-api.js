@@ -17,3 +17,7 @@ export async function getNextUp() {
 export async function getInProgressBooks() {
     return sendRequest(`${BASE_URL}/current`)
 }
+
+export async function getBooksRead() {
+    return sendRequest(`${BASE_URL}/totalbooks`)
+}

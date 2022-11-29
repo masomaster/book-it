@@ -56,7 +56,22 @@ bookSchema.statics.getNextUp = function(userId) {
 bookSchema.statics.getInProgressBooks = function(userId) {
     return this.find({
         user: userId,
-        pagesRead: { $gt: 0} // Need to update this to not include if pagesRead === totalPages and also search for done=true
+        $and: [
+            {$and: [
+                {$expr: {$gt: ["$pagesRead", 0 ]}},
+                {$isNumber: "$pagesRead"}
+            ]}, 
+            {$expr: { $ne: ["$pagesRead", "$totalPages"]}}
+        ],
+        done: false,
+    })
+}
+
+bookSchema.statics.getBooksRead = function(userId) {
+    return this.find({
+        user: userId,
+        $or: [{done: true}, {$expr: { $eq: ["$pagesRead", "$totalPages"]}}] 
+        
     })
 }
 

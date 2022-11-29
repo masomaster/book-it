@@ -1,26 +1,27 @@
 import { useState, useEffect } from 'react';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
+import CurrentlyReadingItem from '../Book/Book';
 import "./HighlightedBookshelf.css";
 
 export default function HighlightedBookshelf() {
-    const [bookshelf, setBookshelf] = useState([])
+    const [bookshelf, setBookshelf] = useState({})
+    const [books, setBooks] = useState([])
 
     useEffect(function() {
         (async function getHighlightedBookshelf(){
             const shelf = await bookshelvesAPI.getHighlightedBookshelf();
             setBookshelf(shelf);
+            setBooks(shelf.books);
         })()
     },[])
 
-    console.log(bookshelf)
-
     return (
-        <div className="highlighted-bookhself">
+        <div className="highlighted-bookshelf-panel">
             <h3>Pinned Bookshelf: {bookshelf.title}</h3>
-            <div>
-                {bookshelf.books.map((b) => (
-                    <p key={b.title}>{b.title}</p>
-                ))}
+            <div className="highlighted-bookshelf-list">
+                {books.map((b) => (
+                    <CurrentlyReadingItem book={b} key={b.id} />
+                    ))}
             </div>
         </div>
     )

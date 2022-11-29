@@ -26,18 +26,17 @@ async function getHighlightedBookshelf(req, res) {
           handleError(err);
           console.log('failed to populate')
       } else {
-          console.log('bookshelf populated', bookshelf)
           res.json(bookshelf)
       }
   });
 }
 
 async function addBook(req, res) {
-  console.log('req.body from the bookshelves controller', req.body)
   const bookshelf = await Bookshelf.findOne({
     user: req.user._id,
     _id: req.body.bookshelfID
   })
   bookshelf.books.push(req.body.newBookID)
+  bookshelf.save();
   res.json(bookshelf);
 }
