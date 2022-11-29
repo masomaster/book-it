@@ -4,24 +4,21 @@ import "./HighlightedBookshelf.css";
 
 export default function HighlightedBookshelf() {
     const [bookshelf, setBookshelf] = useState([])
-    const [books, setBooks] = useState([])
 
     useEffect(function() {
         (async function getHighlightedBookshelf(){
-            const shelfAndBooks = await bookshelvesAPI.getHighlightedBookshelf();
-            console.log(shelfAndBooks)
-            setBookshelf(shelfAndBooks.bookshelf);
-            setBooks(shelfAndBooks.books);
+            const shelf = await bookshelvesAPI.getHighlightedBookshelf();
+            setBookshelf(shelf);
         })()
     },[])
-    
 
-    // Could I have another function here that returns all books with bookshelf: bookshelf._id?
+    console.log(bookshelf)
+
     return (
         <div className="highlighted-bookhself">
             <h3>Pinned Bookshelf: {bookshelf.title}</h3>
             <div>
-                {books.map((b) => (
+                {bookshelf.books.map((b) => (
                     <p key={b.title}>{b.title}</p>
                 ))}
             </div>

@@ -19,7 +19,7 @@ bookshelfSchema.statics.getHighlightedBookshelf = function(userId) {
     return this.findOne({
         user: userId,
         pinned: true
-    });
+    })
 }
 
 module.exports = mongoose.model('Bookshelf', bookshelfSchema);

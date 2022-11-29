@@ -59,8 +59,6 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, h
             formDataCopy.user = user._id;
 
             const newBook = await booksAPI.addBook(formDataCopy);
-            // add functionality to add newBook to the desired bookshelf
-            console.log()
             if (formDataCopy.bookshelf) {
                 const bookshelf = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelf);
             }

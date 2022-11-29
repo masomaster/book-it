@@ -21,7 +21,6 @@ const bookSchema = new Schema({
     img: String,
     lastReadingDate: Date,
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    // bookshelf: { type: Schema.Types.ObjectId, ref: "Bookshelf" },
 }, {
     timestamps: true,
     toJSON: { virtuals: true },
