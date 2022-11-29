@@ -17,7 +17,7 @@ export default function CurrentlyReading() {
     return (
         <div className="currently-reading-panel">
             <h3>Books You're Currently Enjoying</h3>
-            <div className="currently-reading-list">
+            <div className="horizontal-book-list">
                 {inProgressBooks.map(book => (
                 <div className="currently-reading-item" key={book._id}>
                     <CurrentlyReadingItem book={book} key={book.title} />

@@ -10,7 +10,15 @@ module.exports = {
 
 async function getBookshelves(req, res) {
   const bookshelves = await Bookshelf.getBookshelves(req.user._id)
-  res.json(bookshelves);
+  .populate('books')
+  .exec(function(err, bookshelf) {
+      if (err) {
+          handleError(err);
+          console.log('failed to populate')
+      } else {
+          res.json(bookshelf)
+      }
+  });
 }
 
 async function addBookshelf(req, res) {

@@ -1,24 +1,15 @@
-import { useState, useEffect } from 'react';
 import NewBookshelfForm from '../../components/NewBookshelfForm/NewBookshelfForm';
 import BookshelfListItem from '../../components/BookshelfListItem/BookshelfListItem';
-import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 
-export default function BookshelfList({ user }) {
-    const [bookshelves, setBookshelves] = useState([])
-
-    useEffect(function() {
-        (async function getBookshelves(){
-            const bookshelfSet = await bookshelvesAPI.getBookshelves();
-            setBookshelves(bookshelfSet);
-        })();
-    }, [])
+export default function BookshelfList({ user, bookshelves, setBookshelves }) {
+    
 
     return (
         <div className="content">
             <div className="bookshelf-list">
                 <h2>Your Bookshelves</h2>
                 {bookshelves.map(shelf => (
-                    <BookshelfListItem bookshelf={shelf} key={shelf._id} />
+                    <BookshelfListItem bookshelf={shelf} key={shelf._id} bookshelves={bookshelves}/>
                     ))}
             </div>
             <NewBookshelfForm user={user} bookshelves={bookshelves} setBookshelves={setBookshelves}/>

@@ -14,3 +14,7 @@
 footer {
   grid-area: footer;
 }
+
+.horizontal-book-list {
+  display: flex;
+}

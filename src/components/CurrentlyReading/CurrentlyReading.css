@@ -1,6 +1,3 @@
-.currently-reading-list {
-    display: flex;
-}
 .currently-reading-item {
     display: grid;
     align-items: center;

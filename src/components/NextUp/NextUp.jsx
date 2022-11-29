@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as booksAPI from '../../utilities/books-api';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import EditDeleteButtons from '../EditDeleteButtons/EditDeleteButtons';
 import "./NextUp.css";
 
 export default function NextUp() {
@@ -26,10 +27,7 @@ export default function NextUp() {
             <h4 className="book-title">Next up: {nextUpBook?.title}!</h4>
             <p className="remaining-hours">You can finish this book in only {remainingHours} hours!</p>
             <ProgressBar done={nextUpBook?.percentRead}/>
-            <div className="buttons">
-                <button>Edit</button>
-                <button>Delete</button>
-            </div>
+            <EditDeleteButtons book={nextUpBook}/>
         </div>
     )
 }

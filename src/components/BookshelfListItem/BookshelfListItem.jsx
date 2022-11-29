@@ -1,10 +1,12 @@
-export default function BookshelfListItem({ bookshelf }) {
+import { Link } from "react-router-dom";
+
+export default function BookshelfListItem({ bookshelf}) {
     return (
-        <div className="bookshelf-list-item">
-            <p>{bookshelf.title}</p>
-            <p>{bookshelf.description}</p>
-            {bookshelf.pinned ? <p>Pinned</p> : <div></div>}
-            <hr />
-        </div>
+        <Link to={`/bookshelves/${bookshelf._id}`}>
+            <div className="bookshelf-list-item">
+                <p>{bookshelf.title}</p>
+                <hr />
+            </div>
+        </Link>
     )
 }
