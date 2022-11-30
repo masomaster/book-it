@@ -6,8 +6,6 @@ import EditDeleteButtons from '../EditDeleteButtons/EditDeleteButtons';
 import "./NextUp.css";
 
 export default function NextUp() {
-    // here or elsewhere?
-    // I need a function that retrieves ONE pinned book for now (.findOne()).
     const [nextUpBook, setNextUpBook] = useState(null);
     const readingSpeed = 30; //this is a placeholder number until user's readingSpeed can be imported
 
@@ -19,11 +17,11 @@ export default function NextUp() {
     },[])
 
     const remainingHours = Math.round((nextUpBook?.remainingPages / readingSpeed) + Number.EPSILON) * 100 /100;
-    
+
     return (
         <div className="next-up">
             <div className="book-img">
-                <Link to={`/books/${nextUpBook._id}`}>
+                <Link to={`/books/${nextUpBook?._id}`}>
                     <img src={nextUpBook?.img} alt="book over"/>
                 </Link>
             </div>
