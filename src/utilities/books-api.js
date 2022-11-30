@@ -27,6 +27,5 @@ export async function deleteBookshelf(bookId) {
 }
 
 export async function updateBook(bookId, newBookInfo) {
-    console.log(bookId, newBookInfo)
     return sendRequest(`${BASE_URL}/updatebook`, 'POST', {bookId, newBookInfo});
 }

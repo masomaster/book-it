@@ -126,13 +126,9 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
                 <label>Notes</label>
                 <textarea rows="3" cols="16" name="notes" value={formData.notes} onChange={handleChange}/>
                 <label>Pin to Prioritize?</label>
-                <select name="pinned" onChange={handleChange}>
-                    <option>No</option>
-                    {formData.pinned ? 
-                        <option selected>Yes</option>
-                    :
-                        <option>Yes</option>
-                    }
+                <select name="pinned" value={formData.pinned} onChange={handleChange}>
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
                 </select>
                 <label>Add to Bookshelf</label>
                 <select name="bookshelf" /* ADD BACK IN ONCE FEATURE IMPLEMENTED value={formData.bookshelf} */ onChange={handleChange}>
@@ -140,22 +136,14 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
                     {bookshelves?.map(b => <option key={b._id} value={b._id}>{b.title}</option>)}
                 </select>
                 <label>Done?</label>
-                <select name="done" onChange={handleChange}>
-                    <option>No</option>
-                    {formData.done ? 
-                        <option selected>Yes</option>
-                    :
-                        <option>Yes</option>
-                    }
+                <select name="done" value={formData.done}onChange={handleChange}>
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
                 </select>
                 <label>Owned?</label>
-                <select name="owned" onChange={handleChange}>
-                    <option value="no">No</option>
-                    {formData.owned ? 
-                        <option selected>Yes</option>
-                    :
-                        <option>Yes</option>
-                    }
+                <select name="owned" value={formData.owned}onChange={handleChange}>
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
                 </select><br />
                 <input type="submit" className="btn" value="Update Book" />
             </form>
