@@ -24,10 +24,10 @@ export default function App() {
         <>
           <NavBar user = {user} setUser = {setUser}/>
           <Routes>
-            <Route path="/" element={<Home user = {user} library={library} setLibrary={setLibrary} setBookshelves={setBookshelves}/>} />
+            <Route path="/" element={<Home user = {user} library={library} setLibrary={setLibrary} setBookshelves={setBookshelves} />} />
             <Route path="/books" element={<BookList library={library} />} />
-            <Route path="/books/new" element={<NewBook user={user} library={library} setLibrary={setLibrary}/>} />
-            <Route path="/books/:bookId" element={<BookDetailPage library={library} setLibrary={setLibrary}/>} />
+            <Route path="/books/new" element={<NewBook user={user} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} />} />
+            <Route path="/books/:bookId" element={<BookDetailPage library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} />} />
             <Route path="/bookshelves" element={<BookshelfList user={user} bookshelves={bookshelves} setBookshelves={setBookshelves}/>} />
             <Route path="/bookshelves/:bookshelfId" element={<BookshelfDetailPage bookshelves={bookshelves} setBookshelves={setBookshelves}/>} />
           </Routes>

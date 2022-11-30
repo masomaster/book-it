@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 
-export default function EditBookshelfForm({ book, library, setLibrary, setEditToggle }) {
+export default function EditBookForm({ book, library, setLibrary, bookshelves, setBookshelves, setEditToggle }) {
     const [formData, setFormData] = useState({
         title: '',
         authors: '',
@@ -14,7 +14,7 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
         url: '',
         description: '',
         course: '',
-        dueDate: '',
+        dueDate: book.dueDate ? book.dueDate : '',
         pinned: false,
         notes: '',
         bookshelf: '',
@@ -24,7 +24,6 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
         user: '',
         img: '',
     });
-    const [bookshelves, setBookshelves] = useState([])
 
     useEffect(function() {
         setFormData({
@@ -38,10 +37,10 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
             url: book.url,
             description: book.description,
             course: book.course,
-            dueDate: book.dueDate,
+            dueDate: book.dueDate ? book.dueDate : '',
             pinned: book.pinned,
             notes: book.notes,
-            bookshelf: book.bookshelf,
+            bookshelf: '',
             done: book.done,
             owned: book.owned,
             error: book.error,
@@ -63,6 +62,10 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
             newLibrary.push(updatedBook);
             setLibrary(newLibrary);
 
+            if (formDataCopy.bookshelf) {
+                const bookshelf = await bookshelvesAPI.addBook(book._id, formDataCopy.bookshelf);
+            }
+
             setFormData({
                 title: book.title,
                 authors: book.authors,
@@ -74,10 +77,10 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
                 url: book.url,
                 description: book.description,
                 course: book.course,
-                dueDate: book.dueDate,
+                dueDate: book.dueDate ? book.dueDate : '',
                 pinned: book.pinned,
                 notes: book.notes,
-                bookshelf: book.bookshelf,
+                bookshelf: book.bookshelf ? book.bookshelf : '',
                 done: book.done,
                 owned: book.owned,
                 error: book.error,
@@ -125,8 +128,8 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
                     <option value={true}>Yes</option>
                 </select>
                 <label>Add to Bookshelf</label>
-                <select name="bookshelf" /* ADD BACK IN ONCE FEATURE IMPLEMENTED value={formData.bookshelf} */ onChange={handleChange}>
-                    <option></option>
+                <select name="bookshelf" value={formData.bookshelf} onChange={handleChange}>
+                    <option value={''}></option>
                     {bookshelves?.map(b => <option key={b._id} value={b._id}>{b.title}</option>)}
                 </select>
                 <label>Done?</label>

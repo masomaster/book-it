@@ -4,7 +4,7 @@ import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 // import '../Sidebar/Sidebar.css';
 
 
-export default function NewBookForm({ user, library, setLibrary, selectedBook, handlePopulateForm }) {
+export default function NewBookForm({ user, library, setLibrary, selectedBook, bookshelves, setBookshelves, handlePopulateForm }) {
     const [newBookForm, setNewBookForm] = useState({
         title: '',
         authors: '',
@@ -25,20 +25,12 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, h
         user: '',
         img: '',
     });
-    const [bookshelves, setBookshelves] = useState([])
 
     useEffect(function() {
         if (selectedBook) {
             setNewBookForm(selectedBook)
         }
     }, [handlePopulateForm, selectedBook])
-    
-    useEffect(function() {
-        (async function getBookshelves(){
-            const bookshelfSet = await bookshelvesAPI.getBookshelves();
-            setBookshelves(bookshelfSet);
-        })();
-    }, [])
 
     function handleChange(evt) {
         const newFormData = { ...newBookForm, [evt.target.name]: evt.target.value, error: ''}
@@ -52,8 +44,6 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, h
             if (formDataCopy.authors) formDataCopy.authors = formDataCopy.authors.split(',').map(function(str) {
                 return str.trim();
             });
-            // if (formDataCopy.pinned === "Yes") formDataCopy.pinned = true;
-            // if (formDataCopy.owned === "No") formDataCopy.owned = false;
             if (formDataCopy.dueDate) formDataCopy.dueDate = new Date(formDataCopy.dueDate);
             if (!formDataCopy.bookshelf) formDataCopy.bookshelf = null;
             formDataCopy.user = user._id;
