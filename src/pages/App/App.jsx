@@ -17,6 +17,7 @@ export default function App() {
   const [user, setUser] = useState(getUser());
   const [library, setLibrary] = useState([])
   const [bookshelves, setBookshelves] = useState([])
+  const [shelvesInclBook, setShelvesInclBook] = useState([])
 
   return (
     <main className="App">
@@ -24,10 +25,10 @@ export default function App() {
         <>
           <NavBar user = {user} setUser = {setUser}/>
           <Routes>
-            <Route path="/" element={<Home user = {user} library={library} setLibrary={setLibrary} setBookshelves={setBookshelves} />} />
+            <Route path="/" element={<Home user = {user} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} />} />
             <Route path="/books" element={<BookList library={library} />} />
-            <Route path="/books/new" element={<NewBook user={user} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} />} />
-            <Route path="/books/:bookId" element={<BookDetailPage library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} />} />
+            <Route path="/books/new" element={<NewBook user={user} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} />} />
+            <Route path="/books/:bookId" element={<BookDetailPage library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} />} />
             <Route path="/bookshelves" element={<BookshelfList user={user} bookshelves={bookshelves} setBookshelves={setBookshelves}/>} />
             <Route path="/bookshelves/:bookshelfId" element={<BookshelfDetailPage bookshelves={bookshelves} setBookshelves={setBookshelves}/>} />
           </Routes>

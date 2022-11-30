@@ -4,7 +4,7 @@ import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 // import '../Sidebar/Sidebar.css';
 
 
-export default function NewBookForm({ user, library, setLibrary, selectedBook, bookshelves, setBookshelves, handlePopulateForm }) {
+export default function NewBookForm({ user, library, setLibrary, selectedBook, bookshelves, setBookshelves, shelvesInclBook, setShelvesInclBook, handlePopulateForm }) {
     const [newBookForm, setNewBookForm] = useState({
         title: '',
         authors: '',
@@ -50,7 +50,11 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
             const newBook = await booksAPI.addBook(formDataCopy);
 
             if (formDataCopy.bookshelf) {
-                const bookshelf = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelf);
+                const updatedBookshelf = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelf);
+                const newBookshelves = bookshelves.filter(b => b._id !== updatedBookshelf._id);
+                newBookshelves.push(updatedBookshelf)
+                setBookshelves(newBookshelves)
+                setShelvesInclBook([...shelvesInclBook, updatedBookshelf.title]);
             }
 
             library.push(newBook);

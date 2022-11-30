@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 
-export default function EditBookForm({ book, library, setLibrary, bookshelves, setBookshelves, setEditToggle }) {
+export default function EditBookForm({ book, library, setLibrary, bookshelves, setBookshelves, setEditToggle, shelvesInclBook, setShelvesInclBook }) {
     const [formData, setFormData] = useState({
         title: '',
         authors: '',
@@ -64,6 +64,7 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
 
             if (formDataCopy.bookshelf) {
                 const bookshelf = await bookshelvesAPI.addBook(book._id, formDataCopy.bookshelf);
+                setShelvesInclBook([...shelvesInclBook, bookshelf.title]);
             }
 
             setFormData({
@@ -95,6 +96,7 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
         }
     }
 
+    console.log(formData)
     return (
         <div className="book-form">
             <form onSubmit={handleSubmit}>
