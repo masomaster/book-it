@@ -37,8 +37,8 @@ export default function NewBookshelfForm({ user, bookshelves, setBookshelves }) 
     }
     
     return (
-        <aside>
-            <div className="bookshelf-form">
+        <div>
+            <div className="new-bookshelf-form">
                 <form onSubmit={handleSubmit}>
                     <label>Title</label>
                     <input type="text" name="title" required value={newBookshelfForm.title} onChange={handleChange}/>
@@ -48,11 +48,11 @@ export default function NewBookshelfForm({ user, bookshelves, setBookshelves }) 
                     <select name="pinned" value={newBookshelfForm.pinned} onChange={handleChange}>
                         <option>No</option>
                         <option>Yes</option>
-                    </select>
+                    </select><br />
                     <input type="submit" className="btn" value="Add Bookshelf" />
                 </form>
                 <p className="error-message">&nbsp;{newBookshelfForm.error}</p>
             </div>
-        </aside>
+        </div>
     )
 }

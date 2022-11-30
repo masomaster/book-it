@@ -5,38 +5,24 @@ module.exports = {
   getBookshelves,
   addBookshelf,
   getHighlightedBookshelf,
-  addBook
+  addBook,
+  updateBookshelf,
+  deleteBookshelf
 };
 
 async function getBookshelves(req, res) {
-  const bookshelves = await Bookshelf.getBookshelves(req.user._id)
-  .populate('books')
-  .exec(function(err, bookshelf) {
-      if (err) {
-          handleError(err);
-          console.log('failed to populate')
-      } else {
-          res.json(bookshelf)
-      }
-  });
+  const bookshelves = await Bookshelf.getBookshelves(req.user._id).populate('books');
+  res.json(bookshelves);
 }
 
 async function addBookshelf(req, res) {
   const bookshelf = await Bookshelf.create(req.body);
-  res.json(bookshelf)
+  res.json(bookshelf);
 }
 
 async function getHighlightedBookshelf(req, res) {
-  const bookshelf = await Bookshelf.getHighlightedBookshelf(req.user._id)
-  .populate('books')
-  .exec(function(err, bookshelf) {
-      if (err) {
-          handleError(err);
-          console.log('failed to populate')
-      } else {
-          res.json(bookshelf)
-      }
-  });
+  const bookshelf = await Bookshelf.getHighlightedBookshelf(req.user._id).populate('books');
+  res.json(bookshelf);
 }
 
 async function addBook(req, res) {
@@ -47,4 +33,15 @@ async function addBook(req, res) {
   bookshelf.books.push(req.body.newBookID)
   bookshelf.save();
   res.json(bookshelf);
+}
+
+async function updateBookshelf(req, res) {
+  const updatedBookshelf = await Bookshelf.findByIdAndUpdate(req.body.bookshelfId, req.body.newBookshelfInfo, {new: true}).populate('books');
+  res.json(updatedBookshelf);
+}
+
+async function deleteBookshelf(req, res) {
+  const deletedBookshelf = await Bookshelf.findByIdAndDelete(req.params.id);
+  const bookshelves = await Bookshelf.getBookshelves(req.user._id).populate('books');
+  res.json(bookshelves);
 }

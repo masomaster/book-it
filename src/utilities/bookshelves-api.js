@@ -14,6 +14,14 @@ export async function getHighlightedBookshelf() {
     return sendRequest(`${BASE_URL}/highlighted`);
 }
 
-export async function addBook(newBookID, bookshelfID) {
-    return sendRequest(`${BASE_URL}/addbook`, 'POST', {newBookID, bookshelfID});
+export async function addBook(newBookId, bookshelfId) {
+    return sendRequest(`${BASE_URL}/addbook`, 'POST', {newBookId, bookshelfId});
+}
+
+export async function updateBookshelf(bookshelfId, newBookshelfInfo) {
+    return sendRequest(`${BASE_URL}/updatebookshelf`, 'POST', {bookshelfId, newBookshelfInfo});
+}
+
+export async function deleteBookshelf(bookshelfId) {
+    return sendRequest(`${BASE_URL}/deletebookshelf/${bookshelfId}`, 'DELETE');
 }

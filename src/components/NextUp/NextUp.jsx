@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import * as booksAPI from '../../utilities/books-api';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import EditDeleteButtons from '../EditDeleteButtons/EditDeleteButtons';
@@ -22,12 +23,14 @@ export default function NextUp() {
     return (
         <div className="next-up">
             <div className="book-img">
-                <img src={nextUpBook?.img} alt="book over"/>
+                <Link to={`/books/${nextUpBook._id}`}>
+                    <img src={nextUpBook?.img} alt="book over"/>
+                </Link>
             </div>
             <h4 className="book-title">Next up: {nextUpBook?.title}!</h4>
             <p className="remaining-hours">You can finish this book in only {remainingHours} hours!</p>
             <ProgressBar done={nextUpBook?.percentRead}/>
-            <EditDeleteButtons book={nextUpBook}/>
+            <button>Update</button>
         </div>
     )
 }

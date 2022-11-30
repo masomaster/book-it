@@ -12,6 +12,7 @@ export default function BookshelfList({ user, bookshelves, setBookshelves }) {
                     <BookshelfListItem bookshelf={shelf} key={shelf._id} bookshelves={bookshelves}/>
                     ))}
             </div>
+            <h3>Add a Bookshelf</h3>
             <NewBookshelfForm user={user} bookshelves={bookshelves} setBookshelves={setBookshelves}/>
         </div>
     )
