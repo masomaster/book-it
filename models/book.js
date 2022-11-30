@@ -7,7 +7,7 @@ const bookSchema = new Schema({
     pubYear: { type: Number, minLength: 4, maxLength: 4 },
     publisher: String,
     totalPages: Number,
-    pagesRead: Number,
+    pagesRead: { type: Number, default: 0 },
     category: String,
     url: String,
     description: String,

@@ -6,7 +6,7 @@ import NewBookForm from '../../components/NewBookForm/NewBookForm';
 // import Sidebar from "../../components/Sidebar/Sidebar";
 import "./NewBook.css";
 
-export default function NewBook({ user, library, setLibrary, bookshelves, setBookshelves }) {
+export default function NewBook({ user, library, setLibrary, bookshelves, setBookshelves, setShelvesInclBook, shelvesInclBook }) {
     const [searchResults, setSearchResults] = useState("");
     const [queryText, setQueryText] = useState("");
     const [selectedBook, setSelectedBook] = useState(null);
@@ -93,7 +93,7 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
                                 }
                             </div>
                         </div>
-                        <NewBookForm user={user} selectedBook={selectedBook} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} handlePopulateForm={handlePopulateForm}/>
+                        <NewBookForm user={user} selectedBook={selectedBook} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} handlePopulateForm={handlePopulateForm}/>
                     </div>
                 </div>
             </div>
