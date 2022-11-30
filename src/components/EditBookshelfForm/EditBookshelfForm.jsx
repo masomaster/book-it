@@ -58,7 +58,7 @@ export default function EditBookshelfForm({bookshelf, bookshelves, setBookshelve
                     {formData.pinned ? 
                         <option selected>Yes</option>
                     :
-                        <option >Yes</option>
+                        <option>Yes</option>
                     }
                 </select><br />
                 <input type="submit" className="btn" value="Update Bookshelf" />

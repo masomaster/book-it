@@ -37,22 +37,20 @@ export default function NewBookshelfForm({ user, bookshelves, setBookshelves }) 
     }
     
     return (
-        <div>
-            <div className="new-bookshelf-form">
-                <form onSubmit={handleSubmit}>
-                    <label>Title</label>
-                    <input type="text" name="title" required value={newBookshelfForm.title} onChange={handleChange}/>
-                    <label>Description</label>
-                    <textarea rows="3" cols="16" name="description" value={newBookshelfForm.description} onChange={handleChange}/>
-                    <label>Pin to Prioritize?</label>
-                    <select name="pinned" value={newBookshelfForm.pinned} onChange={handleChange}>
-                        <option>No</option>
-                        <option>Yes</option>
-                    </select><br />
-                    <input type="submit" className="btn" value="Add Bookshelf" />
-                </form>
-                <p className="error-message">&nbsp;{newBookshelfForm.error}</p>
-            </div>
+        <div className="new-bookshelf-form">
+            <form onSubmit={handleSubmit}>
+                <label>Title</label>
+                <input type="text" name="title" required value={newBookshelfForm.title} onChange={handleChange}/>
+                <label>Description</label>
+                <textarea rows="3" cols="16" name="description" value={newBookshelfForm.description} onChange={handleChange}/>
+                <label>Pin to Prioritize?</label>
+                <select name="pinned" value={newBookshelfForm.pinned} onChange={handleChange}>
+                    <option>No</option>
+                    <option>Yes</option>
+                </select><br />
+                <input type="submit" className="btn" value="Add Bookshelf" />
+            </form>
+            <p className="error-message">&nbsp;{newBookshelfForm.error}</p>
         </div>
     )
 }
