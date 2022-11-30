@@ -45,7 +45,6 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
             done: book.done,
             owned: book.owned,
             error: book.error,
-            // user: book.user,
             img: book.img,
         })
     }, [book])
@@ -59,9 +58,12 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
         evt.preventDefault();
         try {
             const formDataCopy = {...formData};
-            formDataCopy.pinned === "Yes" ? formDataCopy.pinned = true : formDataCopy.pinned = false;
-            formDataCopy.done === "Yes" ? formDataCopy.done = true : formDataCopy.done = false;
-            formDataCopy.owned === "Yes" ? formDataCopy.owned = true : formDataCopy.owned = false;
+            if (formDataCopy.pinned === "Yes") formDataCopy.pinned = true;
+            if (formDataCopy.pinned === "No") formDataCopy.pinned = false;
+            if (formDataCopy.done === "Yes") formDataCopy.done = true;
+            if (formDataCopy.done === "No") formDataCopy.done = false;
+            if (formDataCopy.owned === "Yes") formDataCopy.owned = true;
+            if (formDataCopy.owned === "No") formDataCopy.owned = false;
             const updatedBook = await booksAPI.updateBook(book._id, formDataCopy);
             const newLibrary = library.filter(b => b._id !== updatedBook._id);
             newLibrary.push(updatedBook);
@@ -85,7 +87,6 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
                 done: book.done,
                 owned: book.owned,
                 error: book.error,
-                // user: book.user,
                 img: book.img,
             })
             setEditToggle(false)
