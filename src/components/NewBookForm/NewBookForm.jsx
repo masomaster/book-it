@@ -52,8 +52,8 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, h
             if (formDataCopy.authors) formDataCopy.authors = formDataCopy.authors.split(',').map(function(str) {
                 return str.trim();
             });
-            if (formDataCopy.pinned === "Yes") formDataCopy.pinned = true;
-            if (formDataCopy.owned === "No") formDataCopy.owned = false;
+            // if (formDataCopy.pinned === "Yes") formDataCopy.pinned = true;
+            // if (formDataCopy.owned === "No") formDataCopy.owned = false;
             if (formDataCopy.dueDate) formDataCopy.dueDate = new Date(formDataCopy.dueDate);
             if (!formDataCopy.bookshelf) formDataCopy.bookshelf = null;
             formDataCopy.user = user._id;
@@ -89,7 +89,7 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, h
         } catch {
             setNewBookForm({
                 ...newBookForm, 
-                error: 'Invalid Entry - Correct Red Entries'
+                error: 'Invalid Entry - Correct Entries'
             });
         }
     }
@@ -123,8 +123,8 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, h
                 <textarea rows="3" cols="16" name="notes" value={newBookForm.notes} onChange={handleChange}/>
                 <label>Pin to Prioritize?</label>
                 <select name="pinned" value={newBookForm.pinned} onChange={handleChange}>
-                    <option>No</option>
-                    <option>Yes</option>
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
                 </select>
                 <label>Add to Bookshelf</label>
                 <select name="bookshelf" value={newBookForm.bookshelf} onChange={handleChange}>
@@ -133,8 +133,8 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, h
                 </select>
                 <label>Owned?</label>
                 <select name="owned" value={newBookForm.owned} onChange={handleChange}>
-                    <option>Yes</option>
-                    <option>No</option>
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
                 </select><br />
                 <input type="submit" className="btn" value="Add Book" />
             </form>

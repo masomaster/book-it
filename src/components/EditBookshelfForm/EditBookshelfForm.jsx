@@ -25,7 +25,6 @@ export default function EditBookshelfForm({bookshelf, bookshelves, setBookshelve
         evt.preventDefault();
         try {
             const formDataCopy = {...formData};
-            if (formDataCopy.pinned === "Yes") formDataCopy.pinned = true;
             const updatedBookshelf = await bookshelvesAPI.updateBookshelf(bookshelf._id, formDataCopy);
             const newBookshelves = bookshelves.filter(b => b._id !== updatedBookshelf._id);
             newBookshelves.push(updatedBookshelf);
@@ -53,13 +52,9 @@ export default function EditBookshelfForm({bookshelf, bookshelves, setBookshelve
                 <label>Description</label>
                 <textarea rows="3" cols="16" name="description" value={formData.description} onChange={handleChange}/>
                 <label>Pin to Prioritize?</label>
-                <select name="pinned" onChange={handleChange}>
-                    <option value="no">No</option>
-                    {formData.pinned ? 
-                        <option selected>Yes</option>
-                    :
-                        <option>Yes</option>
-                    }
+                <select name="pinned" value={formData.pinned} onChange={handleChange}>
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
                 </select><br />
                 <input type="submit" className="btn" value="Update Bookshelf" />
                 <button>Delete</button>

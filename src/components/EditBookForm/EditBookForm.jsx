@@ -58,12 +58,6 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
         evt.preventDefault();
         try {
             const formDataCopy = {...formData};
-            if (formDataCopy.pinned === "Yes") formDataCopy.pinned = true;
-            if (formDataCopy.pinned === "No") formDataCopy.pinned = false;
-            if (formDataCopy.done === "Yes") formDataCopy.done = true;
-            if (formDataCopy.done === "No") formDataCopy.done = false;
-            if (formDataCopy.owned === "Yes") formDataCopy.owned = true;
-            if (formDataCopy.owned === "No") formDataCopy.owned = false;
             const updatedBook = await booksAPI.updateBook(book._id, formDataCopy);
             const newLibrary = library.filter(b => b._id !== updatedBook._id);
             newLibrary.push(updatedBook);
@@ -136,12 +130,12 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
                     {bookshelves?.map(b => <option key={b._id} value={b._id}>{b.title}</option>)}
                 </select>
                 <label>Done?</label>
-                <select name="done" value={formData.done}onChange={handleChange}>
+                <select name="done" value={formData.done} onChange={handleChange}>
                     <option value={false}>No</option>
                     <option value={true}>Yes</option>
                 </select>
                 <label>Owned?</label>
-                <select name="owned" value={formData.owned}onChange={handleChange}>
+                <select name="owned" value={formData.owned} onChange={handleChange}>
                     <option value={false}>No</option>
                     <option value={true}>Yes</option>
                 </select><br />

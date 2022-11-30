@@ -18,9 +18,7 @@ export default function NewBookshelfForm({ user, bookshelves, setBookshelves }) 
         evt.preventDefault();
         try {
             const formDataCopy = {...newBookshelfForm};
-            if (formDataCopy.pinned === "Yes") formDataCopy.pinned = true;
             formDataCopy.user = user._id;
-            console.log(formDataCopy)
             
             const newBookshelf = await bookshelvesAPI.addBookshelf(formDataCopy);
             setBookshelves([...bookshelves, newBookshelf])
@@ -45,8 +43,8 @@ export default function NewBookshelfForm({ user, bookshelves, setBookshelves }) 
                 <textarea rows="3" cols="16" name="description" value={newBookshelfForm.description} onChange={handleChange}/>
                 <label>Pin to Prioritize?</label>
                 <select name="pinned" value={newBookshelfForm.pinned} onChange={handleChange}>
-                    <option>No</option>
-                    <option>Yes</option>
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
                 </select><br />
                 <input type="submit" className="btn" value="Add Bookshelf" />
             </form>
