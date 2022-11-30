@@ -2,26 +2,38 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import * as booksAPI from '../../utilities/books-api';
+import * as bookshelvesAPI from '../../utilities/bookshelves-api';
+
 import EditBookForm from '../../components/EditBookForm/EditBookForm';
 import './BookDetailPage.css';
 
 export default function BookDetailPage({ library, setLibrary, bookshelves, setBookshelves, shelvesInclBook, setShelvesInclBook }) {
-    console.log(shelvesInclBook)
     const [editToggle, setEditToggle] = useState(false);
+    const [loadingBookshelves, setLoadingBookshelves] = useState(true);
     const { bookId } = useParams();
     const book = library.find((b) => b._id === bookId);
     const navigate = useNavigate();
     
     // Create array of bookshelf titles that include this book
-    // useEffect(function() {
-    //     const shelves =[]
-    //     bookshelves.forEach((s) => {
-    //         s.books.forEach((b) => {
-    //             if (b._id == book._id) shelves.push(s.title)
-    //         })
-    //     })
-    //     setShelvesInclBook(shelves);
-    // }, [bookshelves])
+    useEffect(function() {
+        (async function getBookshelves(){
+            const bookshelfSet = await bookshelvesAPI.getBookshelves();
+            setBookshelves(bookshelfSet);
+            setLoadingBookshelves(false);
+        })();
+    }, [setBookshelves])
+    
+    useEffect(function() {
+        if (!loadingBookshelves) {
+            const shelves = []
+            bookshelves.forEach((s) => {
+                s.books.forEach((b) => {
+                    if (b._id === book._id) shelves.push(s.title)
+                })
+            })
+            setShelvesInclBook(shelves);
+        }
+    }, [book._id, bookshelves, setShelvesInclBook, loadingBookshelves])
 
     function handleToggle() {
         setEditToggle(!editToggle)

@@ -50,8 +50,11 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
             const newBook = await booksAPI.addBook(formDataCopy);
 
             if (formDataCopy.bookshelf) {
-                const bookshelf = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelf);
-                setShelvesInclBook([...shelvesInclBook, bookshelf.title]);
+                const updatedBookshelf = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelf);
+                const newBookshelves = bookshelves.filter(b => b._id !== updatedBookshelf._id);
+                newBookshelves.push(updatedBookshelf)
+                setBookshelves(newBookshelves)
+                setShelvesInclBook([...shelvesInclBook, updatedBookshelf.title]);
             }
 
             library.push(newBook);

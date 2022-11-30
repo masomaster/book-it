@@ -8,7 +8,7 @@ import './Home.css';
 import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 
-export default function Home({ user, library, setLibrary, setBookshelves }) {
+export default function Home({ user, library, setLibrary, bookshelves, setBookshelves }) {
     
     useEffect(function() {
         (async function getLibrary(){
@@ -22,7 +22,7 @@ export default function Home({ user, library, setLibrary, setBookshelves }) {
             const bookshelfSet = await bookshelvesAPI.getBookshelves();
             setBookshelves(bookshelfSet);
         })();
-    }, [setBookshelves])
+    }, [bookshelves, setBookshelves])
 
     return (
         <div className="content">
