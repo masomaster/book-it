@@ -7,6 +7,7 @@ router.get('/next', booksCtrl.getNextUp);
 router.get('/current', booksCtrl.getInProgressBooks);
 router.get('/totalbooks', booksCtrl.getBooksRead);
 router.post('/new', booksCtrl.addBook);
+router.post('/updatebook', booksCtrl.updateBook);
 router.delete('/deletebook/:id', booksCtrl.deleteBook);
 
 module.exports = router;

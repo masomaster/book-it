@@ -41,7 +41,7 @@ export default function EditBookshelfForm({bookshelf, bookshelves, setBookshelve
             console.log(err)
             setFormData({
                 ...formData, 
-                error: 'Invalid Entry - Correct Red Entries'});
+                error: 'Invalid Entry - Correct Entries'});
         }
     }
     

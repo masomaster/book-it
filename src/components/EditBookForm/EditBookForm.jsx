@@ -45,7 +45,7 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
             done: book.done,
             owned: book.owned,
             error: book.error,
-            user: book.user,
+            // user: book.user,
             img: book.img,
         })
     }, [book])
@@ -56,10 +56,46 @@ export default function EditBookshelfForm({ book, library, setLibrary, setEditTo
     };
 
     async function handleSubmit(evt) {
+        evt.preventDefault();
+        try {
+            const formDataCopy = {...formData};
+            formDataCopy.pinned === "Yes" ? formDataCopy.pinned = true : formDataCopy.pinned = false;
+            formDataCopy.done === "Yes" ? formDataCopy.done = true : formDataCopy.done = false;
+            formDataCopy.owned === "Yes" ? formDataCopy.owned = true : formDataCopy.owned = false;
+            const updatedBook = await booksAPI.updateBook(book._id, formDataCopy);
+            const newLibrary = library.filter(b => b._id !== updatedBook._id);
+            newLibrary.push(updatedBook);
+            setLibrary(newLibrary);
 
+            setFormData({
+                title: book.title,
+                authors: book.authors,
+                pubYear: book.pubYear,
+                publisher: book.publisher,
+                totalPages: book.totalPages,
+                pagesRead: book.pagesRead,
+                category: book.category,
+                url: book.url,
+                description: book.description,
+                course: book.course,
+                dueDate: book.dueDate,
+                pinned: book.pinned,
+                notes: book.notes,
+                bookshelf: book.bookshelf,
+                done: book.done,
+                owned: book.owned,
+                error: book.error,
+                // user: book.user,
+                img: book.img,
+            })
+            setEditToggle(false)
+        } catch(err) {
+            console.log(err)
+            setFormData({
+                ...formData, 
+                error: 'Invalid Entry - Correct Entries'});
+        }
     }
-
-console.log(formData)
 
     return (
         <div className="book-form">
