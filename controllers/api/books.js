@@ -5,7 +5,8 @@ module.exports = {
   addBook,
   getNextUp,
   getInProgressBooks,
-  getBooksRead
+  getBooksRead,
+  deleteBook
 };
 
 async function getLibrary(req, res) {
@@ -31,4 +32,10 @@ async function getInProgressBooks(req, res) {
 async function getBooksRead(req, res) {
   const books = await Book.getBooksRead(req.user._id)
   res.json(books)
+}
+
+async function deleteBook(req, res) {
+  const deletedBook = await Book.findByIdAndDelete(req.params.id);
+  const books = await Book.getLibrary(req.user._id);
+  res.json(books);
 }

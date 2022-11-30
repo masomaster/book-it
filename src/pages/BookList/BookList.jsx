@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import BookListItem from '../../components/BookListItem/BookListItem';
-import NewBookForm from '../../components/NewBookForm/NewBookForm';
 
-export default function BookList({ user, library, setLibrary }) {
+export default function BookList({ library }) {    
     return (
         <div className="content">
             <div className="book-list">
@@ -14,7 +13,6 @@ export default function BookList({ user, library, setLibrary }) {
                     ))}
                 </div>
             </div>
-            <NewBookForm user = {user} library={library} setLibrary={setLibrary}/>
         </div>
     )
 }

@@ -32,7 +32,6 @@ export default function BookshelfDetailPage({ bookshelves, setBookshelves }) {
                     <p>Pinned? {bookshelf.pinned ? "Yup!" : "Nope!"}</p>
                     <button onClick={handleToggle}>Edit</button>
                     <button onClick={deleteBookshelf}>Delete</button>
-
                 </>
             }
             <div className="horizontal-book-list">

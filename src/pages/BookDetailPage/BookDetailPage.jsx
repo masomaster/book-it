@@ -1,17 +1,28 @@
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import * as booksAPI from '../../utilities/books-api';
 import './BookDetailPage.css';
 
-export default function BookDetailPage({ library }) {
+export default function BookDetailPage({ library, setLibrary }) {
     const { bookId } = useParams();
     const book = library.find((b) => b._id === bookId);
+    const navigate = useNavigate();
     
+    async function deleteBook() {
+        const books = await booksAPI.deleteBookshelf(book._id);
+        setLibrary(books);
+        navigate("/books");
+    }
+
     return (
         <div className="book-detail-page">
             <h2>{book.title}</h2>
             <div>
                 <img src={book.img} alt="book cover"/>
             </div>
-            {book.authors.map(a => <p>{a}</p>)}
+            {book.authors.map((a, idx) => (
+                <p key={idx}>{a}</p>
+            ))}
             <p>Published: {book.pubYear}</p>
             <p>Publisher: {book.publisher}</p>
             <p>Total Pages: {book.totalPages}</p>
@@ -29,7 +40,7 @@ export default function BookDetailPage({ library }) {
             <p>Last read on: {book.lastReadingDate}</p>
             <div className="buttons">
                 <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={deleteBook}>Delete</button>
             </div>
         </div>
     )

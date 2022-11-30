@@ -21,3 +21,7 @@ export async function getInProgressBooks() {
 export async function getBooksRead() {
     return sendRequest(`${BASE_URL}/totalbooks`)
 }
+
+export async function deleteBookshelf(bookId) {
+    return sendRequest(`${BASE_URL}/deletebook/${bookId}`, 'DELETE')
+}

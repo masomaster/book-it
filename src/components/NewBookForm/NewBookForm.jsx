@@ -57,11 +57,15 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, h
             if (formDataCopy.dueDate) formDataCopy.dueDate = new Date(formDataCopy.dueDate);
             if (!formDataCopy.bookshelf) formDataCopy.bookshelf = null;
             formDataCopy.user = user._id;
-
             const newBook = await booksAPI.addBook(formDataCopy);
+
             if (formDataCopy.bookshelf) {
                 const bookshelf = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelf);
             }
+
+            library.push(newBook);
+            setLibrary(library);
+
             setNewBookForm({
                 title: '',
                 authors: '',
@@ -82,7 +86,6 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, h
                 user: '',
                 img: '',
             })
-            // setLibrary([...library, newBook]); Might need this later if NewBookForm is on the BookList page
         } catch {
             setNewBookForm({
                 ...newBookForm, 
