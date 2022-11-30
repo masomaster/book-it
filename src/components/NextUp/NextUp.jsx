@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as booksAPI from '../../utilities/books-api';
 import ProgressBar from '../ProgressBar/ProgressBar';
-import EditDeleteButtons from '../EditDeleteButtons/EditDeleteButtons';
 import "./NextUp.css";
 
 export default function NextUp() {

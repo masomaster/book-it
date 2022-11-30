@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import EditDeleteButtons from "../../components/EditDeleteButtons/EditDeleteButtons";
 import './BookDetailPage.css';
 
 export default function BookDetailPage({ library }) {
@@ -28,7 +27,10 @@ export default function BookDetailPage({ library }) {
             <p>Course: {book.course}</p>
             <p>Due Date: {book.dueDate}</p>
             <p>Last read on: {book.lastReadingDate}</p>
-            <EditDeleteButtons book={book}/>
+            <div className="buttons">
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
         </div>
     )
 }

@@ -29,7 +29,7 @@ export default function ReadingStats({ user, library }) {
             <p>ADD READING STREAK ONCE IMPLEMENTED IN MODEL</p>
             <p>Here are some:</p>
             <div className="highlighted-bookshelf-list">
-                {finishedBooks.map(b => (<Book book={b}/>))}
+                {finishedBooks.map(b => (<Book key={b._id} book={b}/>))}
             </div>
         </div>
     )
