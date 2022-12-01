@@ -29,7 +29,7 @@ export default function Home({ user, library, setLibrary, bookshelves, setBooksh
             <div className="summary-pane">
                 <NextUp />
                 <CurrentlyReading />
-                <HighlightedBookshelf />
+                {/* <HighlightedBookshelf /> */}
                 <ReadingStats user={user} library={library}/>
             </div>
         </div>
