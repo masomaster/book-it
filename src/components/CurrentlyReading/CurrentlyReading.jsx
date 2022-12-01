@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import CurrentlyReadingItem from '../Book/Book';
+import Book from '../Book/Book';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import * as booksAPI from '../../utilities/books-api';
 import "./CurrentlyReading.css";
@@ -13,16 +13,16 @@ export default function CurrentlyReading() {
             setInProgressBooks(books);
         })()
     },[])
-
+    
     return (
         <div className="currently-reading-panel">
-            <h3>Books You're Currently Enjoying</h3>
+            <h3 className="section-title">Books You're Currently Enjoying</h3>
             <div className="horizontal-book-list">
                 {inProgressBooks.map(book => (
                 <div className="currently-reading-item" key={book._id}>
-                    <CurrentlyReadingItem book={book} key={book.title} />
-                    <p>Just about {book.remainingPages / 25} hours to finish</p>
+                    <Book book={book} key={book.title} />
                     <ProgressBar done={book.percentRead} key={book._id}/>
+                    <p>About {Math.round((book.remainingPages / 30) + Number.EPSILON) * 100 /100} hours to finish</p>
                 </div>
                 ))}
             </div>

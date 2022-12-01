@@ -46,7 +46,7 @@ export default function NewBookshelfForm({ user, bookshelves, setBookshelves }) 
                     <option value={false}>No</option>
                     <option value={true}>Yes</option>
                 </select><br />
-                <input type="submit" className="btn" value="Add Bookshelf" />
+                <input type="submit" className="button-primary" value="Add Bookshelf" />
             </form>
             <p className="error-message">&nbsp;{newBookshelfForm.error}</p>
         </div>

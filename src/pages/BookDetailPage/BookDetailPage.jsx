@@ -47,35 +47,39 @@ export default function BookDetailPage({ library, setLibrary, bookshelves, setBo
 
     return (
         <div className="book-detail-page">
-            <h2>{book.title}</h2>
+            <h2 className="section-title">{book.title}</h2>
             { editToggle ?
                 <EditBookForm book={book} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} setEditToggle={setEditToggle}/>
             : 
                 <>
-                    <div>
-                        <img src={book.img} alt="book cover"/>
+                    <div className="cover-and-info">
+                        <div>
+                            <img src={book.img} alt="book cover"/>
+                        </div>
+                        <div className="info-except-descr">
+                            <p>Author(s): {book.authors.join(", ")}</p>
+                            <p>Published: {book.pubYear}</p>
+                            <p>Publisher: {book.publisher}</p>
+                            <p>Total Pages: {book.totalPages}</p>
+                            <p>Pages Read: {book.pagesRead}</p>
+                            <p>Category: {book.category}</p>
+                            <p><a href={book.url}>Google Books page</a></p>
+                            <p>Bookshelves: {shelvesInclBook?.join(", ")}</p>
+                            <p>Feeling after reading: {book.feeling}</p>
+                            <p>Pinned? {book.pinned ? "Yup!" : "Nope!"}</p>
+                            <p>Done? {book.done ? "Yup!" : "Not yet!"}</p>
+                            <p>Owned? {book.owned ? "Yup!" : "Not yet!"}</p>
+                            <p>Course: {book.course}</p>
+                            <p>Due Date: {book.dueDate}</p>
+                            <p>Last read on: {book.lastReadingDate}</p>
+                        </div>
                     </div>
-                    {book.authors.map((a, idx) => (
-                        <p key={idx}>{a}</p>
-                    ))}
-                    <p>Published: {book.pubYear}</p>
-                    <p>Publisher: {book.publisher}</p>
-                    <p>Total Pages: {book.totalPages}</p>
-                    <p>Pages Read: {book.pagesRead}</p>
-                    <p>Category: {book.category}</p>
-                    <p><a href={book.url}>Click here</a> for Google Books page</p>
-                    <p>Description: {book.description}</p>
-                    <p>Notes: {book.notes}</p>
-                    <p>Bookshelves: {shelvesInclBook?.join(", ")}</p>
-                    <p>Feeling after reading: {book.feeling}</p>
-                    <p>Pinned? {book.pinned ? "Yup!" : "Nope!"}</p>
-                    <p>Done? {book.done ? "Yup!" : "Not yet!"}</p>
-                    <p>Owned? {book.owned ? "Yup!" : "Not yet!"}</p>
-                    <p>Course: {book.course}</p>
-                    <p>Due Date: {book.dueDate}</p>
-                    <p>Last read on: {book.lastReadingDate}</p>
+                    <div className="notes-desc">
+                        <p>Notes: {book.notes}</p>
+                        <p>Description: {book.description}</p>
+                    </div>
                     <div className="buttons">
-                        <button onClick={handleToggle}>Edit</button>
+                        <button onClick={handleToggle}  className="button-primary">Edit</button>
                         <button onClick={deleteBook}>Delete</button>
                     </div>
                 </>

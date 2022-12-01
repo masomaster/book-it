@@ -4,6 +4,7 @@ import Book from "../../components/Book/Book";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import EditBookshelfForm from "../../components/EditBookshelfForm/EditBookshelfForm";
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
+import './BookshelfDetailPage.css';
 
 export default function BookshelfDetailPage({ bookshelves, setBookshelves }) {
     const [editToggle, setEditToggle] = useState(false);
@@ -23,22 +24,26 @@ export default function BookshelfDetailPage({ bookshelves, setBookshelves }) {
 
     return (
         <div className="bookshelf-detail-page">
-            <h2>{bookshelf.title} Bookshelf</h2>
+            <h2 className="section-title">{bookshelf.title} Bookshelf</h2>
             { editToggle ?
                 <EditBookshelfForm bookshelf={bookshelf} bookshelves={bookshelves} setBookshelves={setBookshelves} setEditToggle={setEditToggle}/>
             : 
-                <>
-                    <p>Description: {bookshelf.description}</p>
-                    <p>Pinned? {bookshelf.pinned ? "Yup!" : "Nope!"}</p>
-                    <button onClick={handleToggle}>Edit</button>
+                <div className="bookshelf-info">
+                    <h5>Description:</h5><p>{bookshelf.description}</p>
+                    <h5>Pinned? {bookshelf.pinned ? "Yup!" : "Nope!"}</h5>
+                    <button className="button-primary" onClick={handleToggle}>Edit</button>
                     <button onClick={deleteBookshelf}>Delete</button>
-                </>
+                </div>
             }
             <div className="horizontal-book-list">
                 {bookshelf.books.map(b => (
                     <div>
                         <Book key={b.title} book={b}/>
-                        <ProgressBar key={b._id} book={b} done={b.percentRead}/>
+                        { typeof(b.percentRead) === "number" ?
+                            <ProgressBar key={b._id} book={b} done={b.percentRead}/>
+                        :
+                            <p>Let's start reading!</p>
+                        }
                     </div>
                 ))}
             </div>

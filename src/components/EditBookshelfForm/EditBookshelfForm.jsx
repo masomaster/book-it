@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
+import './EditBookshelfForm.css';
 
 export default function EditBookshelfForm({bookshelf, bookshelves, setBookshelves, setEditToggle}) {
     const [formData, setFormData] = useState({
@@ -50,13 +51,13 @@ export default function EditBookshelfForm({bookshelf, bookshelves, setBookshelve
                 <label>Title</label>
                 <input type="text" name="title" required value={formData.title} onChange={handleChange}/>
                 <label>Description</label>
-                <textarea rows="3" cols="16" name="description" value={formData.description} onChange={handleChange}/>
+                <textarea rows="5" cols="60" name="description" value={formData.description} onChange={handleChange}/>
                 <label>Pin to Prioritize?</label>
                 <select name="pinned" value={formData.pinned} onChange={handleChange}>
                     <option value={false}>No</option>
                     <option value={true}>Yes</option>
                 </select><br />
-                <input type="submit" className="btn" value="Update Bookshelf" />
+                <input type="submit" className="button-primary" value="Update Bookshelf" />
                 <button>Delete</button>
             </form>
             <p className="error-message">&nbsp;{formData.error}</p>

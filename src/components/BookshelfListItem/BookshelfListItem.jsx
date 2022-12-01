@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
+import Book from "../Book/Book";
+import './BookshelfListItem.css';
 
 export default function BookshelfListItem({ bookshelf}) {
     return (
-        <Link to={`/bookshelves/${bookshelf._id}`}>
-            <div className="bookshelf-list-item">
-                <p>{bookshelf.title}</p>
-                <hr />
+        <div className="bookshelf-list-item">
+            <Link to={`/bookshelves/${bookshelf._id}`}>
+                <h3>{bookshelf.title}</h3>
+            </Link>
+            <div className="horizontal-book-list">
+                {bookshelf.books.slice(0, 4).map(b => (<Book key={b._id} book={b}/>))}
             </div>
-        </Link>
+            <hr />
+        </div>
     )
 }

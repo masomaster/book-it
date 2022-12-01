@@ -67,35 +67,31 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
     -- */
 
     return (
-        <div className="content home">
-            <div className="home">
-                <div>
-                    <h3>Add a Book!</h3>
-                    <div className="search-and-add-panels">
-                        <div className="search-panel">
-                            <form onSubmit={handleQuery}>
-                                <input
-                                    value={queryText}
-                                    type="text"
-                                    onChange={(evt) => setQueryText(evt.target.value)}
-                                /><br />
-                                <button type="submit">Search!</button>
-                            </form>
+        <div className="new-book">
+            <h3>Add a Book!</h3>
+            <div className="search-and-add-panels">
+                <div className="search-panel">
+                    <form onSubmit={handleQuery}>
+                        <input
+                            value={queryText}
+                            type="text"
+                            onChange={(evt) => setQueryText(evt.target.value)}
+                        /><br />
+                        <button type="submit"  className="button-primary">Search!</button>
+                    </form>
+                    <div>
+                        { searchResults ?
                             <div className="search-results">
-                                { searchResults ?
-                                    <div>
-                                        {searchResults.map(book => (
-                                            <SearchResultItem book={book} handlePopulateForm={handlePopulateForm} key={book.id}/>                                
-                                        ))}
-                                    </div>
-                                :
-                                    <div>Search for a book to add it to your library!</div>
-                                }
+                                {searchResults.map(book => (
+                                    <SearchResultItem book={book} handlePopulateForm={handlePopulateForm} key={book.id}/>                                
+                                ))}
                             </div>
-                        </div>
-                        <NewBookForm user={user} selectedBook={selectedBook} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} handlePopulateForm={handlePopulateForm}/>
+                        :
+                            <div>Search for a book to add it to your library!</div>
+                        }
                     </div>
                 </div>
+                <NewBookForm user={user} selectedBook={selectedBook} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} handlePopulateForm={handlePopulateForm}/>
             </div>
         </div>
     )

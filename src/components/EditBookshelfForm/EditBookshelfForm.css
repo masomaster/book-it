@@ -1,0 +1,6 @@
+.edit-bookshelf-form textarea {
+    height: auto;
+}
+.edit-bookshelf-form input, .edit-bookshelf-form button {
+    margin: 20px 30px;
+}

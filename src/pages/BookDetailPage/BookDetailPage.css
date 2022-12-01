@@ -1,0 +1,21 @@
+.book-detail-page button{
+    margin: 20px 30px;
+}
+.cover-and-info {
+    display: flex;
+}
+.cover-and-info img {
+    margin: 30px 100px 30px 30px;
+}
+.info-except-descr {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 400px;
+    text-align: left;
+    margin: 30px;
+    column-gap: 50px;
+}
+.notes-desc {
+    text-align: left;
+}

@@ -130,7 +130,7 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                     <option value={true}>Yes</option>
                     <option value={false}>No</option>
                 </select><br />
-                <input type="submit" className="btn" value="Add Book" />
+                <input type="submit"  className="button-primary" value="Add Book" />
             </form>
             <p className="error-message">&nbsp;{newBookForm.error}</p>
         </div>

@@ -19,15 +19,35 @@ export default function NextUp() {
 
     return (
         <div className="next-up">
-            <div className="book-img">
-                <Link to={`/books/${nextUpBook?._id}`}>
-                    <img src={nextUpBook?.img} alt="book over"/>
-                </Link>
-            </div>
-            <h4 className="book-title">Next up: {nextUpBook?.title}!</h4>
-            <p className="remaining-hours">You can finish this book in only {remainingHours} hours!</p>
-            <ProgressBar done={nextUpBook?.percentRead}/>
-            <button>Update</button>
+                { nextUpBook ?
+                <>
+                    <div className="book-title">
+                        <h3 className="section-title">Next up:</h3>
+                        <h4>{nextUpBook?.title}!</h4>
+                    </div>
+                    <div className="book-img">
+                        <Link to={`/books/${nextUpBook?._id}`}>
+                            <img src={nextUpBook?.img} alt="book over"/>
+                        </Link>
+                    </div>
+                    <div className="book-stats">
+                        <p className="remaining-hours">You can finish this book in only {remainingHours} hours!</p>
+                        { typeof(nextUpBook?.percentRead) === "number" ?
+                            <ProgressBar key={nextUpBook._id} book={nextUpBook} done={nextUpBook.percentRead}/>
+                        :
+                            <p>Let's start reading!</p>
+                        }
+                        <button className="button-primary">Update</button>
+                    </div>
+                </>
+                : 
+                    <>
+                        <div className="book-title">
+                            <h3 className="section-title">Next up:</h3>
+                        </div>
+                        <p>Pin a book to focus your reading</p>
+                    </>
+                }
         </div>
     )
 }

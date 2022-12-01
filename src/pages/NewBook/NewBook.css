@@ -3,10 +3,13 @@
     justify-content: space-evenly;
 }
 .search-panel {
-    background-color: #62AB37;
+    flex-grow: 1;
+}
+.search-results {
+    display: flex;
+    flex-wrap: wrap;
 }
 .book-form {
-    background-color: #38726C;
     min-width: 300px;
     max-width: 500px;
 }

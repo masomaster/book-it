@@ -1,14 +1,10 @@
-/* .summary-pane {
+.home {
     display: grid;
-    justify-content: center;
-    align-items: center;
-} */
-
-/* .content {
-    grid-area: content;
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 80% 20%;
-    align-content: center;
-    height: 100%;
-} */
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* grid-template-rows: repeat(3, 1fr); */
+    grid-column-gap: 15px;
+    grid-row-gap: 30px;
+}
+.section-title {
+    color: orange;
+}

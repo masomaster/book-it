@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as booksAPI from '../../utilities/books-api';
 import Book from "../Book/Book";
+import './ReadingStats.css';
 
 export default function ReadingStats({ user, library }) {    
     const [finishedBooks, setFinishedBooks] = useState([])
@@ -10,8 +11,8 @@ export default function ReadingStats({ user, library }) {
         totalPages += b.pagesRead;
     })
     
-    const speed = 25;
-    const totalHours = totalPages / speed;
+    const speed = 30;
+    const totalHours = Math.round((totalPages / speed) + Number.EPSILON) * 100 /100;
     
     useEffect(function() {
         (async function getBooksRead(){
@@ -21,14 +22,21 @@ export default function ReadingStats({ user, library }) {
     },[])
 
     return (
-        <div>
-            <h3>ReadingStats</h3>
-            <p>You've read {finishedBooks.length} books</p>
-            <p>totaling {totalPages} pages</p>
-            {totalHours ? <p>{`in ${totalHours} hours`}</p> : ''}
-            <p>ADD READING STREAK ONCE IMPLEMENTED IN MODEL</p>
-            <p>Here are some:</p>
-            <div className="highlighted-bookshelf-list">
+        <div className="reading-stats">
+            <h3 className="section-title">You're a reaching machine!</h3>
+            <table className="close">
+                <tr>
+                    <td>You've read:</td> <td className="emph-stats">{finishedBooks.length} books</td>
+                </tr>
+                <tr>
+                    <td>totaling:</td> <td className="emph-stats">{totalPages} pages</td>
+                </tr>
+                <tr>
+                    <td>in:</td> <td className="emph-stats">{totalHours} hours</td>
+                </tr>
+            </table>
+            <h5>Here are some of the books you've finished!</h5>
+            <div className="horizontal-book-list">
                 {finishedBooks.map(b => (<Book key={b._id} book={b}/>))}
             </div>
         </div>

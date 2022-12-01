@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
+import './EditBookForm.css';
 
 export default function EditBookForm({ book, library, setLibrary, bookshelves, setBookshelves, setEditToggle, shelvesInclBook, setShelvesInclBook }) {
     const [formData, setFormData] = useState({
@@ -98,7 +99,10 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
 
     console.log(formData)
     return (
-        <div className="book-form">
+        <div className="edit-book-form">
+            <div>
+                <img src={book.img} alt="book cover"/>
+            </div>
             <form onSubmit={handleSubmit}>
                 <label>Title</label>
                 <input type="text" name="title" required value={formData.title} onChange={handleChange}/>
@@ -144,7 +148,7 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
                     <option value={false}>No</option>
                     <option value={true}>Yes</option>
                 </select><br />
-                <input type="submit" className="btn" value="Update Book" />
+                <input type="submit" className="button-primary" value="Update Book" />
             </form>
             <p className="error-message">&nbsp;{formData.error}</p>
         </div>
