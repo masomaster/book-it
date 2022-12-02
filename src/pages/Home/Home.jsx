@@ -10,7 +10,7 @@ export default function Home({ user, library }) {
         <>
             <div className="home">
                 <div>
-                    <h2 className="section-title"><span>Welcome {user.name}! </span>Your Reading Dashboard:</h2>
+                    <h2 className="section-title">Welcome to your Reading Dashboard, {user.name}!</h2>
                     <div className="dashboard">
                         <ReadingStats user={user} library={library}/>
                         <NextUp />

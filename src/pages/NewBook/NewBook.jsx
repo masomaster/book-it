@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 // import api from 'zotero-api-client';
 
 import SearchResultItem from '../../components/SearchResultItem/SearchResultItem';
@@ -10,6 +12,7 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
     const [searchResults, setSearchResults] = useState("");
     const [queryText, setQueryText] = useState("");
     const [selectedBook, setSelectedBook] = useState(null);
+    const navigate = useNavigate();
 
     function handleQuery(evt) {
         evt.preventDefault();
@@ -68,7 +71,10 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
 
     return (
         <div className="new-book">
-            <h3 className="section-title">Add a Book!</h3>
+            <div className="arrow-and-title">
+                <img className="back-arrow" src="https://seekicon.com/free-icon-download/arrow-ios-back_1.svg" onClick={() => navigate(-1)} />
+                <h2 className="section-title">Add a Book!</h2>
+            </div>
             <div className="search-and-add-panels">
                 <div className="search-panel">
                     <form onSubmit={handleQuery}>

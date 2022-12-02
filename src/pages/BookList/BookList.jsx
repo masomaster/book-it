@@ -1,11 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BookListItem from '../../components/BookListItem/BookListItem';
 import './BookList.css';
 
 export default function BookList({ library }) {    
+    const navigate = useNavigate();
+    
     return (
         <div className="book-list-page">
-            <h2 className="section-title">Your Library</h2>
+            <div className="arrow-and-title">
+                <img className="back-arrow" src="https://seekicon.com/free-icon-download/arrow-ios-back_1.svg" onClick={() => navigate(-1)} />
+                <h2 className="section-title">Your Library</h2>
+            </div>
             <div className="book-list-and-button">
                 <div className="book-list">
                     {library.map(book => (

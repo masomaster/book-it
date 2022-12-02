@@ -1,5 +1,6 @@
 .book-list-page .section-title {
     margin: 30px 0 50px;
+    flex-grow: 1;
 }
 .book-list-and-button {
     display: flex;

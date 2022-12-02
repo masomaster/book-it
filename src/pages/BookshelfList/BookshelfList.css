@@ -1,5 +1,6 @@
 .bookshelf-list-page .section-title {
     margin: 30px 0 50px;
+    flex-grow: 1;
 }
 .bookshelf-list-and-form {
     display: flex;

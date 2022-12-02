@@ -47,7 +47,10 @@ export default function BookDetailPage({ library, setLibrary, bookshelves, setBo
 
     return (
         <div className="book-detail-page">
-            <h2 className="section-title">{book.title}</h2>
+            <div className="arrow-and-title">
+                <img className="back-arrow" src="https://seekicon.com/free-icon-download/arrow-ios-back_1.svg" onClick={() => navigate(-1)} />
+                <h2 className="section-title">{book.title}</h2>
+            </div>
             { editToggle ?
                 <EditBookForm book={book} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} setEditToggle={setEditToggle}/>
             : 

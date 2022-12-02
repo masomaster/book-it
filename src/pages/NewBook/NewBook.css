@@ -1,5 +1,6 @@
 .new-book .section-title {
     margin: 30px 0 50px;
+    flex-grow: 1;
 }
 .search-and-add-panels {
     display: flex;

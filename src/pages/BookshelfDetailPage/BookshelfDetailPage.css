@@ -1,5 +1,6 @@
 .bookshelf-detail-page .section-title {
     margin: 30px 0 50px;
+    flex-grow: 1;
 }
 .bookshelf-detail-page .horizontal-book-list {
     flex-wrap: wrap;

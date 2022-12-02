@@ -22,7 +22,7 @@ export default function NextUp() {
                 { nextUpBook ?
                 <>
                     <div className="book-title">
-                        <h3 className="section-title">Next up:</h3>
+                        <h3 className="section-title">Keep it up!</h3>
                         <h4>{nextUpBook?.title}</h4>
                     </div>
                     <div className="book-img">
@@ -38,7 +38,10 @@ export default function NextUp() {
                             <p>Let's start reading!</p>
                         }
                         <Link to={`/books/${nextUpBook?._id}`}>
-                            <button className="button-primary">Update</button>
+                            <button className="button-primary">Update progress</button>
+                        </Link>
+                        <Link to={"/books/new"}>
+                            <button className="button-primary">Find your next read</button>
                         </Link>
                     </div>
                 </>
