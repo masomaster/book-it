@@ -12,11 +12,15 @@ export default function BookList({ library }) {
                 <h2 className="section-title">Your Library</h2>
             </div>
             <div className="book-list-and-button">
-                <div className="book-list">
-                    {library.map(book => (
-                        <BookListItem book={book} key={book.id}/>
-                    ))}
-                </div>
+                { library.length ?
+                    <div className="book-list">
+                        {library.map(book => (
+                            <BookListItem book={book} key={book.id}/>
+                        ))}
+                    </div>
+                :
+                    ''
+                }
                 <div>
                     <Link to="/books/new">
                         <button className="button-primary">Add a Book!</button>

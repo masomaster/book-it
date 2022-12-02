@@ -38,3 +38,7 @@ hr {
 .back-arrow {
   width: 15px;
 }
+.hours {
+  font-size: 1.5em;
+  color: orange;
+}

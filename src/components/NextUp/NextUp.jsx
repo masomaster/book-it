@@ -31,7 +31,7 @@ export default function NextUp() {
                         </Link>
                     </div>
                     <div className="book-stats">
-                        <p className="remaining-hours">You can finish this book in only {remainingHours} hours!</p>
+                        <p className="remaining-hours">You can finish this book in only <span className="hours">{remainingHours} hours!</span></p>
                         { typeof(nextUpBook?.percentRead) === "number" ?
                             <ProgressBar key={nextUpBook._id} book={nextUpBook} done={nextUpBook.percentRead}/>
                         :
@@ -48,7 +48,7 @@ export default function NextUp() {
                 : 
                     <>
                         <div className="book-title">
-                            <h3 className="section-title">Next up:</h3>
+                            <h3 className="section-title">Keep it up!</h3>
                         </div>
                         <p>Pin a book to focus your reading</p>
                     </>

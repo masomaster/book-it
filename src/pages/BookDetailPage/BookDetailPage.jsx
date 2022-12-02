@@ -5,6 +5,7 @@ import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 
 import EditBookForm from '../../components/EditBookForm/EditBookForm';
+import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import './BookDetailPage.css';
 
 export default function BookDetailPage({ library, setLibrary, bookshelves, setBookshelves, shelvesInclBook, setShelvesInclBook }) {
@@ -56,30 +57,35 @@ export default function BookDetailPage({ library, setLibrary, bookshelves, setBo
             : 
                 <>
                     <div className="cover-and-info">
-                        <div>
+                        <div className="cover-progress">
                             <img src={book.img} alt="book cover"/>
+                            {typeof(book.percentRead) === "number" ?
+                                <ProgressBar done={book.percentRead}/>
+                                :
+                                <p>{book.percentRead}</p>
+                            }
                         </div>
                         <div className="info-except-descr">
-                            <p>Author(s): {book.authors.join(", ")}</p>
-                            <p>Published: {book.pubYear}</p>
-                            <p>Publisher: {book.publisher}</p>
-                            <p>Total Pages: {book.totalPages}</p>
-                            <p>Pages Read: {book.pagesRead}</p>
-                            <p>Category: {book.category}</p>
-                            <p><a href={book.url}>Google Books page</a></p>
-                            <p>Bookshelves: {shelvesInclBook?.join(", ")}</p>
-                            <p>Feeling after reading: {book.feeling}</p>
-                            <p>Pinned? {book.pinned ? "Yup!" : "Nope!"}</p>
-                            <p>Done? {book.done ? "Yup!" : "Not yet!"}</p>
-                            <p>Owned? {book.owned ? "Yup!" : "Not yet!"}</p>
-                            <p>Course: {book.course}</p>
-                            <p>Due Date: {book.dueDate}</p>
-                            <p>Last read on: {book.lastReadingDate}</p>
+                            <p><span className="hours">Author(s):</span> {book.authors.join(", ")}</p>
+                            <p><span className="hours">Published:</span>  {book.pubYear}</p>
+                            <p><span className="hours">Publisher:</span>  {book.publisher}</p>
+                            <p><span className="hours">Total Pages:</span>  {book.totalPages}</p>
+                            <p><span className="hours">Pages Read:</span>  {book.pagesRead}</p>
+                            <p><span className="hours">Category:</span>  {book.category}</p>
+                            <p><span className="hours">Bookshelves:</span>  {shelvesInclBook?.join(", ")}</p>
+                            <p><span className="hours">Feeling after reading:</span>  {book.feeling}</p>
+                            <p><span className="hours">Pinned?</span>  {book.pinned ? "Yup!" : "Nope!"}</p>
+                            <p><span className="hours">Done?</span>  {book.done ? "Yup!" : "Not yet!"}</p>
+                            <p><span className="hours">Owned?</span>  {book.owned ? "Yup!" : "Not yet!"}</p>
+                            <p><span className="hours">Course:</span>  {book.course}</p>
+                            <p><span className="hours">Due Date:</span>  {book.dueDate}</p>
+                            <p><span className="hours">Last read on:</span>  {book.lastReadingDate}</p>
+                            <p><span className="hours"><a href={book.url}>Google Books page</a></span> </p>
                         </div>
                     </div>
                     <div className="notes-desc">
-                        <p>Notes: {book.notes}</p>
-                        <p>Description: {book.description}</p>
+                        <p><span className="hours">Notes:</span>  {book.notes}</p>
+                        <p><span className="hours">Description:</span>  {book.description}</p>
                     </div>
                     <div className="buttons">
                         <button onClick={handleToggle}  className="button-primary">Edit</button>

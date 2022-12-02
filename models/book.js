@@ -43,7 +43,7 @@ bookSchema.virtual('remainingPages').get(function() {
 })
 
 bookSchema.statics.getLibrary = function(userId) {
-    return this.find({user: userId});
+    return this.find({user: userId}).sort({"title":1});
 }
 
 bookSchema.statics.getNextUp = function(userId) {

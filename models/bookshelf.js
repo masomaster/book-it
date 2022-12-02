@@ -12,7 +12,7 @@ const bookshelfSchema = new Schema({
 })
 
 bookshelfSchema.statics.getBookshelves = function(userId) {
-    return this.find({user: userId});
+    return this.find({user: userId}).sort({"title":1});
 }
 
 bookshelfSchema.statics.getHighlightedBookshelf = function(userId) {

@@ -23,19 +23,32 @@ export default function ReadingStats({ user, library }) {
 
     return (
         <div className="reading-stats">
-            <h4>You're a reaching machine!</h4>
+            { library.length ?
+                <h4>You're a reaching machine!</h4>
+            :
+                <h4>Start reading and enter progress to see your stats</h4>
+            }
             <table className="close">
-                <tr>
-                    <td>You've read:</td> <td className="emph-stats">{finishedBooks.length} books</td>
-                </tr>
-                <tr>
-                    <td>totaling:</td> <td className="emph-stats">{totalPages} pages</td>
-                </tr>
-                <tr>
-                    <td>in:</td> <td className="emph-stats">{totalHours} hours</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>You've read:</td>
+                        <td className="emph-stats">{finishedBooks.length} books</td>
+                    </tr>
+                    <tr>
+                        <td>totaling:</td>
+                        <td className="emph-stats">{totalPages} pages</td>
+                    </tr>
+                    <tr>
+                        <td>in:</td>
+                        <td className="emph-stats">{totalHours} hours</td>
+                    </tr>
+                </tbody>
             </table>
-            <h5>Here are some of the many books you've finished!</h5>
+            { finishedBooks.length ?
+                <h5>Here are some of the many books you've finished!</h5>
+            :
+                <h5>Start reading and enter progress to see your stats</h5>
+            }
             <div className="horizontal-book-list">
                 {finishedBooks.slice(0, 3).map(b => (<Book key={b._id} book={b}/>))}
             </div>

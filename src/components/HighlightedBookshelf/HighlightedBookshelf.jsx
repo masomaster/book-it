@@ -12,20 +12,26 @@ export default function HighlightedBookshelf() {
         (async function getHighlightedBookshelf(){
             const shelf = await bookshelvesAPI.getHighlightedBookshelf();
             setBookshelf(shelf);
-            setBooks(shelf.books);
+            setBooks(shelf?.books);
         })()
     },[])
 
     return (
         <div className="highlighted-bookshelf-panel">
-            <h3 className="section-title">Pinned Bookshelf: <Link to={`/bookshelves/${bookshelf._id}`} className="section-title">{bookshelf.title}</Link></h3>
-            <div className="horizontal-book-list">
-                {books.slice(0, 4).map((b) => (
-                    <div className="horizontal-book-list-item" key={b._id}>
-                        <CurrentlyReadingItem book={b} key={b.id} />
+            { bookshelf ? 
+                <>
+                    <h3 className="section-title">Pinned Bookshelf: <Link to={`/bookshelves/${bookshelf._id}`} className="section-title">{bookshelf?.title}</Link></h3>
+                    <div className="horizontal-book-list">
+                        {books?.slice(0, 4).map((b) => (
+                            <div className="horizontal-book-list-item" key={b?._id}>
+                                <CurrentlyReadingItem book={b} key={b?.id} />
+                            </div>
+                            ))}
                     </div>
-                    ))}
-            </div>
+                </>
+            :
+                <p>Add some books and start reading to see your progress!</p>
+            }
         </div>
     )
 }
