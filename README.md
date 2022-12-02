@@ -2,7 +2,7 @@
 
 ## Helping people finish what they're reading
 
-<a href="">BookIt!</a> is a React app to help users track and motivate their reading progress. Users can create an account to access full CRUD functionality using RESTful APIs to create books and bookshelves, pin them to prioritize, see their progress and cumulative reading stats, and be motivated to pick up that book! Google Books API provides full book information and beautiful cover images.
+<a href="https://book-it-reading.herokuapp.com/" target="_blank">BookIt!</a> is a React app to help users track and motivate their reading progress. Users can create an account to access full CRUD functionality using RESTful APIs to create books and bookshelves, pin them to prioritize, see their progress and cumulative reading stats, and be motivated to pick up that book! Google Books API provides full book information and beautiful cover images.
 
 ## Technologies Used
 
@@ -22,7 +22,7 @@
 - <a href="https://trello.com/invite/b/C2hTJevo/ATTI74af5a74f91c5ba0c9a347e6e6802b625EEB015D/book-it-react-app-planning-trello">Trello planning board with user stories</a>
 - <a href="https://lucid.app/lucidchart/dba5d055-323a-4141-8949-cfae00733f57/edit?viewport_loc=-127%2C163%2C1579%2C835%2C0_0&invitationId=inv_e52708ba-259e-4e45-a35e-6a85245f5e0f">ERD</a>
 - <a href="https://www.figma.com/file/r71XjM02GHD27IGLJlFIcq/home-page?node-id=0%3A1&t=mqSG2wbBnhpJqwVs-1">Wireframes</a>
-- <a href="">Deployed Version</a>
+- <a href="https://book-it-reading.herokuapp.com/" target="_blank">Deployed Version</a>
 
 ## Unsolved Problems
 
