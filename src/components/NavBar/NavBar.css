@@ -25,12 +25,20 @@ nav .book-it:hover {
 nav .book-it {
     padding-right: 50px;
 }
+nav .other-links {
+    display: flex;
+    align-items: center;
+}
 nav .nav-links {
     padding: 0 20px;
     font-size: 1.2em;
 }
 nav button {
     color: white;
+    border-color: white;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.8em;
+    text-transform: none;
 }
 nav button:hover {
     color: #1EAEDB;

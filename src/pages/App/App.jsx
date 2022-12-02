@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getUser } from '../../utilities/users-service';
 
 import Provider from '../Provider/Provider';

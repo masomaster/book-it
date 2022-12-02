@@ -25,7 +25,7 @@ export default function BookshelfDetailPage({ bookshelves, setBookshelves }) {
     return (
         <div className="bookshelf-detail-page">
             <div className="arrow-and-title">
-                <img className="back-arrow" src="https://seekicon.com/free-icon-download/arrow-ios-back_1.svg" onClick={() => navigate(-1)} />
+                <img className="back-arrow" src="https://seekicon.com/free-icon-download/arrow-ios-back_1.svg" alt="back-arrow" onClick={() => navigate(-1)} />
                 <h2 className="section-title">{bookshelf.title} Bookshelf</h2>
             </div>
             { editToggle ?

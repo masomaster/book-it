@@ -1,17 +1,10 @@
 .next-up {
-    /* grid-area: 1 / 1 / 2 / 2;  */
     display: flex;
     flex-direction: column;
-    /* grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr); */
-    /* grid-column-gap: 0px;
-    grid-row-gap: 0px; */
-    /* background-color: darkgrey; */
     padding: 20px;
     padding-right: 50px;
     justify-content: center;
     align-items: center;
-    /* border: solid 1px black; */
 }
 .book-title {
     grid-area: 1 / 1 / 2 / 3;
@@ -21,7 +14,7 @@
 }
 .book-stats {
     grid-area: 2 / 2 / 3 / 3;
-    padding: 30px;
+    padding: 0 30px 30px;
 }
 .progress-bar {
     width:200px;

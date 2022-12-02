@@ -22,12 +22,12 @@ export default function NextUp() {
                 { nextUpBook ?
                 <>
                     <div className="book-title">
-                        <h3 className="section-title">Keep it up!</h3>
-                        <h4>{nextUpBook?.title}</h4>
+                        <h4>Keep it up!</h4>
                     </div>
                     <div className="book-img">
                         <Link to={`/books/${nextUpBook?._id}`}>
                             <img src={nextUpBook?.img} alt="book over"/>
+                            <h4>{nextUpBook?.title}</h4>
                         </Link>
                     </div>
                     <div className="book-stats">

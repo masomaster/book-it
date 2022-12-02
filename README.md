@@ -1,18 +1,42 @@
-# MERN-Stack Infrastructure
+# BookIt!
 
-Clone this repo to provide the starter code for a comprehensive MERN-Stack project including token-based authentication.
+## Helping people finish what they're reading
 
-## To Clone
+<a href="">BookIt!</a> is a React app to help users track and motivate their reading progress. Users can create an account to access full CRUD functionality using RESTful APIs to create books and bookshelves, pin them to prioritize, see their progress and cumulative reading stats, and be motivated to pick up that book! Google Books API provides full book information and beautiful cover images.
 
-Here's the process to create a new MERN-Stack project that starts with the infrastructure code:
+## Technologies Used
 
-- Clone the mern-infrastructure repo: git clone <url of mern-infrastructure> <name-of-project>. Note that the folder created will be same as <name-of-project> instead of mern-infrastructure
-- cd <name-of-project>
-- Install the Node modules: npm i
-- Create a .env (touch .env) and add entries for DATABASE_URL and SECRET
-- Update the "name": "mern-infrastructure" in package.json to the name of your project.
-- Create a new repo on your personal GH account.
-- Copy the new GH repo's URL.
-- Update the remote's URL: git remote set-url origin <paste the copied GH url>
-- Make the initial commit: git add -A && git commit -m "Initial commit"
-- Push for the first time: git push -u origin main
+- <img  src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/html5/html5-plain.svg" alt="HTML5" width="50" height="50"/> &nbsp;
+  <img  src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/css3/css3-original.svg" alt="CSS3" width="50" height="50"/> &nbsp;
+  <img  src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/javascript/javascript-original.svg" alt="JavaScript" width="50" height="50"/> &nbsp;
+  <img  src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/react/react-original.svg" alt="ReactJS" width="50" height="50"/> &nbsp;
+  <img  src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/nodejs/nodejs-plain.svg" alt="NodeJS" width="50" height="50"/> &nbsp;
+  <img  src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/express/express-original.svg" alt="ExpressJS" width="50" height="50"/> &nbsp;
+  <img  src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/mongodb/mongodb-original.svg" alt="MongoDB" width="50" height="50"/> &nbsp;
+- <a href="https://developers.google.com/books/docs/v1/getting_started">Google Books API</a>
+- AdminJS
+- Heroku
+
+## Getting Started
+
+- <a href="https://trello.com/invite/b/C2hTJevo/ATTI74af5a74f91c5ba0c9a347e6e6802b625EEB015D/book-it-react-app-planning-trello">Trello planning board with user stories</a>
+- <a href="https://lucid.app/lucidchart/dba5d055-323a-4141-8949-cfae00733f57/edit?viewport_loc=-127%2C163%2C1579%2C835%2C0_0&invitationId=inv_e52708ba-259e-4e45-a35e-6a85245f5e0f">ERD</a>
+- <a href="https://www.figma.com/file/r71XjM02GHD27IGLJlFIcq/home-page?node-id=0%3A1&t=mqSG2wbBnhpJqwVs-1">Wireframes</a>
+- <a href="">Deployed Version</a>
+
+## Unsolved Problems
+
+- Remove book from bookshelf
+- A book's bookshelf titles can be duplicated
+
+## Future Enhancements
+
+- User profile, including profile image, reading speed, etc.
+- Amazon, GoodReads, and Zotero API integrations
+- Login with Google or Apple
+- Add course and due dates for school
+- Search and filter through user library
+- Refactoring to move more functionality to front end, minimizing fetch calls
+- Ability for user to rank books in top ten priority list
+- Add reading streak functionality
+- Implement react-select

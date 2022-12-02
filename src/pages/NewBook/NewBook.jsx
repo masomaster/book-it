@@ -72,7 +72,7 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
     return (
         <div className="new-book">
             <div className="arrow-and-title">
-                <img className="back-arrow" src="https://seekicon.com/free-icon-download/arrow-ios-back_1.svg" onClick={() => navigate(-1)} />
+                <img className="back-arrow" src="https://seekicon.com/free-icon-download/arrow-ios-back_1.svg" alt="back-arrow" onClick={() => navigate(-1)} />
                 <h2 className="section-title">Add a Book!</h2>
             </div>
             <div className="search-and-add-panels">
