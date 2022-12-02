@@ -30,7 +30,12 @@ export default function HighlightedBookshelf() {
                     </div>
                 </>
             :
-                <p>Add some books and start reading to see your progress!</p>
+                <>
+                    <p>Add some books and start reading to see your progress!</p>
+                    <Link to={"/books/new"}>
+                        <button className="button-primary">Find your next read</button>
+                    </Link>
+                </>
             }
         </div>
     )

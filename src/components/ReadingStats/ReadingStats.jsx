@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import * as booksAPI from '../../utilities/books-api';
 import Book from "../Book/Book";
 import './ReadingStats.css';
@@ -26,7 +27,12 @@ export default function ReadingStats({ user, library }) {
             { library.length ?
                 <h4>You're a reaching machine!</h4>
             :
-                <h4>Start reading and enter progress to see your stats</h4>
+                <>
+                    <h4>Add a book and start reading and enter progress to see your stats</h4>
+                    <Link to={"/books/new"}>
+                        <button className="button-primary">Find your next read</button>
+                    </Link>
+                </>
             }
             <table className="close">
                 <tbody>
