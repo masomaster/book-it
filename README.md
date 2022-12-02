@@ -4,7 +4,7 @@
 
 <a href="https://book-it-reading.herokuapp.com/" target="_blank">BookIt!</a> is a React app to help users track and motivate their reading progress. Users can create an account to access full CRUD functionality using RESTful APIs to create books and bookshelves, pin them to prioritize, see their progress and cumulative reading stats, and be motivated to pick up that book! Google Books API provides full book information and beautiful cover images.
 
-<img src="./public/login_shot.png" width="400"/> <img src="./public/home_shot.png" width="500"/>
+<img src="./public/home_shot.png" width="500"/>
 
 ## Technologies Used
 
