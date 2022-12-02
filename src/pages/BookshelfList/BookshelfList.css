@@ -7,9 +7,10 @@
 }
 .bookshelf-list {
     flex-grow: 1;
+    margin-right: 40px;
 }
 .new-bookshelf-form {
     min-width: 300px;
     max-width: 500px;
-    text-align: right;
+    text-align: left;
 }

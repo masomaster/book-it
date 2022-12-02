@@ -1,20 +1,34 @@
 .App {
   text-align: center;
-  display: grid;
-  grid-template-rows: 75px auto;
-  grid-template-columns: 1fr;
-  grid-template-areas: 
-    'nav'
-    'content';
   justify-content: center;
   align-items: center;
-  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: 100px;
 }
-
-footer {
-  grid-area: footer;
-}
-
 .horizontal-book-list {
   display: flex;
+}
+.horizontal-book-list-item {
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 250px 60px 50px;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+.book-it {
+  font-family: 'Arvo', serif;
+  font-style: italic;
+}
+.book-it.small {
+  font-size: 1.5em;
+}
+.book-it.large{
+  font-size: 2.5em;
+}
+hr {
+  width: 100%;
 }

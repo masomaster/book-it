@@ -23,7 +23,7 @@ export default function NextUp() {
                 <>
                     <div className="book-title">
                         <h3 className="section-title">Next up:</h3>
-                        <h4>{nextUpBook?.title}!</h4>
+                        <h4>{nextUpBook?.title}</h4>
                     </div>
                     <div className="book-img">
                         <Link to={`/books/${nextUpBook?._id}`}>
@@ -37,7 +37,9 @@ export default function NextUp() {
                         :
                             <p>Let's start reading!</p>
                         }
-                        <button className="button-primary">Update</button>
+                        <Link to={`/books/${nextUpBook?._id}`}>
+                            <button className="button-primary">Update</button>
+                        </Link>
                     </div>
                 </>
                 : 

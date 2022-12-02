@@ -23,7 +23,7 @@ export default function ReadingStats({ user, library }) {
 
     return (
         <div className="reading-stats">
-            <h3 className="section-title">You're a reaching machine!</h3>
+            <h4>You're a reaching machine!</h4>
             <table className="close">
                 <tr>
                     <td>You've read:</td> <td className="emph-stats">{finishedBooks.length} books</td>
@@ -35,9 +35,9 @@ export default function ReadingStats({ user, library }) {
                     <td>in:</td> <td className="emph-stats">{totalHours} hours</td>
                 </tr>
             </table>
-            <h5>Here are some of the books you've finished!</h5>
+            <h5>Here are some of the many books you've finished!</h5>
             <div className="horizontal-book-list">
-                {finishedBooks.map(b => (<Book key={b._id} book={b}/>))}
+                {finishedBooks.slice(0, 3).map(b => (<Book key={b._id} book={b}/>))}
             </div>
         </div>
     )

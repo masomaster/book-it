@@ -1,3 +1,31 @@
 nav {
-    grid-area: nav;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 75px;
+    background-color: #1EAEDB;
+    color: white;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    padding: 0 10vw;
+    font-family: 'Arvo', serif;
+}
+nav a {
+    color: white;
+}
+nav a:hover {
+    color: white;
+}
+nav .book-it:hover {
+    text-decoration: none;
+}
+nav .book-it {
+    padding-right: 50px;
+}
+nav .nav-links {
+    padding: 0 20px;
+    font-size: 1.2em;
 }

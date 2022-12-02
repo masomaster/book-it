@@ -9,7 +9,7 @@ export default function BookshelfListItem({ bookshelf}) {
                 <h3>{bookshelf.title}</h3>
             </Link>
             <div className="horizontal-book-list">
-                {bookshelf.books.slice(0, 4).map(b => (<Book key={b._id} book={b}/>))}
+                {bookshelf.books.slice(0, 3).map(b => (<Book key={b._id} book={b}/>))}
             </div>
             <hr />
         </div>

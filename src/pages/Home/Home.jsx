@@ -9,8 +9,13 @@ export default function Home({ user, library }) {
     return (
         <>
             <div className="home">
-                <NextUp />
-                <ReadingStats user={user} library={library}/>
+                <div>
+                    <h2 className="section-title"><span>Welcome {user.name}! </span>Your Reading Dashboard:</h2>
+                    <div className="dashboard">
+                        <ReadingStats user={user} library={library}/>
+                        <NextUp />
+                    </div>
+                </div>
                 <CurrentlyReading />
                 <HighlightedBookshelf />
             </div>

@@ -1,5 +1,5 @@
 .next-up {
-    grid-area: 1 / 1 / 2 / 2; 
+    /* grid-area: 1 / 1 / 2 / 2;  */
     display: flex;
     flex-direction: column;
     /* grid-template-columns: repeat(2, 1fr);

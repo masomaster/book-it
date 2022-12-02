@@ -1,19 +1,9 @@
 .currently-reading-panel {
-    grid-area: 2 / 1 / 3 / 3;
+    /* grid-area: 2 / 1 / 3 / 3; */
     margin: 30px 0;
 }
 .currently-reading-panel h3 {
     margin-bottom: 30px;
-}
-.currently-reading-item {
-    justify-content: center;
-    align-items: flex-start;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 250px 60px 50px;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
 }
 .currently-reading-panel p {
     margin: 0;

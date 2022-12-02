@@ -20,8 +20,8 @@ export default function HighlightedBookshelf() {
         <div className="highlighted-bookshelf-panel">
             <h3 className="section-title">Pinned Bookshelf: <Link to={`/bookshelves/${bookshelf._id}`} className="section-title">{bookshelf.title}</Link></h3>
             <div className="horizontal-book-list">
-                {books.map((b) => (
-                    <div className="highlighted-bookshelf-item" key={b._id}>
+                {books.slice(0, 4).map((b) => (
+                    <div className="horizontal-book-list-item" key={b._id}>
                         <CurrentlyReadingItem book={b} key={b.id} />
                     </div>
                     ))}
