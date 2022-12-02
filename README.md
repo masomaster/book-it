@@ -1,4 +1,4 @@
-# <img src="public/favicon.ico" alt="book"/>BookIt!<img src="public/favicon.ico" alt="book"/>
+# <img src="public/favicon.ico" alt="book" width="25" height="25"/>&nbsp;&nbsp;BookIt!&nbsp;&nbsp;<img src="public/favicon.ico" alt="book"  width="25" height="25"/>
 
 ## Helping people finish what they're reading
 
