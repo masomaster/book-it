@@ -29,3 +29,11 @@ nav .nav-links {
     padding: 0 20px;
     font-size: 1.2em;
 }
+nav button {
+    color: white;
+}
+nav button:hover {
+    color: #1EAEDB;
+    border-color: white;
+    background-color: white;
+}

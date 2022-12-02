@@ -1,3 +1,10 @@
+.book-list-page .section-title {
+    margin: 30px 0 50px;
+}
+.book-list-and-button {
+    display: flex;
+    justify-content: space-evenly;
+}
 .book-list {
     display: flex;
     flex-wrap: wrap;

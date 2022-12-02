@@ -1,0 +1,40 @@
+body {
+    color: white;
+    background-color: #1EAEDB;
+}
+.auth-page {
+    display: flex;
+    align-items: center;
+    width: 60vw;
+    height: 70vh;
+    justify-content: space-between;
+}
+.book-it {
+    font-size: 6em;
+}
+h1 {
+    font-family: 'Arvo', serif;
+    margin-bottom: 50px;
+}
+a {
+    color: white;
+}
+a:hover {
+    color: white;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+input {
+    color: #1EAEDB;
+    margin-bottom: 40px;
+}
+button {
+    color: white;
+    background-color: orange;
+}
+button:hover {
+    color: #1EAEDB;
+    background-color: white;
+}

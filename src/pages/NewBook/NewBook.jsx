@@ -68,7 +68,7 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
 
     return (
         <div className="new-book">
-            <h3>Add a Book!</h3>
+            <h3 className="section-title">Add a Book!</h3>
             <div className="search-and-add-panels">
                 <div className="search-panel">
                     <form onSubmit={handleQuery}>

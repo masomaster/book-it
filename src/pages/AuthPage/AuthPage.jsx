@@ -1,7 +1,8 @@
+import {Helmet} from "react-helmet";
+import { useState } from 'react';
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
-import { useState } from 'react';
-import "./AuthPage.css";
+import AuthPageBrand from "../../components/AuthPageBrand/AuthPageBrand";
 
 export default function AuthPage({setUser}) {
     const [login, setLogin] = useState(true)
@@ -12,15 +13,24 @@ export default function AuthPage({setUser}) {
 
     return (
         <main className="auth-page">
+            <Helmet>
+                <link rel="stylesheet" href="AuthPage.css" />
+            </Helmet>
             { login ? 
                 <>
-                    <h1>Log In</h1>
-                    <LoginForm setUser = {setUser} handleToggle={handleToggle} />
+                    <AuthPageBrand />
+                    <div>
+                        <h1>Log In</h1>
+                        <LoginForm setUser = {setUser} handleToggle={handleToggle} />
+                    </div>
                 </>
                 :
                 <>
-                    <h1>Sign Up</h1>
-                    <SignUpForm setUser = {setUser} handleToggle={handleToggle} />
+                    <AuthPageBrand />
+                    <div>
+                        <h1>Sign Up</h1>
+                        <SignUpForm setUser = {setUser} handleToggle={handleToggle} />
+                    </div>
                 </>
             }
         </main>

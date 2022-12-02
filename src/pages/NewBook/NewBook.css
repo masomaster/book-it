@@ -1,3 +1,6 @@
+.new-book .section-title {
+    margin: 30px 0 50px;
+}
 .search-and-add-panels {
     display: flex;
     justify-content: space-evenly;

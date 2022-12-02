@@ -16,7 +16,7 @@ export default function NavBar({user, setUser}) {
             <div>
                 <Link to='/books' className="nav-links">Books</Link>
                 <Link to='/bookshelves' className="nav-links">Bookshelves</Link>
-                <Link to="" className="nav-links" onClick={handleLogOut}>Log Out</Link>
+                <Link to="" className="nav-links" onClick={handleLogOut}><button>Log Out</button></Link>
             </div>
         </nav>
     );
