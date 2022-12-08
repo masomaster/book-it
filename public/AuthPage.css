@@ -1,10 +1,11 @@
 body {
     color: white;
-    background-color: #1EAEDB;
-    box-sizing: border-box;
+    background: rgb(30,121,149);
+    background: linear-gradient(0deg, rgba(30,121,149,1) 0%, rgba(30,174,219,1) 50%, rgba(0,212,255,1) 100%);    box-sizing: border-box;
     display: grid;
     justify-content: center;
     align-content: center;
+    height: 100vh;
 }
 .auth-page {
     display: flex;
@@ -36,6 +37,9 @@ form {
 input {
     color: #1EAEDB;
     margin-bottom: 40px;
+}
+label {
+    text-align: left;
 }
 button {
     color: white;
@@ -69,9 +73,6 @@ button:hover {
     }
     form, p {
         margin-bottom: 0.5rem;
-    }
-    label {
-        text-align: left;
     }
     input {
         margin-bottom: 10px;
