@@ -39,7 +39,7 @@ button:hover {
     background-color: white;
 }
 
-@media (max-width: 550px) {
+@media screen and (max-width: 550px) and (orientation: portrait) {
     .auth-page {
         flex-direction: column;
         justify-content: center;
@@ -59,6 +59,46 @@ button:hover {
     }
     form, p {
         margin-bottom: 0.5rem;
+    }
+    input {
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 750px) and (orientation: landscape) {
+    body {
+        display: grid;
+        align-items: center;
+        height: 100vh;
+    }
+    .App {
+        margin-top: 0;
+        text-align: left;
+    }
+    .auth-page {
+        /* flex-direction: column; */
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .brand {
+        margin-right: 50px;
+    }
+    .book-it {
+        font-size: 3em;
+        margin-bottom: 10px;
+    }
+    h1 {
+        font-size: 2em;
+        /* margin-top: 30px; */
+        margin-bottom: 10px;
+    }
+    h5 {
+        font-size: 1em;
+    }
+    form, p {
+        margin-bottom: 0.5rem;
+        font-size:smaller;
     }
     input {
         margin-bottom: 10px;
