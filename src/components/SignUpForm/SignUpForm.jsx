@@ -36,7 +36,7 @@ export default function SignUpForm({setUser, handleToggle}) {
 
     const disable = signUpForm.password !== signUpForm.confirm;
     return (
-        <div>
+        <div className="auth-page-form">
             <div className="form-container">
             <form autoComplete="off" onSubmit={handleSubmit}>
                 <label>Name</label>
@@ -51,7 +51,7 @@ export default function SignUpForm({setUser, handleToggle}) {
             </form>
             </div>
             <p className="error-message">&nbsp;{signUpForm.error}</p>
-            <Link to="" onClick={handleToggle}>Log In!</Link>
+            <Link to="" onClick={handleToggle}>Already have an account? Login here.</Link>
         </div>
     );     
 }

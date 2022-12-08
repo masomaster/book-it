@@ -28,7 +28,7 @@ export default function LoginForm({ setUser, handleToggle }) {
   }
 
   return (
-    <div>
+    <div className="auth-page-form">
       <div className="form-container">
         <form autoComplete="off" onSubmit={handleSubmit}>
           <label>Email</label>
@@ -39,7 +39,7 @@ export default function LoginForm({ setUser, handleToggle }) {
         </form>
       </div>
       <p className="error-message">&nbsp;{error}</p>
-      <Link to="" onClick={handleToggle}>Sign up!</Link>
+      <Link to="" onClick={handleToggle}>New here? Sign up!</Link>
     </div>
   );
 }

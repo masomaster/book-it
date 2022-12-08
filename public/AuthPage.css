@@ -1,6 +1,7 @@
 body {
     color: white;
     background-color: #1EAEDB;
+    box-sizing: border-box;
 }
 .auth-page {
     display: flex;
@@ -60,6 +61,9 @@ button:hover {
     form, p {
         margin-bottom: 0.5rem;
     }
+    label {
+        text-align: left;
+    }
     input {
         margin-bottom: 10px;
     }
@@ -68,8 +72,9 @@ button:hover {
 @media screen and (max-width: 750px) and (orientation: landscape) {
     body {
         display: grid;
-        align-items: center;
-        height: 100vh;
+        align-items: flex-start;
+        margin-top: 8vh;
+        height: 92vh;
     }
     .App {
         margin-top: 0;
@@ -78,7 +83,7 @@ button:hover {
     .auth-page {
         /* flex-direction: column; */
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         width: 100%;
     }
     .brand {
@@ -90,7 +95,6 @@ button:hover {
     }
     h1 {
         font-size: 2em;
-        /* margin-top: 30px; */
         margin-bottom: 10px;
     }
     h5 {
