@@ -2,6 +2,9 @@ body {
     color: white;
     background-color: #1EAEDB;
     box-sizing: border-box;
+    display: grid;
+    justify-content: center;
+    align-content: center;
 }
 .auth-page {
     display: flex;
@@ -9,6 +12,9 @@ body {
     width: 60vw;
     height: 70vh;
     justify-content: space-between;
+}
+.brand {
+    margin-right: 100px;
 }
 .book-it {
     font-size: 6em;
@@ -40,12 +46,15 @@ button:hover {
     background-color: white;
 }
 
-@media screen and (max-width: 550px) and (orientation: portrait) {
+@media screen and (max-width: 750px) and (orientation: portrait) {
     .auth-page {
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 100%;
+    }
+    .brand {
+        margin-right: 0;
     }
     .book-it {
         font-size: 3em;
@@ -81,7 +90,6 @@ button:hover {
         text-align: left;
     }
     .auth-page {
-        /* flex-direction: column; */
         justify-content: center;
         align-items: flex-start;
         width: 100%;
