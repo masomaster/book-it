@@ -21,7 +21,7 @@ export default function NextUp() {
         <div className="next-up">
                 { nextUpBook ?
                 <>
-                    <div className="book-title">
+                    <div className="next-up-title">
                         <h4>Keep it up!</h4>
                     </div>
                     <div className="book-img">
