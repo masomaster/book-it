@@ -1,7 +1,9 @@
 body {
     color: white;
     background: rgb(30,121,149);
-    background: linear-gradient(0deg, rgba(30,121,149,1) 0%, rgba(30,174,219,1) 50%, rgba(0,212,255,1) 100%);    box-sizing: border-box;
+    background: linear-gradient(0deg, rgba(30,121,149,1) 0%, rgba(30,174,219,1) 50%, rgba(0,212,255,1) 100%);
+    background-attachment: fixed;
+    box-sizing: border-box;
     display: grid;
     justify-content: center;
     align-content: center;
@@ -10,8 +12,8 @@ body {
 .auth-page {
     display: flex;
     align-items: center;
-    width: 60vw;
-    height: 70vh;
+    /* width: 60vw;
+    height: 70vh; */
     justify-content: space-between;
 }
 .brand {
@@ -36,7 +38,7 @@ form {
 }
 input {
     color: #1EAEDB;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 label {
     text-align: left;
@@ -44,6 +46,7 @@ label {
 button {
     color: white;
     background-color: orange;
+    margin-top: 20px;
 }
 button:hover {
     color: #1EAEDB;
@@ -79,12 +82,11 @@ button:hover {
     }
 }
 
-@media screen and (max-width: 750px) and (orientation: landscape) {
+@media screen and (max-width: 1000px) and (orientation: landscape) {
     body {
-        display: grid;
         align-items: flex-start;
-        margin-top: 8vh;
-        height: 92vh;
+        margin-top: 5vh;
+        height: 100%;
     }
     .App {
         margin-top: 0;
