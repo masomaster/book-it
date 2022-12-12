@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    padding-right: 50px;
     justify-content: center;
     align-items: center;
 }
@@ -12,7 +11,6 @@
 }
 .book-stats {
     grid-area: 2 / 2 / 3 / 3;
-    padding: 0 30px 30px;
     display: grid;
     justify-content: center;
 }

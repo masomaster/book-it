@@ -1,11 +1,5 @@
 footer {
     padding: 15px 0;
-    position: relative;
-    /* margin-left: 0;
-    margin-right: 0; */
-    left: 0;
-    right: 0;
-    bottom: 0;
     z-index: 1;
 }
 footer hr {
@@ -15,9 +9,8 @@ footer .footer-text {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* background-color: #1EAEDB; */
+    flex-wrap: wrap;
     color: #1EAEDB;
-
 }
 .gibhub-img {
     height: 30px;
