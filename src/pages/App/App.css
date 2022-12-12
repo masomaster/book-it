@@ -4,16 +4,14 @@
   justify-content: center;
   align-items: center;
   grid-template-columns: 1fr;
-  margin-top: 10px;
-}
-.dashboard {
-  display: flex;
-  flex-direction: column;
+  margin-top: 60px;
 }
 .horizontal-book-list {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  flex-wrap: wrap; /* This could help; not sure if I want to keep this.*/
   align-items: center;
+  justify-content: center;
 }
 .horizontal-book-list-item {
   justify-content: center;
@@ -50,16 +48,7 @@ hr {
 }
 
 @media screen and (min-width: 850px)  {
-  .dashboard {
-    display: flex;
-    flex-direction: row;
-    
-  }
-  .horizontal-book-list {
-    flex-direction: row;  
-    flex-wrap: wrap; /* This could help; not sure if I want to keep this. */
-  }
   .App {
-    margin-top: 70px;
+    margin-top: 100px;
   }
 }

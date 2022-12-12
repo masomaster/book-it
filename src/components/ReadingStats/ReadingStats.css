@@ -17,3 +17,8 @@
 .emph-stats {
     font-size: 2em;
 }
+@media screen and (min-width: 850px)  {
+    .reading-stats .horizontal-book-list {
+        flex-wrap: nowrap;
+    }
+}

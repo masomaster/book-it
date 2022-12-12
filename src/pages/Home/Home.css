@@ -14,4 +14,12 @@
 .dashboard {
     display: flex;
     border: solid 1px lightgrey;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 850px)  {
+    .dashboard {
+      display: flex;
+      flex-direction: row;
+    }
 }
