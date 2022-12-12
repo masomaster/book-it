@@ -51,7 +51,7 @@ export default function EditBookshelfForm({bookshelf, bookshelves, setBookshelve
                 <label>Title</label>
                 <input type="text" name="title" required value={formData.title} onChange={handleChange}/>
                 <label>Description</label>
-                <textarea rows="5" cols="60" name="description" value={formData.description} onChange={handleChange}/>
+                <textarea name="description" value={formData.description} onChange={handleChange}/>
                 <label>Pin to Prioritize?</label>
                 <select name="pinned" value={formData.pinned} onChange={handleChange}>
                     <option value={false}>No</option>
