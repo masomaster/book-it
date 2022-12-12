@@ -7,21 +7,23 @@
     align-items: center;
 }
 .next-up-title {
-    grid-area: 1 / 1 / 2 / 3;
     color: orange;
     font-weight: 900;
-}
-.book-img {
-    grid-area: 2 / 1 / 3 / 2;
 }
 .book-stats {
     grid-area: 2 / 2 / 3 / 3;
     padding: 0 30px 30px;
+    display: grid;
+    justify-content: center;
 }
-.progress-bar {
-    width:200px;
-    height:25px;
-    border:1px solid black;
-    border-radius: 25px;
-    position:relative;
+.next-up .remaining-hours {
+    margin: 0;
+}
+.next-up .progress {
+    margin: 15px;
+}
+@media screen and (max-width: 850px)  {
+    .next-up button {
+        margin: 10px;
+    }
 }

@@ -1,7 +1,5 @@
 .home {
     display: grid;
-    /* grid-template-columns: repeat(2, 1fr); */
-    /* grid-template-rows: repeat(3, 1fr); */
     grid-column-gap: 15px;
     grid-row-gap: 30px;
 }
@@ -11,9 +9,17 @@
 }
 .home h2 {
     text-align: left;
-    margin: 50px 0 20px;
+    /* margin: 50px 0 20px; */
 }
 .dashboard {
     display: flex;
     border: solid 1px lightgrey;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 850px)  {
+    .dashboard {
+      display: flex;
+      flex-direction: row;
+    }
 }

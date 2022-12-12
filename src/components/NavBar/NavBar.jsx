@@ -13,15 +13,19 @@ export default function NavBar({user, setUser}) {
     }
     
     return (
-        <nav>
+        <nav className="top-nav">
             <div>
-                <Link to='/' className="book-it"><span className="book-it large">BookIt!</span></Link>
+                <Link to='/' className="book-it"><span className="book-it large" id="title">BookIt!</span></Link>
             </div>
-            <div className="other-links">
-                <Link to='/books' className="nav-links">Books</Link>
-                <Link to='/bookshelves' className="nav-links">Bookshelves</Link>
-                <button onClick={handleLogOut}>Log Out</button>
-            </div>
+            <input id="menu-toggle" type="checkbox" />
+            <label class='menu-button-container' for="menu-toggle">
+                <div class='menu-button'></div>
+            </label>
+            <ul className="menu">
+                <li><Link to='/books' className="nav-links">Books</Link></li>
+                <li><Link to='/bookshelves' className="nav-links">Bookshelves</Link></li>
+                <li><Link to="" className="nav-links" onClick={handleLogOut}>Log Out</Link></li>
+            </ul>
         </nav>
     );
 }

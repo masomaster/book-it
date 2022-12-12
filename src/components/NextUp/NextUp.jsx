@@ -24,7 +24,7 @@ export default function NextUp() {
                     <div className="next-up-title">
                         <h4>Keep it up!</h4>
                     </div>
-                    <div className="book-img">
+                    <div>
                         <Link to={`/books/${nextUpBook?._id}`}>
                             <img src={nextUpBook?.img} alt="book over"/>
                             <h4>{nextUpBook?.title}</h4>
@@ -37,12 +37,14 @@ export default function NextUp() {
                         :
                             <p>Let's start reading!</p>
                         }
-                        <Link to={`/books/${nextUpBook?._id}`}>
-                            <button className="button-primary">Update progress</button>
-                        </Link>
-                        <Link to={"/books/new"}>
-                            <button className="button-primary">Find your next read</button>
-                        </Link>
+                        <div className="buttons">
+                            <Link to={`/books/${nextUpBook?._id}`}>
+                                <button className="button-primary">Update progress</button>
+                            </Link>
+                            <Link to={"/books/new"}>
+                                <button className="button-primary">Find your next read</button>
+                            </Link>
+                        </div>
                     </div>
                 </>
                 : 
