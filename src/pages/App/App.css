@@ -1,15 +1,18 @@
 .App {
   text-align: center;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+.content {
   margin-top: 60px;
 }
 .horizontal-book-list {
   display: flex;
   /* flex-direction: column; */
-  flex-wrap: wrap; /* This could help; not sure if I want to keep this.*/
+  flex-wrap: wrap; /* Not sure if I want to keep this. If not, swap with column flex direction above. */
   align-items: center;
   justify-content: center;
 }
@@ -48,7 +51,7 @@ hr {
 }
 
 @media screen and (min-width: 850px)  {
-  .App {
+  .content {
     margin-top: 100px;
   }
 }

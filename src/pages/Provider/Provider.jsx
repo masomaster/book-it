@@ -30,26 +30,28 @@ export default function Provider({ user, setUser }) {
     return (
         <>
             <NavBar user = {user} setUser = {setUser}/>
-            <Routes>
-                <Route 
-                        path="/" 
-                        element={<Home user={user} library={library} />} />
+            <div className="content">
+                <Routes>
                     <Route 
-                        path="/books" 
-                        element={<BookList library={library} />} />
-                    <Route 
-                        path="/books/new" 
-                        element={<NewBook user={user} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} />} />
-                    <Route 
-                        path="/books/:bookId" 
-                        element={<BookDetailPage library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} />} />
-                    <Route 
-                        path="/bookshelves" 
-                        element={<BookshelfList user={user} bookshelves={bookshelves} setBookshelves={setBookshelves}/>} />
-                    <Route 
-                        path="/bookshelves/:bookshelfId" 
-                        element={<BookshelfDetailPage bookshelves={bookshelves} setBookshelves={setBookshelves}/>} />
-            </Routes>
+                            path="/" 
+                            element={<Home user={user} library={library} />} />
+                        <Route 
+                            path="/books" 
+                            element={<BookList library={library} />} />
+                        <Route 
+                            path="/books/new" 
+                            element={<NewBook user={user} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} />} />
+                        <Route 
+                            path="/books/:bookId" 
+                            element={<BookDetailPage library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} />} />
+                        <Route 
+                            path="/bookshelves" 
+                            element={<BookshelfList user={user} bookshelves={bookshelves} setBookshelves={setBookshelves}/>} />
+                        <Route 
+                            path="/bookshelves/:bookshelfId" 
+                            element={<BookshelfDetailPage bookshelves={bookshelves} setBookshelves={setBookshelves}/>} />
+                </Routes>
+            </div>
             <Footer />
         </>
     )

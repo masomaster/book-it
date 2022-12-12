@@ -4,9 +4,12 @@
 }
 .book-list-and-button {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
 }
 .book-list {
     display: flex;
     flex-wrap: wrap;
+}
+.book-list-page .add-book-button {
+    margin-bottom: 20px;
 }

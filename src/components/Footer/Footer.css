@@ -1,14 +1,18 @@
 footer {
     padding: 15px 0;
     z-index: 1;
+    margin-top: auto;
+    width: 100%;
 }
 footer hr {
     margin: 15px 0;
 }
 footer .footer-text {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    row-gap: 15px;
     flex-wrap: wrap;
     color: #1EAEDB;
 }
@@ -16,4 +20,10 @@ footer .footer-text {
     height: 30px;
     width: 30px;
     filter: invert(0.5);
+}
+
+@media screen and (min-width: 850px) {
+    footer .footer-text {
+        flex-direction: row;
+    }
 }
