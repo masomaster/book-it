@@ -53,7 +53,7 @@ export default function ReadingStats({ user, library }) {
             { finishedBooks.length ?
                 <h5>Here are some of the many books you've finished!</h5>
             :
-                <h5>Start reading and enter progress to see your stats</h5>
+                <h5>Finish a book to see it listed here!</h5>
             }
             <div className="horizontal-book-list">
                 {finishedBooks.slice(0, 3).map(b => (<Book key={b._id} book={b}/>))}

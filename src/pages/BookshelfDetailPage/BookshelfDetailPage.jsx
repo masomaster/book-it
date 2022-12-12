@@ -32,8 +32,8 @@ export default function BookshelfDetailPage({ bookshelves, setBookshelves }) {
                 <EditBookshelfForm bookshelf={bookshelf} bookshelves={bookshelves} setBookshelves={setBookshelves} setEditToggle={setEditToggle}/>
             : 
                 <div className="bookshelf-info">
-                    <h5>Description:</h5><p>{bookshelf.description}</p>
-                    <h5>Pinned? {bookshelf.pinned ? "Yup!" : "Nope!"}</h5>
+                    <h5><span className="hours">Description:</span></h5><p>{bookshelf.description}</p>
+                    <p><span className="hours">Pinned?</span> {bookshelf.pinned ? "Yup!" : "Nope!"}</p>
                     <button className="button-primary" onClick={handleToggle}>Edit</button>
                     <button onClick={deleteBookshelf}>Delete</button>
                 </div>

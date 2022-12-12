@@ -6,6 +6,7 @@
     justify-content:left;
     align-items:flex-start;
     text-align: left;
+    flex-grow: 1;
 }
 .reading-stats table  {
     line-height: 0.9;

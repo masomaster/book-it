@@ -20,8 +20,11 @@
 .next-up .progress {
     margin: 15px;
 }
+.next-up button {
+    margin: 10px;
+}
 @media screen and (max-width: 850px)  {
-    .next-up button {
-        margin: 10px;
+    .next-up .buttons {
+        display: block;
     }
 }

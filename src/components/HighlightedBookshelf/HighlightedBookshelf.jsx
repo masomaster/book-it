@@ -23,7 +23,7 @@ export default function HighlightedBookshelf() {
                     <h3 className="section-title">Pinned Bookshelf: <Link to={`/bookshelves/${bookshelf._id}`} className="section-title">{bookshelf?.title}</Link></h3>
                     <div className="horizontal-book-list">
                         {books?.slice(0, 4).map((b) => (
-                            <div className="horizontal-book-list-item" key={b?._id}>
+                            <div className="horizontal-book-list-item highlighted" key={b?._id}>
                                 <CurrentlyReadingItem book={b} key={b?.id} />
                             </div>
                             ))}

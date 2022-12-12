@@ -22,7 +22,7 @@ export default function CurrentlyReading() {
                 <div className="horizontal-book-list-item" key={book._id}>
                     <Book book={book} key={book.title} />
                     <ProgressBar done={book.percentRead} key={book._id}/>
-                    <p>About {Math.round((book.remainingPages / 30) + Number.EPSILON) * 100 /100} hours to finish</p>
+                    <p>Finish in {Math.round((book.remainingPages / 30) + Number.EPSILON) * 100 /100} hours</p>
                 </div>
                 ))}
             </div>
