@@ -5,13 +5,19 @@
 .bookshelf-list-and-form {
     display: flex;
     justify-content: space-evenly;
+    flex-direction: column;
 }
 .bookshelf-list {
     flex-grow: 1;
     margin-right: 40px;
 }
 .new-bookshelf-form {
-    min-width: 300px;
+    min-width: 250px;
     max-width: 500px;
     text-align: left;
+}
+@media screen and (min-width: 850px) {
+    .bookshelf-list-and-form {
+        flex-direction: row-reverse;
+    }
 }

@@ -13,15 +13,16 @@ export default function BookshelfList({ user, bookshelves, setBookshelves }) {
                 <h2 className="section-title">Your Bookshelves</h2>
             </div>
             <div className="bookshelf-list-and-form">
+                <div className="new-bookshelf-form">
+                    <h3>Add a Bookshelf</h3>
+                    <NewBookshelfForm user={user} bookshelves={bookshelves} setBookshelves={setBookshelves}/>
+                </div>
                 <div className="bookshelf-list">
                     {bookshelves.map(shelf => (
                         <BookshelfListItem bookshelf={shelf} key={shelf._id} bookshelves={bookshelves}/>
                         ))}
                 </div>
-                <div className="new-bookshelf-form">
-                    <h3>Add a Bookshelf</h3>
-                    <NewBookshelfForm user={user} bookshelves={bookshelves} setBookshelves={setBookshelves}/>
-                </div>
+
             </div>
         </div>
     )
