@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   grid-template-columns: 1fr;
-  margin-top: 100px;
+  margin-top: 10px;
 }
 .dashboard {
   display: flex;
@@ -49,12 +49,17 @@ hr {
   color: orange;
 }
 
-@media screen and (min-width: 1000px)  {
+@media screen and (min-width: 850px)  {
   .dashboard {
     display: flex;
     flex-direction: row;
+    
   }
   .horizontal-book-list {
     flex-direction: row;  
+    flex-wrap: wrap; /* This could help; not sure if I want to keep this. */
+  }
+  .App {
+    margin-top: 70px;
   }
 }

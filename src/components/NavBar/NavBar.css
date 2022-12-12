@@ -2,15 +2,15 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 75px;
+    height: 50px;
     background-color: #1EAEDB;
     color: white;
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
-    z-index: 1;
-    padding: 0 10vw;
+    z-index: +2;
+    padding: 1em 10vw;
     font-family: 'Arvo', serif;
 }
 nav a {
@@ -18,9 +18,6 @@ nav a {
 }
 nav a:hover {
     color: white;
-}
-nav .book-it:hover {
-    text-decoration: none;
 }
 nav .book-it {
     padding-right: 50px;
@@ -33,36 +30,10 @@ nav .nav-links {
     padding: 0 20px;
     font-size: 1.2em;
 }
-nav button {
-    color: white;
-    border-color: white;
-    font-family: "Raleway", sans-serif;
-    font-size: 0.8em;
-    text-transform: none;
-}
 nav button:hover {
     color: #1EAEDB;
     border-color: white;
     background-color: white;
-}
-
-.top-nav {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    color: #FFF;
-    height: 50px;
-    padding: 1em;
-    z-index: +2;
-}
-
-.top-nav a {
-    color: #FFF;
-}
-
-#title {
-    font-size: 1.5em;
 }
 
 .menu {
@@ -72,12 +43,10 @@ nav button:hover {
     margin: 0;
     padding: 0;
 }
-
 .menu > li {
     margin: 0 1rem;
     overflow: hidden;
 }
-
 .menu-button-container {
     display: none;
     height: 100%;
@@ -87,11 +56,9 @@ nav button:hover {
     justify-content: center;
     align-items: center;
 }
-  
 #menu-toggle {
     display: none;
 }
-
 .menu-button,
 .menu-button::before,
 .menu-button::after {
@@ -103,35 +70,32 @@ nav button:hover {
     transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
     border-radius: 2px;
 }
-  
 .menu-button::before {
     content: '';
     margin-top: -8px;
 }
-  
 .menu-button::after {
     content: '';
     margin-top: 8px;
 }
-  
 #menu-toggle:checked + .menu-button-container .menu-button::before {
     margin-top: 0px;
     transform: rotate(405deg);
 }
-  
 #menu-toggle:checked + .menu-button-container .menu-button {
     background: rgba(255, 255, 255, 0);
 }
-  
 #menu-toggle:checked + .menu-button-container .menu-button::after {
     margin-top: 0px;
     transform: rotate(-405deg);
 }
-@media (max-width: 1000px) {
+@media (max-width: 850px) {
+    nav {
+        padding: 0 1em;
+    }
     .menu-button-container {
         display: flex;
     }
-
     .menu {
         position: absolute;
         top: 0;
@@ -142,7 +106,6 @@ nav button:hover {
         justify-content: center;
         align-items: center;
     }
-
     #menu-toggle ~ .menu li {
         height: 0;
         margin: 0;
@@ -150,14 +113,12 @@ nav button:hover {
         border: 0;
         transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
     }
-
     #menu-toggle:checked ~ .menu li {
         border: 1px solid #333;
         height: 2.5em;
         padding: 0.5em;
         transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
     }
-
     .menu > li {
         display: flex;
         justify-content: center;
@@ -167,8 +128,10 @@ nav button:hover {
         color: white;
         background-color: #222;
     }
-
     .menu > li:not(:last-child) {
         border-bottom: 1px solid #444;
+    }
+    #title {
+        font-size: 1.5em;
     }
 }

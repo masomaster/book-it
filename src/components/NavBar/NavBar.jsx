@@ -14,8 +14,8 @@ export default function NavBar({user, setUser}) {
     
     return (
         <nav className="top-nav">
-            <div id="title">
-                <Link to='/' className="book-it"><span className="book-it large">BookIt!</span></Link>
+            <div>
+                <Link to='/' className="book-it"><span className="book-it large" id="title">BookIt!</span></Link>
             </div>
             <input id="menu-toggle" type="checkbox" />
             <label class='menu-button-container' for="menu-toggle">
@@ -24,7 +24,7 @@ export default function NavBar({user, setUser}) {
             <ul className="menu">
                 <li><Link to='/books' className="nav-links">Books</Link></li>
                 <li><Link to='/bookshelves' className="nav-links">Bookshelves</Link></li>
-                <li><Link to="" onClick={handleLogOut}>Log Out</Link></li>
+                <li><Link to="" className="nav-links" onClick={handleLogOut}>Log Out</Link></li>
             </ul>
         </nav>
     );
