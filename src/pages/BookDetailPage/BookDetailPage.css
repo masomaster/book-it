@@ -6,24 +6,38 @@
     margin: 20px 30px;
 }
 .cover-progress {
-    display: grid;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.cover-progress .progress {
+    width: 100%;
 }
 .cover-and-info {
     display: flex;
-}
-.cover-and-info img {
-    margin: 30px 100px 30px 30px;
+    flex-direction: column;
 }
 .info-except-descr {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-height: 500px;
     text-align: left;
     margin: 30px;
     column-gap: 50px;
 }
 .notes-desc {
     text-align: left;
+}
+
+@media screen and (min-width: 1000px) {
+    .cover-and-info {
+        flex-direction: row;
+    }
+    .info-except-descr {
+        max-height: 500px;
+    }
+    .cover-progress {
+        margin: 30px 100px 30px 30px;
+    }
 }
