@@ -1,3 +1,6 @@
+.book-detail-page .arrow-and-title {
+    width: 100%;
+}
 .book-detail-page .section-title {
     margin: 30px 0 50px;
     flex-grow: 1;
