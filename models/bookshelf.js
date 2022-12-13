@@ -22,4 +22,14 @@ bookshelfSchema.statics.getHighlightedBookshelf = function(userId) {
     })
 }
 
+bookshelfSchema.statics.addBook = async function(userId, bookshelfId, newBookId) {
+    const bookshelf = await this.findOne({
+        user: userId,
+        _id: bookshelfId
+    });
+    bookshelf.books.push(newBookId)
+    bookshelf.save();
+    return bookshelf.populate('books');
+}
+
 module.exports = mongoose.model('Bookshelf', bookshelfSchema);
