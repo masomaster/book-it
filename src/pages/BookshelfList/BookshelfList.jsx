@@ -1,10 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import NewBookshelfForm from '../../components/NewBookshelfForm/NewBookshelfForm';
 import BookshelfListItem from '../../components/BookshelfListItem/BookshelfListItem';
+import { useEffect } from 'react';
 import './BookshelfList.css';
 
 export default function BookshelfList({ user, bookshelves, setBookshelves }) {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }, []);
 
     return (
         <div className="bookshelf-list-page">

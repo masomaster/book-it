@@ -1,10 +1,14 @@
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import BookListItem from '../../components/BookListItem/BookListItem';
 import './BookList.css';
 
 export default function BookList({ library }) {    
     const navigate = useNavigate();
-    
+    useEffect(() => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }, []);
+
     return (
         <div className="book-list-page">
             <div className="arrow-and-title">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Book from "../../components/Book/Book";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
@@ -11,6 +11,10 @@ export default function BookshelfDetailPage({ bookshelves, setBookshelves }) {
     const { bookshelfId } = useParams();
     const bookshelf = bookshelves.find((b) => b._id === bookshelfId);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }, []);
 
     function handleToggle() {
         setEditToggle(!editToggle)

@@ -15,6 +15,10 @@ export default function BookDetailPage({ library, setLibrary, bookshelves, setBo
     const book = library.find((b) => b._id === bookId);
     const navigate = useNavigate();
     
+    useEffect(() => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }, []);
+
     // Create array of bookshelf titles that include this book
     useEffect(function() {
         (async function getBookshelves(){

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import NextUp from "../../components/NextUp/NextUp";
 import CurrentlyReading from "../../components/CurrentlyReading/CurrentlyReading";
 import HighlightedBookshelf from "../../components/HighlightedBookshelf/HighlightedBookshelf";
@@ -5,6 +6,10 @@ import ReadingStats from "../../components/ReadingStats/ReadingStats";
 import './Home.css';
 
 export default function Home({ user, library }) {
+
+    useEffect(() => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }, []);
 
     return (
         <>

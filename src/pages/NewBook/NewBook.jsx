@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // import api from 'zotero-api-client';
@@ -13,6 +13,10 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
     const [queryText, setQueryText] = useState("");
     const [selectedBook, setSelectedBook] = useState(null);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }, []);
 
     function handleQuery(evt) {
         evt.preventDefault();
