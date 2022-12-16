@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // import api from 'zotero-api-client';
@@ -13,6 +13,7 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
     const [queryText, setQueryText] = useState("");
     const [selectedBook, setSelectedBook] = useState(null);
     const navigate = useNavigate();
+    const scrollToForm = useRef();
 
     useEffect(() => {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
@@ -21,7 +22,7 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
     function handleQuery(evt) {
         evt.preventDefault();
         setQueryText(queryText.trim());
-        const url = `https://www.googleapis.com/books/v1/volumes?q=${queryText}`;
+        const url = `https://www.googleapis.com/books/v1/volumes?q=${queryText}&maxResults=20`;
         fetch(url)
         .then((res) => res.json())
         .then((content) => {
@@ -49,6 +50,7 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
             img: book.volumeInfo.imageLinks?.smallThumbnail,
         }
         setSelectedBook(transformedBook)
+        scrollToForm.current.scrollIntoView({behavior:"smooth"})
     }
 
     /*-- Testing Zotero API 
@@ -85,9 +87,10 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
                         <input
                             value={queryText}
                             type="text"
+                            placeholder="Enter book info to search Google"
                             onChange={(evt) => setQueryText(evt.target.value)}
                         /><br />
-                        <button type="submit"  className="button-primary">Search!</button>
+                        <button type="submit" className="button-primary">Search!</button>
                     </form>
                     <div>
                         { searchResults ?
@@ -97,11 +100,11 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
                                 ))}
                             </div>
                         :
-                            <div>Search for a book to add it to your library!</div>
+                            <div className="alt-instructions"><p className="alt-instructions-text">Or add it manually</p><img className="alt-instructions-arrow" src="https://icones.pro/wp-content/uploads/2021/06/icone-fleche-droite-orange.png" /></div>
                         }
                     </div>
                 </div>
-                <NewBookForm user={user} selectedBook={selectedBook} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} handlePopulateForm={handlePopulateForm}/>
+                <NewBookForm user={user} selectedBook={selectedBook} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} scrollToForm= {scrollToForm}handlePopulateForm={handlePopulateForm}/>
             </div>
         </div>
     )

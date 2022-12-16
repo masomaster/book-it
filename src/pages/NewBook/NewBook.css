@@ -4,7 +4,9 @@
 }
 .search-and-add-panels {
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
+    row-gap: 50px;
 }
 .search-panel {
     flex-grow: 1;
@@ -14,7 +16,47 @@
     flex-wrap: wrap;
 }
 .book-form {
-    min-width: 300px;
-    max-width: 500px;
     text-align: left;
+    scroll-margin: 70px;
+}
+input, textarea {
+    width: 100%;
+}
+.alt-instructions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    justify-content: center;
+}
+.alt-instructions-text {
+    text-align: left;
+    color: grey;
+    margin: 0 15px 0 0;
+
+}
+.alt-instructions-arrow {
+    width: 30px;
+    height: 30px;
+    rotate: 90deg;
+}
+
+@media screen and (min-width: 850px) {
+    .search-and-add-panels {
+        flex-direction: row;
+    }
+    .book-form {
+        min-width: 300px;
+        max-width: 500px;
+        scroll-margin: 300px;
+    }
+    .search-panel input {
+        width: 75%;
+    }
+    .alt-instructions-text {
+        text-align: center;
+    }
+    .alt-instructions-arrow {
+        rotate: 0deg;
+    }
 }

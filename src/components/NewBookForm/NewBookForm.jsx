@@ -4,7 +4,7 @@ import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 // import '../Sidebar/Sidebar.css';
 
 
-export default function NewBookForm({ user, library, setLibrary, selectedBook, bookshelves, setBookshelves, shelvesInclBook, setShelvesInclBook, handlePopulateForm }) {
+export default function NewBookForm({ user, library, setLibrary, selectedBook, bookshelves, setBookshelves, shelvesInclBook, setShelvesInclBook, scrollToForm, handlePopulateForm }) {
     const [newBookForm, setNewBookForm] = useState({
         title: '',
         authors: '',
@@ -89,7 +89,7 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
     }
     
     return (
-        <div className="book-form">
+        <div className="book-form" ref={scrollToForm}>
             <form onSubmit={handleSubmit}>
                 <label>Title</label>
                 <input type="text" name="title" required value={newBookForm.title} onChange={handleChange}/>
