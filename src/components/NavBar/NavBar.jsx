@@ -27,8 +27,8 @@ export default function NavBar({user, setUser}) {
                 <Link to='/' className="book-it"><span className="book-it large" id="title">BookIt!</span></Link>
             </div>
             <input id="menu-toggle" type="checkbox" />
-            <label class='menu-button-container' for="menu-toggle" onClick={()=> setOpen(true)}>
-                <div class='menu-button'></div>
+            <label className='menu-button-container' htmlFor="menu-toggle" onClick={()=> setOpen(true)}>
+                <div className='menu-button'></div>
             </label>
             <ul className="menu">
                 <li><Link to='/books' className="nav-links" onClick={()=> setOpen(false)}>Books</Link></li>

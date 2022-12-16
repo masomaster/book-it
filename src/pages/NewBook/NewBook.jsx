@@ -100,7 +100,7 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
                                 ))}
                             </div>
                         :
-                            <div className="alt-instructions"><p className="alt-instructions-text">Or add it manually</p><img className="alt-instructions-arrow" src="https://icones.pro/wp-content/uploads/2021/06/icone-fleche-droite-orange.png" /></div>
+                            <div className="alt-instructions"><p className="alt-instructions-text">Or add it manually</p><img className="alt-instructions-arrow" src="https://icones.pro/wp-content/uploads/2021/06/icone-fleche-droite-orange.png" alt="arrow"/></div>
                         }
                     </div>
                 </div>

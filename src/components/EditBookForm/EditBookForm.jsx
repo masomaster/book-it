@@ -97,7 +97,6 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
         }
     }
 
-    console.log(formData)
     return (
         <div className="edit-book-form">
             <div>
