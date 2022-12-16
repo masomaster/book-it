@@ -22,9 +22,13 @@ body {
 .book-it {
     font-size: 6em;
 }
+.auth-page-form {
+    min-width: 200px;
+}
 h1 {
     font-family: 'Arvo', serif;
     margin-bottom: 50px;
+    white-space: nowrap;
 }
 a {
     color: white;

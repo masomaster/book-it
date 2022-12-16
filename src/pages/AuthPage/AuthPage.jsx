@@ -19,7 +19,7 @@ export default function AuthPage({setUser}) {
             { login ? 
                 <>
                     <AuthPageBrand />
-                    <div>
+                    <div className="auth-page-form">
                         <h1>Log In</h1>
                         <LoginForm setUser = {setUser} handleToggle={handleToggle} />
                     </div>
@@ -27,7 +27,7 @@ export default function AuthPage({setUser}) {
                 :
                 <>
                     <AuthPageBrand />
-                    <div>
+                    <div className="auth-page-form">
                         <h1>Sign Up</h1>
                         <SignUpForm setUser = {setUser} handleToggle={handleToggle} />
                     </div>
