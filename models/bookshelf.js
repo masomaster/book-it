@@ -12,7 +12,7 @@ const bookshelfSchema = new Schema({
 })
 
 bookshelfSchema.statics.getBookshelves = function(userId) {
-    return this.find({user: userId}).sort({"title":1});
+    return this.find({user: userId}).sort({"title":1}).populate('books');
 }
 
 bookshelfSchema.statics.getHighlightedBookshelf = function(userId) {
@@ -22,14 +22,17 @@ bookshelfSchema.statics.getHighlightedBookshelf = function(userId) {
     })
 }
 
-bookshelfSchema.statics.addBook = async function(userId, bookshelfId, newBookId) {
-    const bookshelf = await this.findOne({
-        user: userId,
-        _id: bookshelfId
-    });
-    bookshelf.books.push(newBookId)
-    bookshelf.save();
-    return bookshelf.populate('books');
+bookshelfSchema.statics.addBook = async function(userId, bookshelfIdsArray, newBookId) {
+    const bookModel = this;
+    for (b of bookshelfIdsArray) {
+        const bookshelf = await bookModel.findOne({
+            user: userId,
+            _id: b
+        });
+        bookshelf.books.push(newBookId)
+        bookshelf.save();
+    }
+    return this.getBookshelves(userId);
 }
 
 module.exports = mongoose.model('Bookshelf', bookshelfSchema);

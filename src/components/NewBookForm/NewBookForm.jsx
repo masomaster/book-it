@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+import Select from 'react-select';
 import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
-// import '../Sidebar/Sidebar.css';
 
 
 export default function NewBookForm({ user, library, setLibrary, selectedBook, bookshelves, setBookshelves, shelvesInclBook, setShelvesInclBook, scrollToForm, handlePopulateForm }) {
@@ -19,12 +19,13 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
         dueDate: '',
         pinned: false,
         notes: '',
-        bookshelf: '',
         owned: true,
         error: '',
         user: '',
         img: '',
     });
+
+    const bookshelfOptions = bookshelves?.map(b => {return {value: b._id, label: b.title}});
 
     useEffect(function() {
         if (selectedBook) {
@@ -37,6 +38,14 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
         setNewBookForm(newFormData);
     };
 
+    function handleBookshelfAdd(choices) {
+        console.log({choices})
+        const newFormData = { ...newBookForm, bookshelves: []};
+        choices.forEach(c => newFormData.bookshelves.push(c.value));
+        console.log(newFormData)
+        setNewBookForm(newFormData);
+    }
+
     async function handleSubmit(evt) {
         evt.preventDefault();
         try {
@@ -45,16 +54,13 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                 return str.trim();
             });
             if (formDataCopy.dueDate) formDataCopy.dueDate = new Date(formDataCopy.dueDate);
-            if (!formDataCopy.bookshelf) formDataCopy.bookshelf = null;
+            // if (!formDataCopy.bookshelf) formDataCopy.bookshelf = null;
             formDataCopy.user = user._id;
             const newBook = await booksAPI.addBook(formDataCopy);
 
-            if (formDataCopy.bookshelf) {
-                const updatedBookshelf = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelf);
-                const newBookshelves = bookshelves.filter(b => b._id !== updatedBookshelf._id);
-                newBookshelves.push(updatedBookshelf)
-                setBookshelves(newBookshelves)
-                setShelvesInclBook([...shelvesInclBook, updatedBookshelf.title]);
+            if (formDataCopy.bookshelves) {
+                const updatedBookshelves = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelves);
+                setBookshelves(updatedBookshelves);
             }
 
             library.push(newBook);
@@ -74,7 +80,6 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                 dueDate: '',
                 pinned: false,
                 notes: '',
-                bookshelf: '',
                 owned: true,
                 error: '',
                 user: '',
@@ -121,10 +126,13 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                     <option value={true}>Yes</option>
                 </select>
                 <label>Add to Bookshelf</label>
-                <select name="bookshelf" value={newBookForm.bookshelf} onChange={handleChange}>
-                    <option></option>
-                    {bookshelves?.map(b => <option key={b._id} value={b._id}>{b.title}</option>)}
-                </select>
+                <Select 
+                    name="bookshelves" 
+                    options={bookshelfOptions} 
+                    isMulti 
+                    className="basic-multi-select" 
+                    classNamePrefix="select" 
+                    onChange={handleBookshelfAdd}/>
                 <label>Owned?</label>
                 <select name="owned" value={newBookForm.owned} onChange={handleChange}>
                     <option value={true}>Yes</option>

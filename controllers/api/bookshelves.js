@@ -11,7 +11,7 @@ module.exports = {
 };
 
 async function getBookshelves(req, res) {
-  const bookshelves = await Bookshelf.getBookshelves(req.user._id).populate('books');
+  const bookshelves = await Bookshelf.getBookshelves(req.user._id);
   res.json(bookshelves);
 }
 
