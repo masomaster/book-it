@@ -26,8 +26,8 @@ async function getHighlightedBookshelf(req, res) {
 }
 
 async function addBook(req, res) {
-  const newBookshelfPopulated = await Bookshelf.addBook(req.user._id, req.body.bookshelfId, req.body.newBookId)
-  res.json(newBookshelfPopulated);
+  const newBookshelves = await Bookshelf.addBook(req.user._id, req.body.newBookId, req.body.bookshelfIds, req.body.newBookshelves)
+  res.json(newBookshelves);
 }
 
 async function updateBookshelf(req, res) {

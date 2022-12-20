@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import CreatableSelect from 'react-select/creatable';
 import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 
@@ -25,7 +26,9 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
         img: '',
     });
 
+    // Variables needed for react-select
     const bookshelfOptions = bookshelves?.map(b => {return {value: b._id, label: b.title}});
+    const animatedComponents = makeAnimated();
 
     useEffect(function() {
         if (selectedBook) {
@@ -39,10 +42,14 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
     };
 
     function handleBookshelfAdd(choices) {
-        console.log({choices})
-        const newFormData = { ...newBookForm, bookshelves: []};
-        choices.forEach(c => newFormData.bookshelves.push(c.value));
-        console.log(newFormData)
+        const newFormData = { ...newBookForm, bookshelves: [], createdBookshelves: []}; 
+        choices.forEach(function(c) {
+            if (c.label === c.value) {
+                newFormData.createdBookshelves.push(c.label)
+            } else {
+                newFormData.bookshelves.push(c.value);
+            }
+        })
         setNewBookForm(newFormData);
     }
 
@@ -54,12 +61,11 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                 return str.trim();
             });
             if (formDataCopy.dueDate) formDataCopy.dueDate = new Date(formDataCopy.dueDate);
-            // if (!formDataCopy.bookshelf) formDataCopy.bookshelf = null;
             formDataCopy.user = user._id;
             const newBook = await booksAPI.addBook(formDataCopy);
 
             if (formDataCopy.bookshelves) {
-                const updatedBookshelves = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelves);
+                const updatedBookshelves = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelves, formDataCopy.createdBookshelves);
                 setBookshelves(updatedBookshelves);
             }
 
@@ -126,13 +132,15 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                     <option value={true}>Yes</option>
                 </select>
                 <label>Add to Bookshelf</label>
-                <Select 
+                <CreatableSelect 
                     name="bookshelves" 
                     options={bookshelfOptions} 
                     isMulti 
+                    components={animatedComponents}
                     className="basic-multi-select" 
                     classNamePrefix="select" 
-                    onChange={handleBookshelfAdd}/>
+                    // onCreateOption={handleCreateBookshelves}
+                    onChange={handleBookshelfAdd} />
                 <label>Owned?</label>
                 <select name="owned" value={newBookForm.owned} onChange={handleChange}>
                     <option value={true}>Yes</option>
