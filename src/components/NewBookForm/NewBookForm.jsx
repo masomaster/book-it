@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Select from 'react-select';
 import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 // import '../Sidebar/Sidebar.css';
@@ -26,6 +27,9 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
         img: '',
     });
 
+    const bookshelfOptions = bookshelves?.map(b => {return {value: b.title.toLowerCase().replaceAll(' ', '-'), label: b.title}});
+    const [selectedBookshelves, setSelectedBookshelves] = useState()
+
     useEffect(function() {
         if (selectedBook) {
             setNewBookForm(selectedBook)
@@ -36,6 +40,14 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
         const newFormData = { ...newBookForm, [evt.target.name]: evt.target.value, error: ''}
         setNewBookForm(newFormData);
     };
+
+    function handleBookshelfAdd(choice) {
+        console.log(choice)
+        const newFormData = { ...newBookForm, bookshelf: choice.label};
+        console.log(newFormData)
+        setNewBookForm(newFormData);
+
+    }
 
     async function handleSubmit(evt) {
         evt.preventDefault();
@@ -121,10 +133,13 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                     <option value={true}>Yes</option>
                 </select>
                 <label>Add to Bookshelf</label>
-                <select name="bookshelf" value={newBookForm.bookshelf} onChange={handleChange}>
+
+                <Select name="bookshelf" options={bookshelfOptions} onChange={handleBookshelfAdd}/>
+
+                {/* <select name="bookshelf" value={newBookForm.bookshelf} onChange={handleChange}>
                     <option></option>
                     {bookshelves?.map(b => <option key={b._id} value={b._id}>{b.title}</option>)}
-                </select>
+                </select> */}
                 <label>Owned?</label>
                 <select name="owned" value={newBookForm.owned} onChange={handleChange}>
                     <option value={true}>Yes</option>
