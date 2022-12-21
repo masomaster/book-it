@@ -24,22 +24,26 @@ bookshelfSchema.statics.getHighlightedBookshelf = function(userId) {
 
 bookshelfSchema.statics.addBook = async function(userId, newBookId, bookshelfIds, newBookshelves) {
     const bookModel = this;
-    for (b of newBookshelves) {
-        const newShelf = await this.create({
-            title: b,
-            user: userId
-        });
-        console.log(newShelf)
-        newShelf.books.push(newBookId);
-        newShelf.save();
+    if (newBookshelves?.length) {
+        for (b of newBookshelves) {
+            const newShelf = await this.create({
+                title: b,
+                user: userId
+            });
+            console.log(newShelf)
+            newShelf.books.push(newBookId);
+            newShelf.save();
+        }
     }
-    for (b of bookshelfIds) {
-        const bookshelf = await bookModel.findOne({
-            user: userId,
-            _id: b
-        });
-        bookshelf.books.push(newBookId)
-        bookshelf.save();
+    if (bookshelfIds?.length) {
+        for (b of bookshelfIds) {
+            const bookshelf = await bookModel.findOne({
+                user: userId,
+                _id: b
+            });
+            bookshelf.books.push(newBookId)
+            bookshelf.save();
+        }
     }
     const newBookshelfList = this.getBookshelves(userId);
     return newBookshelfList;
