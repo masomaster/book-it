@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import makeAnimated from 'react-select/animated';
+import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
+import makeAnimated from 'react-select/animated';
 import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 
@@ -26,8 +27,16 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
         img: '',
     });
 
+    const [pinned, setPinned] = useState(false);
+    const [owned, setOwned] = useState(true);
+
+
     // Variables needed for react-select
     const bookshelfOptions = bookshelves?.map(b => {return {value: b._id, label: b.title}});
+    const booleanOptions = [
+        {value: false, label: 'No'},
+        {value: true, label: 'Yes'}
+    ]
     const animatedComponents = makeAnimated();
 
     useEffect(function() {
@@ -126,11 +135,6 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                 <input type="date" name="dueDate" value={newBookForm.dueDate} onChange={handleChange}/>
                 <label>Notes</label>
                 <textarea rows="3" cols="16" name="notes" value={newBookForm.notes} onChange={handleChange}/>
-                <label>Pin to Prioritize?</label>
-                <select name="pinned" value={newBookForm.pinned} onChange={handleChange}>
-                    <option value={false}>No</option>
-                    <option value={true}>Yes</option>
-                </select>
                 <label>Add to Bookshelf</label>
                 <CreatableSelect 
                     name="bookshelves" 
@@ -139,13 +143,29 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                     components={animatedComponents}
                     className="basic-multi-select" 
                     classNamePrefix="select" 
-                    // onCreateOption={handleCreateBookshelves}
                     onChange={handleBookshelfAdd} />
+                <br />
+                <label>Pin to Prioritize?</label>
+                {/* <input type="checkbox" /> */}
+                {/* <Select 
+                    options={booleanOptions} 
+                    defaultValue={booleanOptions[0]}
+                />           <br /> */}
+                <select name="pinned" value={newBookForm.pinned} onChange={handleChange}>
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
+                </select>
                 <label>Owned?</label>
+                {/* <Select 
+                    options={booleanOptions} 
+                    defaultValue={booleanOptions[1]}
+                />
+                <br /> */}
                 <select name="owned" value={newBookForm.owned} onChange={handleChange}>
                     <option value={true}>Yes</option>
                     <option value={false}>No</option>
-                </select><br />
+                </select>
+                <br />
                 <input type="submit"  className="button-primary" value="Add Book" />
             </form>
             <p className="error-message">&nbsp;{newBookForm.error}</p>
