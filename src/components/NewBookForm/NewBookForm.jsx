@@ -150,7 +150,8 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                 {/* <Select 
                     options={booleanOptions} 
                     defaultValue={booleanOptions[0]}
-                />           <br /> */}
+                />
+                <br /> */}
                 <select name="pinned" value={newBookForm.pinned} onChange={handleChange}>
                     <option value={false}>No</option>
                     <option value={true}>Yes</option>
