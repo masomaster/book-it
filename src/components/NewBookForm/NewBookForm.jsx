@@ -1,13 +1,11 @@
-import { useState, useEffect } from "react";
-import Select from 'react-select';
+import { useState, useEffect, useRef } from "react";
 import CreatableSelect from 'react-select/creatable';
 import makeAnimated from 'react-select/animated';
 import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 
-
-export default function NewBookForm({ user, library, setLibrary, selectedBook, bookshelves, setBookshelves, shelvesInclBook, setShelvesInclBook, scrollToForm, handlePopulateForm }) {
-    const [newBookForm, setNewBookForm] = useState({
+export default function NewBookForm({ user, library, setLibrary, selectedBook, setSelectedBook, bookshelves, setBookshelves, shelvesInclBook, setShelvesInclBook, scrollToForm, handlePopulateForm }) {
+    const initialFormState = {
         title: '',
         authors: '',
         pubYear: '',
@@ -22,11 +20,12 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
         pinned: false,
         notes: '',
         owned: true,
+        bookshelves: [],
         error: '',
         user: '',
         img: '',
-    });
-
+    }
+    const [newBookForm, setNewBookForm] = useState(initialFormState);
     const [pinned, setPinned] = useState(false);
     const [owned, setOwned] = useState(true);
 
@@ -38,13 +37,20 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
         {value: true, label: 'Yes'}
     ]
     const animatedComponents = makeAnimated();
+    const bookshelfSelect = useRef();
 
+    // Adds selected book info to NewBookForm
     useEffect(function() {
         if (selectedBook) {
+            bookshelfSelect.current.clearValue();
             setNewBookForm(selectedBook)
+        }
+        else {
+            setNewBookForm(initialFormState)
         }
     }, [handlePopulateForm, selectedBook])
 
+    // Handles form changes
     function handleChange(evt) {
         const newFormData = { ...newBookForm, [evt.target.name]: evt.target.value, error: ''}
         setNewBookForm(newFormData);
@@ -62,6 +68,7 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
         setNewBookForm(newFormData);
     }
 
+    // Handles form submission
     async function handleSubmit(evt) {
         evt.preventDefault();
         try {
@@ -72,35 +79,18 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
             if (formDataCopy.dueDate) formDataCopy.dueDate = new Date(formDataCopy.dueDate);
             formDataCopy.user = user._id;
             const newBook = await booksAPI.addBook(formDataCopy);
+            const newLibrary = [...library]
+            newLibrary.push(newBook);
+            setLibrary(newLibrary);
 
             if (formDataCopy.bookshelves) {
                 const updatedBookshelves = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelves, formDataCopy.createdBookshelves);
                 setBookshelves(updatedBookshelves);
             }
-
-            library.push(newBook);
-            setLibrary(library);
-
-            setNewBookForm({
-                title: '',
-                authors: '',
-                pubYear: '',
-                publisher: '',
-                totalPages: '',
-                pagesRead: '',
-                category: '',
-                url: '',
-                description: '',
-                course: '',
-                dueDate: '',
-                pinned: false,
-                notes: '',
-                owned: true,
-                error: '',
-                user: '',
-                img: '',
-            })
-        } catch {
+            
+            setSelectedBook(null);
+        } catch(err) {
+            console.log(err)
             setNewBookForm({
                 ...newBookForm, 
                 error: 'Invalid Entry - Correct Entries'
@@ -138,6 +128,7 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                 <label>Add to Bookshelf</label>
                 <CreatableSelect 
                     name="bookshelves" 
+                    ref={bookshelfSelect}
                     options={bookshelfOptions} 
                     isMulti 
                     components={animatedComponents}
@@ -167,7 +158,7 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, b
                     <option value={false}>No</option>
                 </select>
                 <br />
-                <input type="submit"  className="button-primary" value="Add Book" />
+                <input type="submit" className="button-primary" value="Add Book" />
             </form>
             <p className="error-message">&nbsp;{newBookForm.error}</p>
         </div>

@@ -1,12 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-// import api from 'zotero-api-client';
-
 import SearchResultItem from '../../components/SearchResultItem/SearchResultItem';
 import NewBookForm from '../../components/NewBookForm/NewBookForm';
-// import Sidebar from "../../components/Sidebar/Sidebar";
 import "./NewBook.css";
+
+// import api from 'zotero-api-client';
 
 export default function NewBook({ user, library, setLibrary, bookshelves, setBookshelves, setShelvesInclBook, shelvesInclBook }) {
     const [searchResults, setSearchResults] = useState("");
@@ -104,7 +102,7 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
                         }
                     </div>
                 </div>
-                <NewBookForm user={user} selectedBook={selectedBook} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} scrollToForm= {scrollToForm}handlePopulateForm={handlePopulateForm}/>
+                <NewBookForm user={user} selectedBook={selectedBook} setSelectedBook={setSelectedBook} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} scrollToForm= {scrollToForm}handlePopulateForm={handlePopulateForm}/>
             </div>
         </div>
     )
