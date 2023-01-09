@@ -26,7 +26,7 @@ bookshelfSchema.statics.addBook = async function(userId, newBookId, bookshelfIds
     const bookModel = this;
     if (newBookshelves?.length) {
         for (b of newBookshelves) {
-            const newShelf = await this.create({
+            const newShelf = await bookModel.create({
                 title: b,
                 user: userId
             });
@@ -45,7 +45,7 @@ bookshelfSchema.statics.addBook = async function(userId, newBookId, bookshelfIds
             bookshelf.save();
         }
     }
-    const newBookshelfList = this.getBookshelves(userId);
+    const newBookshelfList = bookModel.getBookshelves(userId);
     return newBookshelfList;
 }
 

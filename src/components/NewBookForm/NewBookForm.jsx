@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import makeAnimated from 'react-select/animated';
 import * as booksAPI from '../../utilities/books-api';
@@ -26,9 +27,6 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, s
         img: '',
     }
     const [newBookForm, setNewBookForm] = useState(initialFormState);
-    const [pinned, setPinned] = useState(false);
-    const [owned, setOwned] = useState(true);
-
 
     // Variables needed for react-select
     const bookshelfOptions = bookshelves?.map(b => {return {value: b._id, label: b.title}});
@@ -68,6 +66,18 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, s
         setNewBookForm(newFormData);
     }
 
+    function handlePinChange(choice) {
+        const newFormData = { ...newBookForm};
+        newFormData.pinned = choice.value;
+        setNewBookForm(newFormData);
+    }
+
+    function handleOwnedChange(choice) {
+        const newFormData = { ...newBookForm};
+        newFormData.owned = choice.value;
+        setNewBookForm(newFormData);
+    }
+
     // Handles form submission
     async function handleSubmit(evt) {
         evt.preventDefault();
@@ -86,6 +96,7 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, s
             if (formDataCopy.bookshelves) {
                 const updatedBookshelves = await bookshelvesAPI.addBook(newBook._id, formDataCopy.bookshelves, formDataCopy.createdBookshelves);
                 setBookshelves(updatedBookshelves);
+                console.log({updatedBookshelves})
             }
             
             setSelectedBook(null);
@@ -137,26 +148,18 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, s
                     onChange={handleBookshelfAdd} />
                 <br />
                 <label>Pin to Prioritize?</label>
-                {/* <input type="checkbox" /> */}
-                {/* <Select 
+                <Select 
                     options={booleanOptions} 
                     defaultValue={booleanOptions[0]}
+                    onChange={handlePinChange}
                 />
-                <br /> */}
-                <select name="pinned" value={newBookForm.pinned} onChange={handleChange}>
-                    <option value={false}>No</option>
-                    <option value={true}>Yes</option>
-                </select>
+                <br />
                 <label>Owned?</label>
-                {/* <Select 
+                <Select 
                     options={booleanOptions} 
                     defaultValue={booleanOptions[1]}
+                    onChange={handleOwnedChange}
                 />
-                <br /> */}
-                <select name="owned" value={newBookForm.owned} onChange={handleChange}>
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
-                </select>
                 <br />
                 <input type="submit" className="button-primary" value="Add Book" />
             </form>
