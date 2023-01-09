@@ -36,11 +36,15 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, s
     ]
     const animatedComponents = makeAnimated();
     const bookshelfSelect = useRef();
+    const pinnedSelect = useRef();
+    const ownedSelect = useRef();
 
     // Adds selected book info to NewBookForm
     useEffect(function() {
         if (selectedBook) {
             bookshelfSelect.current.clearValue();
+            pinnedSelect.current.setValue(booleanOptions[0])
+            ownedSelect.current.setValue(booleanOptions[1])
             setNewBookForm(selectedBook)
         }
         else {
@@ -150,6 +154,7 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, s
                 <label>Pin to Prioritize?</label>
                 <Select 
                     options={booleanOptions} 
+                    ref={pinnedSelect}
                     defaultValue={booleanOptions[0]}
                     onChange={handlePinChange}
                 />
@@ -157,6 +162,7 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, s
                 <label>Owned?</label>
                 <Select 
                     options={booleanOptions} 
+                    ref={ownedSelect}
                     defaultValue={booleanOptions[1]}
                     onChange={handleOwnedChange}
                 />

@@ -46,6 +46,7 @@ bookshelfSchema.statics.addBook = async function(userId, newBookId, bookshelfIds
         }
     }
     const newBookshelfList = bookModel.getBookshelves(userId);
+    console.log({newBookshelfList})
     return newBookshelfList;
 }
 
