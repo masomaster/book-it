@@ -1,4 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import Select from 'react-select';
+import CreatableSelect from 'react-select/creatable';
+import makeAnimated from 'react-select/animated';
 import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 import './EditBookForm.css';
@@ -18,7 +21,6 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
         dueDate: book.dueDate ? book.dueDate : '',
         pinned: false,
         notes: '',
-        bookshelf: '',
         done: false,
         owned: true,
         error: '',
@@ -27,32 +29,49 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
     });
 
     useEffect(function() {
-        setFormData({
-            title: book.title,
-            authors: book.authors,
-            pubYear: book.pubYear,
-            publisher: book.publisher,
-            totalPages: book.totalPages,
-            pagesRead: book.pagesRead,
-            category: book.category,
-            url: book.url,
-            description: book.description,
-            course: book.course,
-            dueDate: book.dueDate ? book.dueDate : '',
-            pinned: book.pinned,
-            notes: book.notes,
-            bookshelf: '',
-            done: book.done,
-            owned: book.owned,
-            error: book.error,
-            img: book.img,
-        })
+        setFormData(book)
     }, [book])
     
+    // Variables needed for react-select
+    const bookshelfOptions = bookshelves?.map(b => {return {value: b._id, label: b.title}});
+    const shelfPreset = bookshelves.filter(s => shelvesInclBook.includes(s.title)).flatMap(s => [{"value": s._id, "label": s.title}])
+    const booleanOptions = [
+        {value: false, label: 'No'},
+        {value: true, label: 'Yes'}
+    ]
+    const animatedComponents = makeAnimated();
+    const bookshelfSelect = useRef();
+    const pinnedSelect = useRef();
+    const ownedSelect = useRef();
+
     function handleChange(evt) {
         const newFormData = { ...formData, [evt.target.name]: evt.target.value, error: ''}
         setFormData(newFormData);
     };
+
+    function handleBookshelfAdd(choices) {
+        const newFormData = { ...formData, bookshelves: [], createdBookshelves: []}; 
+        choices.forEach(function(c) {
+            if (c.label === c.value) {
+                newFormData.createdBookshelves.push(c.label)
+            } else {
+                newFormData.bookshelves.push(c.value);
+            }
+        })
+        setFormData(newFormData);
+    }
+
+    function handlePinChange(choice) {
+        const newFormData = { ...formData};
+        newFormData.pinned = choice.value;
+        setFormData(newFormData);
+    }
+
+    function handleOwnedChange(choice) {
+        const newFormData = { ...formData};
+        newFormData.owned = choice.value;
+        setFormData(newFormData);
+    }
 
     async function handleSubmit(evt) {
         evt.preventDefault();
@@ -63,9 +82,14 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
             newLibrary.push(updatedBook);
             setLibrary(newLibrary);
 
-            if (formDataCopy.bookshelf) {
-                const bookshelf = await bookshelvesAPI.addBook(book._id, formDataCopy.bookshelf);
-                setShelvesInclBook([...shelvesInclBook, bookshelf.title]);
+            if (formDataCopy.bookshelves) {
+                // console.log(formDataCopy.bookshelves, formDataCopy.createdBookshelves)
+                // const bookshelf = await bookshelvesAPI.addBook(book._id, formDataCopy.bookshelf);
+                // setShelvesInclBook([...shelvesInclBook, bookshelf.title]);
+
+                const updatedBookshelves = await bookshelvesAPI.addBook(book._id, formDataCopy.bookshelf, formDataCopy.createdBookshelves);
+                setBookshelves(updatedBookshelves);
+                console.log({updatedBookshelves})
             }
 
             setFormData({
@@ -82,7 +106,6 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
                 dueDate: book.dueDate ? book.dueDate : '',
                 pinned: book.pinned,
                 notes: book.notes,
-                bookshelf: book.bookshelf ? book.bookshelf : '',
                 done: book.done,
                 owned: book.owned,
                 error: book.error,
@@ -127,26 +150,39 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
                 <input type="date" name="dueDate" /* ADD BACK IN ONCE FEATURE IMPLEMENTED value={formData.dueDate} */ onChange={handleChange}/>
                 <label>Notes</label>
                 <textarea rows="3" cols="16" name="notes" value={formData.notes} onChange={handleChange}/>
-                <label>Pin to Prioritize?</label>
-                <select name="pinned" value={formData.pinned} onChange={handleChange}>
-                    <option value={false}>No</option>
-                    <option value={true}>Yes</option>
-                </select>
                 <label>Add to Bookshelf</label>
-                <select name="bookshelf" value={formData.bookshelf} onChange={handleChange}>
-                    <option value={''}></option>
-                    {bookshelves?.map(b => <option key={b._id} value={b._id}>{b.title}</option>)}
-                </select>
+                <CreatableSelect 
+                    name="bookshelves" 
+                    ref={bookshelfSelect}
+                    options={bookshelfOptions} 
+                    isMulti 
+                    components={animatedComponents}
+                    className="basic-multi-select" 
+                    classNamePrefix="select" 
+                    defaultValue={shelfPreset}
+                    onChange={handleBookshelfAdd} />
+                <br />
+                <label>Pin to Prioritize?</label>
+                <Select 
+                    options={booleanOptions} 
+                    ref={pinnedSelect}
+                    defaultValue={booleanOptions[0]}
+                    onChange={handlePinChange}
+                />
+                <br />
+                <label>Owned?</label>
+                <Select 
+                    options={booleanOptions} 
+                    ref={ownedSelect}
+                    defaultValue={booleanOptions[1]}
+                    onChange={handleOwnedChange}
+                />
+                <br />
                 <label>Done?</label>
                 <select name="done" value={formData.done} onChange={handleChange}>
                     <option value={false}>No</option>
                     <option value={true}>Yes</option>
                 </select>
-                <label>Owned?</label>
-                <select name="owned" value={formData.owned} onChange={handleChange}>
-                    <option value={false}>No</option>
-                    <option value={true}>Yes</option>
-                </select><br />
                 <input type="submit" className="button-primary" value="Update Book" />
             </form>
             <p className="error-message">&nbsp;{formData.error}</p>

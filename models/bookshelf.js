@@ -31,10 +31,8 @@ bookshelfSchema.statics.addBook = async function(userId, newBookId, bookshelfIds
                     title: b,
                     user: userId
                 });
-                console.log(newShelf)
                 newShelf.books.push(newBookId);
                 newShelf.save();
-                console.log({bookshelf})
             }
         }
         if (bookshelfIds?.length) {
@@ -45,13 +43,11 @@ bookshelfSchema.statics.addBook = async function(userId, newBookId, bookshelfIds
                 });
                 bookshelf.books.push(newBookId)
                 bookshelf.save();
-                console.log({bookshelf})
             }
         }
     }
     async function returnNewShelves(userId) {
         const newBookshelfList = await bookModel.getBookshelves(userId);
-        console.log({newBookshelfList})
         return newBookshelfList;
     }
     await addToShelves(userId, newBookId, bookshelfIds, newBookshelves);
