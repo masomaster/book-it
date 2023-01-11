@@ -22,6 +22,10 @@ export async function updateBookshelf(bookshelfId, newBookshelfInfo) {
     return sendRequest(`${BASE_URL}/updatebookshelf`, 'POST', {bookshelfId, newBookshelfInfo});
 }
 
+export async function updateBookshelvesContents(bookId, bookshelfIds, newBookshelfTitle) {
+    return sendRequest(`${BASE_URL}/updatebookshelvescontents`, 'POST', {bookId, bookshelfIds, newBookshelfTitle});
+}
+
 export async function deleteBookshelf(bookshelfId) {
     return sendRequest(`${BASE_URL}/deletebookshelf/${bookshelfId}`, 'DELETE');
 }

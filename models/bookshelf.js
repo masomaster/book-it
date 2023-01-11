@@ -22,22 +22,13 @@ bookshelfSchema.statics.getHighlightedBookshelf = function(userId) {
     })
 }
 
-bookshelfSchema.statics.addBook = async function(userId, newBookId, bookshelfIds, newBookshelves) {
-    const bookModel = this;
-    async function addToShelves(userId, newBookId, bookshelfIds, newBookshelves) {
-        if (newBookshelves?.length) {
-            for (b of newBookshelves) {
-                const newShelf = await bookModel.create({
-                    title: b,
-                    user: userId
-                });
-                newShelf.books.push(newBookId);
-                newShelf.save();
-            }
-        }
+bookshelfSchema.statics.addBook = async function(userId, newBookId, bookshelfIds, newBookshelfTitles) {
+    const bookshelfModel = this;
+    async function addToShelves(userId, newBookId, bookshelfIds, newBookshelfTitles) {
+        this.createBookshelfAndAddBook(userId, newBookId, newBookshelfTitles)
         if (bookshelfIds?.length) {
             for (b of bookshelfIds) {
-                const bookshelf = await bookModel.findOne({
+                const bookshelf = await bookshelfModel.findOne({
                     user: userId,
                     _id: b
                 });
@@ -47,11 +38,52 @@ bookshelfSchema.statics.addBook = async function(userId, newBookId, bookshelfIds
         }
     }
     async function returnNewShelves(userId) {
-        const newBookshelfList = await bookModel.getBookshelves(userId);
+        const newBookshelfList = await bookshelfModel.getBookshelves(userId);
         return newBookshelfList;
     }
-    await addToShelves(userId, newBookId, bookshelfIds, newBookshelves);
+    await addToShelves(userId, newBookId, bookshelfIds, newBookshelfTitles);
     return await returnNewShelves(userId);
 }
 
+bookshelfSchema.statics.updateBookshelvesContents = async function(userId, bookId, bookshelfIds, newBookshelfTitles) {
+    const bookshelfModel = this;
+    // find bookshelves that should include book but don't, then add
+    const bookshelvesShouldHaveBookButDont = await bookshelfModel.find({
+        '_id': { $in: bookshelfIds},
+        'books': { $nin: [bookId]}
+    })
+    bookshelvesShouldHaveBookButDont.forEach(function(s) {
+        s.books.push(bookId)
+        s.save();
+    })
+
+    // find bookshelves that include book but shouldn't, then remove
+    const bookshelvesShouldNotHaveBookButDo = await bookshelfModel.find({
+        '_id': { $nin: bookshelfIds},
+        'books': { $in: [bookId]}
+    })
+    bookshelvesShouldNotHaveBookButDo.forEach(function(s) {
+        s.books.splice(s.books.indexOf(bookId), 1)
+        s.save();
+    })
+
+    // create any new bookshelves (if applicable)
+    this.createBookshelfAndAddBook(userId, bookId, newBookshelfTitles);
+    
+    return bookshelfModel.getBookshelves(userId);
+}
+
+bookshelfSchema.statics.createBookshelfAndAddBook = async function (userId, newBookId, newBookshelfTitles) {
+    const bookshelfModel = this;
+    if (newBookshelfTitles?.length) {
+        for (b of newBookshelfTitles) {
+            const newShelf = await bookshelfModel.create({
+                title: b,
+                user: userId
+            });
+            newShelf.books.push(newBookId);
+            newShelf.save();
+        }
+    }
+}
 module.exports = mongoose.model('Bookshelf', bookshelfSchema);

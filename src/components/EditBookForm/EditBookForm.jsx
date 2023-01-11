@@ -44,6 +44,7 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
     const pinnedSelect = useRef();
     const ownedSelect = useRef();
 
+    // Functions to handle various form changes
     function handleChange(evt) {
         const newFormData = { ...formData, [evt.target.name]: evt.target.value, error: ''}
         setFormData(newFormData);
@@ -73,6 +74,7 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
         setFormData(newFormData);
     }
 
+    // Function to handle form submission
     async function handleSubmit(evt) {
         evt.preventDefault();
         try {
@@ -83,13 +85,8 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
             setLibrary(newLibrary);
 
             if (formDataCopy.bookshelves) {
-                // console.log(formDataCopy.bookshelves, formDataCopy.createdBookshelves)
-                // const bookshelf = await bookshelvesAPI.addBook(book._id, formDataCopy.bookshelf);
-                // setShelvesInclBook([...shelvesInclBook, bookshelf.title]);
-
-                const updatedBookshelves = await bookshelvesAPI.addBook(book._id, formDataCopy.bookshelf, formDataCopy.createdBookshelves);
+                const updatedBookshelves = await bookshelvesAPI.updateBookshelvesContents(book._id, formDataCopy.bookshelves, formDataCopy.createdBookshelves);
                 setBookshelves(updatedBookshelves);
-                console.log({updatedBookshelves})
             }
 
             setFormData({

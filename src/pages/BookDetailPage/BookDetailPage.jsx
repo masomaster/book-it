@@ -5,7 +5,6 @@ import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 
 import EditBookForm from '../../components/EditBookForm/EditBookForm';
-import NewBookForm from "../../components/NewBookForm/NewBookForm";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import './BookDetailPage.css';
 
