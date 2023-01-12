@@ -8,6 +8,7 @@ router.get('/highlighted', ensureLoggedIn, bookshelvesCtrl.getHighlightedBookshe
 router.post('/new', ensureLoggedIn, bookshelvesCtrl.addBookshelf);
 router.post('/addbook', ensureLoggedIn, bookshelvesCtrl.addBook);
 router.post('/updatebookshelf', ensureLoggedIn, bookshelvesCtrl.updateBookshelf);
+router.post('/updatebookshelvescontents', ensureLoggedIn, bookshelvesCtrl.updateBookshelvesContents);
 router.delete('/deletebookshelf/:id', ensureLoggedIn, bookshelvesCtrl.deleteBookshelf);
 
 module.exports = router;

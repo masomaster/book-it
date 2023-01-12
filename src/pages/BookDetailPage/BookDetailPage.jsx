@@ -26,7 +26,7 @@ export default function BookDetailPage({ library, setLibrary, bookshelves, setBo
             setBookshelves(bookshelfSet);
             setLoadingBookshelves(false);
         })();
-    }, [setBookshelves])
+    }, [setShelvesInclBook])
     
     useEffect(function() {
         if (!loadingBookshelves) {
@@ -38,7 +38,7 @@ export default function BookDetailPage({ library, setLibrary, bookshelves, setBo
             })
             setShelvesInclBook(shelves);
         }
-    }, [book._id, bookshelves, setShelvesInclBook, loadingBookshelves])
+    }, [book._id, bookshelves, loadingBookshelves])
 
     function handleToggle() {
         setEditToggle(!editToggle)

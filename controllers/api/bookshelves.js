@@ -7,6 +7,7 @@ module.exports = {
   getHighlightedBookshelf,
   addBook,
   updateBookshelf,
+  updateBookshelvesContents,
   deleteBookshelf
 };
 
@@ -33,6 +34,11 @@ async function addBook(req, res) {
 async function updateBookshelf(req, res) {
   const updatedBookshelf = await Bookshelf.findByIdAndUpdate(req.body.bookshelfId, req.body.newBookshelfInfo, {new: true}).populate('books');
   res.json(updatedBookshelf);
+}
+
+async function updateBookshelvesContents(req, res) {
+  const shelvesAndTitles = await Bookshelf.updateBookshelvesContents(req.user._id, req.body.bookId, req.body.bookshelfIds, req.body.newBookshelfTitle)
+  res.json(shelvesAndTitles);
 }
 
 async function deleteBookshelf(req, res) {
