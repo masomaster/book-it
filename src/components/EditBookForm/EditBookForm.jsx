@@ -19,6 +19,7 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
         description: '',
         course: '',
         dueDate: book.dueDate ? book.dueDate : '',
+        feeling: '',
         pinned: false,
         notes: '',
         done: false,
@@ -41,6 +42,7 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
             description: book.description || '',
             course: book.course || '',
             dueDate: book.dueDate ? book.dueDate : '',
+            feeling: book.feeling || '',
             pinned: book.pinned,
             notes: book.notes || '',
             done: book.done,
@@ -159,6 +161,8 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
                 <input type="number" name="pagesRead" value={formData.pagesRead} onChange={handleChange}/>
                 <label>Category</label>
                 <input type="text" name="category" value={formData.category} onChange={handleChange}/>
+                <label>Feeling after reading (enter emoji)</label>
+                <input type="text" name="feeling" value={formData.feeling} onChange={handleChange}/>
                 <label>Website</label>
                 <input type="text" name="url" value={formData.url} onChange={handleChange}/>
                 <label>Description</label>
