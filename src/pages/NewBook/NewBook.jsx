@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchResultItem from '../../components/SearchResultItem/SearchResultItem';
 import NewBookForm from '../../components/NewBookForm/NewBookForm';
+import BookRecs from '../../components/BookRecs/BookRecs';
 import "./NewBook.css";
 
 // import api from 'zotero-api-client';
@@ -98,7 +99,12 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
                                 ))}
                             </div>
                         :
-                            <div className="alt-instructions"><p className="alt-instructions-text">Or add it manually</p><img className="alt-instructions-arrow" src="https://icones.pro/wp-content/uploads/2021/06/icone-fleche-droite-orange.png" alt="arrow"/></div>
+                            <>
+                                <BookRecs library={library} />
+                                <div className="alt-instructions">
+                                    <p className="alt-instructions-text">Or add it manually</p><img className="alt-instructions-arrow" src="https://icones.pro/wp-content/uploads/2021/06/icone-fleche-droite-orange.png" alt="arrow"/>
+                                </div>
+                            </>
                         }
                     </div>
                 </div>

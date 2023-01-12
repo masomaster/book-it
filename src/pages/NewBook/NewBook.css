@@ -40,6 +40,9 @@ input, textarea {
     height: 30px;
     rotate: 90deg;
 }
+.ai {
+    display: inline-block;
+}
 
 @media screen and (min-width: 850px) {
     .search-and-add-panels {
