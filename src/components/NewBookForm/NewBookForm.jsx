@@ -50,6 +50,7 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, s
         else {
             setNewBookForm(initialFormState)
         }
+        // eslint-disable-next-line
     }, [handlePopulateForm, selectedBook])
 
     // Handles form changes

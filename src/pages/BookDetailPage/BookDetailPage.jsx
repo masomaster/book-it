@@ -13,6 +13,7 @@ export default function BookDetailPage({ library, setLibrary, bookshelves, setBo
     const [loadingBookshelves, setLoadingBookshelves] = useState(true);
     const { bookId } = useParams();
     const book = library.find((b) => b._id === bookId);
+    console.log(book)
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -26,7 +27,7 @@ export default function BookDetailPage({ library, setLibrary, bookshelves, setBo
             setBookshelves(bookshelfSet);
             setLoadingBookshelves(false);
         })();
-    }, [setShelvesInclBook])
+    }, [setShelvesInclBook, setBookshelves])
     
     useEffect(function() {
         if (!loadingBookshelves) {
@@ -38,7 +39,7 @@ export default function BookDetailPage({ library, setLibrary, bookshelves, setBo
             })
             setShelvesInclBook(shelves);
         }
-    }, [book._id, bookshelves, loadingBookshelves])
+    }, [book._id, bookshelves, setShelvesInclBook, loadingBookshelves])
 
     function handleToggle() {
         setEditToggle(!editToggle)

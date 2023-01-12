@@ -39,8 +39,9 @@
     }
     .info-except-descr {
         max-height: 500px;
+        max-width: 400px;
     }
     .cover-progress {
-        margin: 30px 100px 30px 30px;
+        margin: 30px 75px 30px 30px;
     }
 }
