@@ -25,7 +25,7 @@ bookshelfSchema.statics.getHighlightedBookshelf = function(userId) {
 bookshelfSchema.statics.addBook = async function(userId, newBookId, bookshelfIds, newBookshelfTitles) {
     const bookshelfModel = this;
     async function addToShelves(userId, newBookId, bookshelfIds, newBookshelfTitles) {
-        this.createBookshelfAndAddBook(userId, newBookId, newBookshelfTitles)
+        bookshelfModel.createBookshelfAndAddBook(userId, newBookId, newBookshelfTitles)
         if (bookshelfIds?.length) {
             for (b of bookshelfIds) {
                 const bookshelf = await bookshelfModel.findOne({
@@ -47,8 +47,10 @@ bookshelfSchema.statics.addBook = async function(userId, newBookId, bookshelfIds
 
 bookshelfSchema.statics.updateBookshelvesContents = async function(userId, bookId, bookshelfIds, newBookshelfTitles) {
     const bookshelfModel = this;
-    // find bookshelves that should include book but don't, then add
+    
+    // Finds bookshelves that should include book but don't, then add
     const bookshelvesShouldHaveBookButDont = await bookshelfModel.find({
+        'user': userId,
         '_id': { $in: bookshelfIds},
         'books': { $nin: [bookId]}
     })
@@ -57,8 +59,9 @@ bookshelfSchema.statics.updateBookshelvesContents = async function(userId, bookI
         s.save();
     })
 
-    // find bookshelves that include book but shouldn't, then remove
+    // Finds bookshelves that include book but shouldn't, then remove
     const bookshelvesShouldNotHaveBookButDo = await bookshelfModel.find({
+        'user': userId,
         '_id': { $nin: bookshelfIds},
         'books': { $in: [bookId]}
     })
@@ -67,10 +70,19 @@ bookshelfSchema.statics.updateBookshelvesContents = async function(userId, bookI
         s.save();
     })
 
-    // create any new bookshelves (if applicable)
-    this.createBookshelfAndAddBook(userId, bookId, newBookshelfTitles);
+    // Creates any new bookshelves (if applicable)
+    bookshelfModel.createBookshelfAndAddBook(userId, bookId, newBookshelfTitles);
     
-    return bookshelfModel.getBookshelves(userId);
+    // Formats return info
+    const bookshelves = await bookshelfModel.getBookshelves(userId)
+    const bookshelvesWithBook = await bookshelfModel.find({
+        'user': userId,
+        'books': { $in: [bookId]}
+    })
+    const bookshelfTitlesWithBook = bookshelvesWithBook.map(b => b.title);
+    console.log(bookshelfTitlesWithBook);
+    const shelvesAndTitles = [bookshelves, bookshelfTitlesWithBook]
+    return shelvesAndTitles;
 }
 
 bookshelfSchema.statics.createBookshelfAndAddBook = async function (userId, newBookId, newBookshelfTitles) {

@@ -29,7 +29,26 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
     });
 
     useEffect(function() {
-        setFormData(book)
+        setFormData({
+            title: book.title || '',
+            authors: book.authors || '',
+            pubYear: book.pubYear || '',
+            publisher: book.publisher || '',
+            totalPages: book.totalPages || '',
+            pagesRead: book.pagesRead || '',
+            category: book.category || '',
+            url: book.url || '',
+            description: book.description || '',
+            course: book.course || '',
+            dueDate: book.dueDate ? book.dueDate : '',
+            pinned: book.pinned,
+            notes: book.notes || '',
+            done: book.done,
+            owned: book.owned,
+            error: '',
+            user: book.user,
+            img: book.img || '',
+        })
     }, [book])
     
     // Variables needed for react-select
@@ -85,8 +104,11 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
             setLibrary(newLibrary);
 
             if (formDataCopy.bookshelves) {
-                const updatedBookshelves = await bookshelvesAPI.updateBookshelvesContents(book._id, formDataCopy.bookshelves, formDataCopy.createdBookshelves);
+                const shelvesAndTitles = await bookshelvesAPI.updateBookshelvesContents(book._id, formDataCopy.bookshelves, formDataCopy.createdBookshelves);
+                const updatedBookshelves = shelvesAndTitles[0];
+                const bookshelfTitlesWithBook = shelvesAndTitles[1];
                 setBookshelves(updatedBookshelves);
+                setShelvesInclBook(bookshelfTitlesWithBook);
             }
 
             setFormData({

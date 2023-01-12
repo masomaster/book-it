@@ -37,8 +37,8 @@ async function updateBookshelf(req, res) {
 }
 
 async function updateBookshelvesContents(req, res) {
-  const updatedBookshelves = await Bookshelf.updateBookshelvesContents(req.user._id, req.body.bookId, req.body.bookshelfIds, req.body.newBookshelfTitle)
-  res.json(updatedBookshelves);
+  const shelvesAndTitles = await Bookshelf.updateBookshelvesContents(req.user._id, req.body.bookId, req.body.bookshelfIds, req.body.newBookshelfTitle)
+  res.json(shelvesAndTitles);
 }
 
 async function deleteBookshelf(req, res) {
