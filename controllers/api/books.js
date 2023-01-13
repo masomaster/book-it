@@ -1,3 +1,4 @@
+const { Configuration, OpenAIApi } = require("openai");
 const Book = require('../../models/book');
 
 module.exports = {
@@ -6,8 +7,9 @@ module.exports = {
   getNextUp,
   getInProgressBooks,
   getBooksRead,
+  updateBook,
+  getRecs,
   deleteBook,
-  updateBook
 };
 
 async function getLibrary(req, res) {
@@ -44,4 +46,19 @@ async function deleteBook(req, res) {
 async function updateBook(req, res) {
   const updatedBook = await Book.findByIdAndUpdate(req.body.bookId, req.body.newBookInfo, {new: true});
   res.json(updatedBook);
+}
+
+async function getRecs(req, res) {
+  const configuration = new Configuration({
+    organization: "org-eVtGfFGWJhLqwyGuYbMWzr4E",
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+  const openai = new OpenAIApi(configuration);
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: req.body.query,
+    max_tokens: 4000
+  });
+  console.log(response.data.choices[0].text);
+  res.json(response.data.choices[0].text);
 }

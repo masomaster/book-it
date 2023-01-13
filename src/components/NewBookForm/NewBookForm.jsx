@@ -105,10 +105,6 @@ export default function NewBookForm({ user, library, setLibrary, selectedBook, s
             }
             
             setSelectedBook(null);
-            setNewBookForm({
-                ...initialFormState, 
-                error: 'Book Added!'
-            })
         } catch(err) {
             console.log(err)
             setNewBookForm({
