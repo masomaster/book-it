@@ -82,6 +82,7 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
             </div>
             <div className="search-and-add-panels">
                 <div className="search-panel">
+                    <BookRecs library={library} />
                     <form onSubmit={handleQuery}>
                         <input
                             value={queryText}
@@ -100,9 +101,8 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
                             </div>
                         :
                             <>
-                                <BookRecs library={library} />
-                                <div className="alt-instructions">
-                                    <p className="alt-instructions-text">Or add it manually</p><img className="alt-instructions-arrow" src="https://icones.pro/wp-content/uploads/2021/06/icone-fleche-droite-orange.png" alt="arrow"/>
+                                <div className="manual-instructions">
+                                    <p className="manual-instructions-text">Or add it manually</p><img className="manual-instructions-arrow" src="https://icones.pro/wp-content/uploads/2021/06/icone-fleche-droite-orange.png" alt="arrow"/>
                                 </div>
                             </>
                         }

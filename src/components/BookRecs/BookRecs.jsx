@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Select from 'react-select';
-
+import * as booksAPI from '../../utilities/books-api';
 
 export default function BookRecs({ library }) {
     const [bookChoices, setBookChoices] = useState()
@@ -14,14 +14,18 @@ export default function BookRecs({ library }) {
         }
     }
 
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
         evt.preventDefault();
         if (bookChoices) {
             try {
+                setMessage("Oooo great choices! Hm... Let me think about that for a moment...")
                 const likedBooks = [...bookChoices];
                 const likedBooksString = likedBooks.map(b => b.label).join(', and ')
                 const query = `If I liked the book ${likedBooksString} what other books might I like reading?`
-                console.log(query)
+                console.log({query})
+                const recommendations = await booksAPI.getRecs(query);
+                console.log({recommendations});
+                setMessage(recommendations);
             } catch(err) {
                 console.log(err)
             }
@@ -31,9 +35,9 @@ export default function BookRecs({ library }) {
     }
 
     return (
-        <div className="alt-instructions ai">
-            <p className="alt-instructions-text">Or get AI recommendations! Select up to three books you liked:</p><br />
-            <form onSubmit={handleSubmit}>
+        <div className="ai-instructions">
+            <p className="alt-instructions-text">Not sure what to read next? Get AI recommendations! Select up to three books you liked:</p><br />
+            <form className="ai-form" onSubmit={handleSubmit}>
                 <Select
                     name="likedBooks"
                     isMulti

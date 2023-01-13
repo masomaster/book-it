@@ -9,6 +9,7 @@ router.get('/current', ensureLoggedIn, booksCtrl.getInProgressBooks);
 router.get('/totalbooks', ensureLoggedIn, booksCtrl.getBooksRead);
 router.post('/new', ensureLoggedIn, booksCtrl.addBook);
 router.post('/updatebook', ensureLoggedIn, booksCtrl.updateBook);
+router.post('/getrecs', ensureLoggedIn, booksCtrl.getRecs);
 router.delete('/deletebook/:id', ensureLoggedIn, booksCtrl.deleteBook);
 
 module.exports = router;

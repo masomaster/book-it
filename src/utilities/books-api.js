@@ -29,3 +29,7 @@ export async function deleteBookshelf(bookId) {
 export async function updateBook(bookId, newBookInfo) {
     return sendRequest(`${BASE_URL}/updatebook`, 'POST', {bookId, newBookInfo});
 }
+
+export async function getRecs(query) {
+    return sendRequest(`${BASE_URL}/getrecs`, 'POST', {query});
+}

@@ -13,7 +13,6 @@ export default function BookDetailPage({ library, setLibrary, bookshelves, setBo
     const [loadingBookshelves, setLoadingBookshelves] = useState(true);
     const { bookId } = useParams();
     const book = library.find((b) => b._id === bookId);
-    console.log(book)
     const navigate = useNavigate();
     
     useEffect(() => {

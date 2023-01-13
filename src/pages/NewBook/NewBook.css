@@ -22,20 +22,34 @@
 input, textarea {
     width: 100%;
 }
-.alt-instructions {
+.ai-instructions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    margin: 0 10%;
+}
+.ai-form {
+    margin-bottom: 0;
+    width: 100%;
+}
+.ai-instructions .button-primary {
+    margin-top: 20px;
+}
+.manual-instructions {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 15px;
     justify-content: center;
 }
-.alt-instructions-text {
+.manual-instructions-text {
     text-align: left;
     color: grey;
     margin: 0 15px 0 0;
-
 }
-.alt-instructions-arrow {
+.manual-instructions-arrow {
     width: 30px;
     height: 30px;
     rotate: 90deg;
@@ -56,10 +70,10 @@ input, textarea {
     .search-panel input {
         width: 75%;
     }
-    .alt-instructions-text {
+    .manual-instructions-text {
         text-align: center;
     }
-    .alt-instructions-arrow {
+    .manual-instructions-arrow {
         rotate: 0deg;
     }
 }
