@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = function(req, res, next) {
-    let token = req.get('Authorization') || req.query.token;
+    let token = req.get('Authorization');
     if (token) {
         token = token.replace('Bearer ', '');
         // Check if token is valid and not expired

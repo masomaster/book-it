@@ -14,7 +14,10 @@ async function create(req, res) {
         const token = createJWT(user);
         res.json(token);
     } catch (err) {
-        res.status(400).json(err);
+        if (err && err.code === 11000) {
+            return res.status(400).json({ message: 'Email already registered' });
+        }
+        res.status(400).json({ message: 'Sign up failed' });
     }
 }
 

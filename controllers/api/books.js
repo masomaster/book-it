@@ -38,8 +38,8 @@ async function getLibrary(req, res) {
 }
 
 async function addBook(req, res) {
-  const book = await Book.create(req.body);
-  res.json(book)
+  const book = await Book.create({ ...req.body, user: req.user._id });
+  res.json(book);
 }
 
 async function getNextUp(req, res) {
@@ -58,13 +58,28 @@ async function getBooksRead(req, res) {
 }
 
 async function deleteBook(req, res) {
-  const deletedBook = await Book.findByIdAndDelete(req.params.id);
+  const deletedBook = await Book.findOneAndDelete({
+    _id: req.params.id,
+    user: req.user._id,
+  });
+  if (!deletedBook) {
+    return res.status(404).json({ error: 'Book not found' });
+  }
   const books = await Book.getLibrary(req.user._id);
   res.json(books);
 }
 
 async function updateBook(req, res) {
-  const updatedBook = await Book.findByIdAndUpdate(req.body.bookId, req.body.newBookInfo, {new: true});
+  const newBookInfo = { ...req.body.newBookInfo };
+  delete newBookInfo.user;
+  const updatedBook = await Book.findOneAndUpdate(
+    { _id: req.body.bookId, user: req.user._id },
+    newBookInfo,
+    { new: true }
+  );
+  if (!updatedBook) {
+    return res.status(404).json({ error: 'Book not found' });
+  }
   res.json(updatedBook);
 }
 

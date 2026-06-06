@@ -17,7 +17,7 @@ async function getBookshelves(req, res) {
 }
 
 async function addBookshelf(req, res) {
-  const bookshelf = await Bookshelf.create(req.body);
+  const bookshelf = await Bookshelf.create({ ...req.body, user: req.user._id });
   res.json(bookshelf);
 }
 
@@ -32,7 +32,16 @@ async function addBook(req, res) {
 }
 
 async function updateBookshelf(req, res) {
-  const updatedBookshelf = await Bookshelf.findByIdAndUpdate(req.body.bookshelfId, req.body.newBookshelfInfo, {new: true}).populate('books');
+  const newBookshelfInfo = { ...req.body.newBookshelfInfo };
+  delete newBookshelfInfo.user;
+  const updatedBookshelf = await Bookshelf.findOneAndUpdate(
+    { _id: req.body.bookshelfId, user: req.user._id },
+    newBookshelfInfo,
+    { new: true }
+  ).populate('books');
+  if (!updatedBookshelf) {
+    return res.status(404).json({ error: 'Bookshelf not found' });
+  }
   res.json(updatedBookshelf);
 }
 
@@ -42,7 +51,13 @@ async function updateBookshelvesContents(req, res) {
 }
 
 async function deleteBookshelf(req, res) {
-  const deletedBookshelf = await Bookshelf.findByIdAndDelete(req.params.id);
+  const deletedBookshelf = await Bookshelf.findOneAndDelete({
+    _id: req.params.id,
+    user: req.user._id,
+  });
+  if (!deletedBookshelf) {
+    return res.status(404).json({ error: 'Bookshelf not found' });
+  }
   const bookshelves = await Bookshelf.getBookshelves(req.user._id).populate('books');
   res.json(bookshelves);
 }
