@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../../utilities/users-service';
+import { httpsUrl } from '../../utilities/https-url';
 import SearchResultItem from '../../components/SearchResultItem/SearchResultItem';
 import NewBookForm from '../../components/NewBookForm/NewBookForm';
 import BookRecs from '../../components/BookRecs/BookRecs';
@@ -92,12 +93,12 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
             publisher: book.volumeInfo.publisher ? book.volumeInfo.publisher : '',
             totalPages: book.volumeInfo.pageCount ? book.volumeInfo.pageCount : '',
             category: book.volumeInfo.categories ? book.volumeInfo.categories[0] : '',
-            url: book.volumeInfo.previewLink ? book.volumeInfo.previewLink : '',
+            url: httpsUrl(book.volumeInfo.previewLink) || '',
             description: book.volumeInfo.description ? book.volumeInfo.description : '',
             course: '',
             pagesRead: '',
             dueDate: '',
-            img: book.volumeInfo.imageLinks?.smallThumbnail,
+            img: httpsUrl(book.volumeInfo.imageLinks?.smallThumbnail),
         }
         setSelectedBook(transformedBook)
         scrollToForm.current.scrollIntoView({behavior:"smooth"})

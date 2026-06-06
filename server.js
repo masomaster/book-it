@@ -17,6 +17,11 @@ require('dotenv').config();
 
 const app = express();
 
+// Vercel (and other reverse proxies): correct client IP for rate limiting
+if (process.env.VERCEL || process.env.TRUST_PROXY === '1') {
+  app.set('trust proxy', 1);
+}
+
 app.use(logger('dev'));
 app.use(express.json());
 
@@ -57,25 +62,36 @@ if (require.main === module) {
 
 module.exports = app;
 
-/* --- AdminJS: local only (ENABLE_ADMINJS=true) --- */
+/* --- AdminJS: opt-in only; blocked in production unless explicitly allowed --- */
 if (require.main === module && process.env.ENABLE_ADMINJS === 'true') {
-  const adminPort = 8000;
+  if (
+    process.env.NODE_ENV === 'production' &&
+    process.env.ALLOW_ADMINJS_IN_PRODUCTION !== 'true'
+  ) {
+    console.warn(
+      'AdminJS: not starting in production (set ALLOW_ADMINJS_IN_PRODUCTION=true to override — insecure on a public host).'
+    );
+  } else {
+    const adminPort = 8000;
 
-  const startAdmin = async () => {
-    const adminApp = express();
+    const startAdmin = async () => {
+      const adminApp = express();
 
-    const admin = new AdminJS({
-      resources: [Book, Bookshelf, User],
-      rootPath: '/admin',
-    });
+      const admin = new AdminJS({
+        resources: [Book, Bookshelf, User],
+        rootPath: '/admin',
+      });
 
-    const adminRouter = AdminJSExpress.buildRouter(admin);
-    adminApp.use(admin.options.rootPath, adminRouter);
+      const adminRouter = AdminJSExpress.buildRouter(admin);
+      adminApp.use(admin.options.rootPath, adminRouter);
 
-    adminApp.listen(adminPort, () => {
-      console.log(`AdminJS started on http://localhost:${adminPort}${admin.options.rootPath}`);
-    });
-  };
+      adminApp.listen(adminPort, () => {
+        console.log(
+          `AdminJS started on http://localhost:${adminPort}${admin.options.rootPath}`
+        );
+      });
+    };
 
-  startAdmin();
+    startAdmin();
+  }
 }

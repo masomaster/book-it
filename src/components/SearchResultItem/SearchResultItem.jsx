@@ -1,5 +1,6 @@
 import './SearchResultItem.css';
 import '../Book/Book.css';
+import { httpsUrl } from '../../utilities/https-url';
 
 export default function SearchResultItem({ book, handlePopulateForm }) {
     function handleClick() {
@@ -9,7 +10,7 @@ export default function SearchResultItem({ book, handlePopulateForm }) {
     return (
         <div className="book-list-item" onClick={handleClick}>
             <div className="book-cover-img">
-                <img src={book.volumeInfo.imageLinks?.smallThumbnail} alt="book cover"/>
+                <img src={httpsUrl(book.volumeInfo.imageLinks?.smallThumbnail)} alt="book cover"/>
             </div>
             <p>{book.volumeInfo.title}</p>
             <p>{book.volumeInfo.authors ? book.volumeInfo?.authors[0] : ''}</p>

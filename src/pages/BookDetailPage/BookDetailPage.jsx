@@ -6,6 +6,7 @@ import * as bookshelvesAPI from '../../utilities/bookshelves-api';
 
 import EditBookForm from '../../components/EditBookForm/EditBookForm';
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
+import { httpsUrl } from '../../utilities/https-url';
 import './BookDetailPage.css';
 
 export default function BookDetailPage({ library, setLibrary, bookshelves, setBookshelves, shelvesInclBook, setShelvesInclBook }) {
@@ -62,7 +63,7 @@ export default function BookDetailPage({ library, setLibrary, bookshelves, setBo
                 <>
                     <div className="cover-and-info">
                         <div className="cover-progress">
-                            <img src={book.img} alt="book cover"/>
+                            <img src={httpsUrl(book.img)} alt="book cover"/>
                             {typeof(book.percentRead) === "number" ?
                                 <ProgressBar done={book.percentRead}/>
                                 :

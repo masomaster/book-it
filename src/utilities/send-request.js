@@ -14,5 +14,14 @@ export default async function sendRequest(url, method = 'GET', payload = null) {
     const res = await fetch(url, options);
     if (res.ok) return res.json();
     const errBody = await res.text();
-    throw new Error(`HTTP ${res.status}: ${errBody.slice(0, 400)}`);
+    let detail = errBody.slice(0, 400);
+    try {
+        const parsed = JSON.parse(errBody);
+        if (parsed && typeof parsed.message === 'string') {
+            detail = parsed.message;
+        }
+    } catch {
+        /* keep raw slice */
+    }
+    throw new Error(detail || `HTTP ${res.status}`);
 }

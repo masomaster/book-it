@@ -4,6 +4,7 @@ import CreatableSelect from 'react-select/creatable';
 import makeAnimated from 'react-select/animated';
 import * as booksAPI from '../../utilities/books-api';
 import * as bookshelvesAPI from '../../utilities/bookshelves-api';
+import { httpsUrl } from '../../utilities/https-url';
 import './EditBookForm.css';
 
 export default function EditBookForm({ book, library, setLibrary, bookshelves, setBookshelves, setEditToggle, shelvesInclBook, setShelvesInclBook }) {
@@ -38,7 +39,7 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
             totalPages: book.totalPages || '',
             pagesRead: book.pagesRead || '',
             category: book.category || '',
-            url: book.url || '',
+            url: httpsUrl(book.url) || '',
             description: book.description || '',
             course: book.course || '',
             dueDate: book.dueDate ? book.dueDate : '',
@@ -49,7 +50,7 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
             owned: book.owned,
             error: '',
             user: book.user,
-            img: book.img || '',
+            img: httpsUrl(book.img) || '',
         })
     }, [book])
     
@@ -114,24 +115,26 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
             }
 
             setFormData({
-                title: book.title,
-                authors: book.authors,
-                pubYear: book.pubYear,
-                publisher: book.publisher,
-                totalPages: book.totalPages,
-                pagesRead: book.pagesRead,
-                category: book.category,
-                url: book.url,
-                description: book.description,
-                course: book.course,
-                dueDate: book.dueDate ? book.dueDate : '',
-                pinned: book.pinned,
-                notes: book.notes,
-                done: book.done,
-                owned: book.owned,
-                error: book.error,
-                img: book.img,
-            })
+                title: updatedBook.title || '',
+                authors: updatedBook.authors || '',
+                pubYear: updatedBook.pubYear || '',
+                publisher: updatedBook.publisher || '',
+                totalPages: updatedBook.totalPages || '',
+                pagesRead: updatedBook.pagesRead || '',
+                category: updatedBook.category || '',
+                url: httpsUrl(updatedBook.url) || '',
+                description: updatedBook.description || '',
+                course: updatedBook.course || '',
+                dueDate: updatedBook.dueDate ? updatedBook.dueDate : '',
+                feeling: updatedBook.feeling || '',
+                pinned: updatedBook.pinned,
+                notes: updatedBook.notes || '',
+                done: updatedBook.done,
+                owned: updatedBook.owned,
+                error: '',
+                user: updatedBook.user,
+                img: httpsUrl(updatedBook.img) || '',
+            });
             setEditToggle(false)
         } catch(err) {
             console.log(err)
@@ -144,7 +147,7 @@ export default function EditBookForm({ book, library, setLibrary, bookshelves, s
     return (
         <div className="edit-book-form">
             <div>
-                <img src={book.img} alt="book cover"/>
+                <img src={httpsUrl(book.img)} alt="book cover"/>
             </div>
             <form onSubmit={handleSubmit}>
                 <label>Title</label>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as booksAPI from '../../utilities/books-api';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import { httpsUrl } from '../../utilities/https-url';
 import "./NextUp.css";
 
 export default function NextUp() {
@@ -26,7 +27,7 @@ export default function NextUp() {
                     </div>
                     <div>
                         <Link to={`/books/${nextUpBook?._id}`}>
-                            <img src={nextUpBook?.img} alt="book over"/>
+                            <img src={httpsUrl(nextUpBook?.img)} alt="book over"/>
                             <h4>{nextUpBook?.title}</h4>
                         </Link>
                     </div>

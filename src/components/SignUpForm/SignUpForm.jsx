@@ -27,14 +27,17 @@ export default function SignUpForm({setUser, handleToggle}) {
                 // const formDataCopy = {name, email, password};
             const user = await signUp(formDataCopy);
             setUser(user);
-        } catch {
+        } catch (err) {
             setSignUpForm({
-                ...signUpForm, 
-                error: 'Sign Up Failed - Try Again'});
+                ...signUpForm,
+                error: err.message || 'Sign Up Failed - Try Again',
+            });
         }
     }
 
-    const disable = signUpForm.password !== signUpForm.confirm;
+    const disable =
+        signUpForm.password !== signUpForm.confirm ||
+        signUpForm.password.length < 8;
     return (
         <div className="auth-page-form">
             <div className="form-container">
@@ -43,10 +46,10 @@ export default function SignUpForm({setUser, handleToggle}) {
                 <input type="text" name="name" value={signUpForm.name} onChange={handleChange} required />
                 <label>Email</label>
                 <input type="email" name="email" value={signUpForm.email} onChange={handleChange} required />
-                <label>Password</label>
-                <input type="password" name="password" value={signUpForm.password} onChange={handleChange} required />
+                <label>Password (at least 8 characters)</label>
+                <input type="password" name="password" value={signUpForm.password} onChange={handleChange} required minLength={8} autoComplete="new-password" />
                 <label>Confirm</label>
-                <input type="password" name="confirm" value={signUpForm.confirm} onChange={handleChange} required />
+                <input type="password" name="confirm" value={signUpForm.confirm} onChange={handleChange} required minLength={8} autoComplete="new-password" />
                 <button type="submit" disabled={disable}>SIGN UP</button>
             </form>
             </div>
