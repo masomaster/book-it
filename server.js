@@ -3,12 +3,10 @@ const AdminJSExpress = require('@adminjs/express')
 AdminJS.registerAdapter(require('@adminjs/mongoose'));
 
 const express = require('express');
-const Connect = require('connect-pg-simple')
-const session = require('express-session')
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
-const ensureLoggedIn = require('./config/ensureLoggedIn')
+const connectDB = require('./config/database');
 
 // Must require models for AdminJS
 const Book = require('./models/book')
@@ -16,7 +14,6 @@ const Bookshelf = require('./models/bookshelf')
 const User = require('./models/user')
 
 require('dotenv').config();
-require('./config/database');
 
 const app = express();
 
@@ -45,28 +42,40 @@ app.get('/*', function(req, res) {
 // development to avoid collision with React's dev server
 const port = process.env.PORT || 3001;
 
-app.listen(port, function() {
-  console.log(`Express app running on port ${port}`)
-});
-
-
-/* --- Extra middleware for AdminJS --- */
-const PORT = 8000
-
-const start = async () => {
-  const app = express()
-
-  const admin = new AdminJS({
-    resources: [Book, Bookshelf, User],
-    rootPath: '/admin',
-  })
-
-  const adminRouter = AdminJSExpress.buildRouter(admin)
-  app.use(admin.options.rootPath, adminRouter)
-
-  app.listen(PORT, () => {
-    console.log(`AdminJS started on http://localhost:${PORT}${admin.options.rootPath}`)
-  })
+if (require.main === module) {
+  connectDB()
+    .then(() => {
+      app.listen(port, function () {
+        console.log(`Express app running on port ${port}`);
+      });
+    })
+    .catch((err) => {
+      console.error('Failed to start server:', err.message);
+      process.exit(1);
+    });
 }
 
-start()
+module.exports = app;
+
+/* --- AdminJS: local only (ENABLE_ADMINJS=true) --- */
+if (require.main === module && process.env.ENABLE_ADMINJS === 'true') {
+  const adminPort = 8000;
+
+  const startAdmin = async () => {
+    const adminApp = express();
+
+    const admin = new AdminJS({
+      resources: [Book, Bookshelf, User],
+      rootPath: '/admin',
+    });
+
+    const adminRouter = AdminJSExpress.buildRouter(admin);
+    adminApp.use(admin.options.rootPath, adminRouter);
+
+    adminApp.listen(adminPort, () => {
+      console.log(`AdminJS started on http://localhost:${adminPort}${admin.options.rootPath}`);
+    });
+  };
+
+  startAdmin();
+}

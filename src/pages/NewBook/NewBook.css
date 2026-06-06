@@ -15,6 +15,11 @@
     display: flex;
     flex-wrap: wrap;
 }
+.search-results-empty {
+    margin: 1rem 0;
+    color: #555;
+    text-align: center;
+}
 .book-form {
     text-align: left;
     scroll-margin: 70px;

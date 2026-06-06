@@ -3,6 +3,7 @@ const router = express.Router();
 const booksCtrl = require('../../controllers/api/books');
 const ensureLoggedIn = require('../../config/ensureLoggedIn');
 
+router.get('/google-volumes', ensureLoggedIn, booksCtrl.googleVolumes);
 router.get('/', ensureLoggedIn, booksCtrl.getLibrary);
 router.get('/next', ensureLoggedIn, booksCtrl.getNextUp);
 router.get('/current', ensureLoggedIn, booksCtrl.getInProgressBooks);
