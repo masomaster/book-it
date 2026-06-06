@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getToken } from '../../utilities/users-service';
 import SearchResultItem from '../../components/SearchResultItem/SearchResultItem';
 import NewBookForm from '../../components/NewBookForm/NewBookForm';
 import BookRecs from '../../components/BookRecs/BookRecs';
@@ -8,7 +9,9 @@ import "./NewBook.css";
 // import api from 'zotero-api-client';
 
 export default function NewBook({ user, library, setLibrary, bookshelves, setBookshelves, setShelvesInclBook, shelvesInclBook }) {
-    const [searchResults, setSearchResults] = useState("");
+    /** `null` = not searched yet; array = last search outcome (may be empty) */
+    const [searchResults, setSearchResults] = useState(null);
+    const [searchHint, setSearchHint] = useState(null);
     const [queryText, setQueryText] = useState("");
     const [selectedBook, setSelectedBook] = useState(null);
     const navigate = useNavigate();
@@ -18,19 +21,67 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     }, []);
 
-    function handleQuery(evt) {
+    async function handleQuery(evt) {
         evt.preventDefault();
-        setQueryText(queryText.trim());
-        const url = `https://www.googleapis.com/books/v1/volumes?q=${queryText}&maxResults=20`;
-        fetch(url)
-        .then((res) => res.json())
-        .then((content) => {
-            setSearchResults(content.items)
-            setQueryText("");
-        })
-        .catch((err) => {
+        const q = queryText.trim();
+        if (!q) return;
+
+        setSearchHint(null);
+
+        const token = getToken();
+        const headers = {};
+        if (token) headers.Authorization = `Bearer ${token}`;
+
+        try {
+            const res = await fetch(
+                `/api/books/google-volumes?q=${encodeURIComponent(q)}`,
+                { headers }
+            );
+            let content;
+            try {
+                content = await res.json();
+            } catch {
+                setSearchResults([]);
+                setSearchHint('Search returned an unreadable response. Try again.');
+                return;
+            }
+
+            if (!res.ok) {
+                console.error('Book search:', content);
+                setSearchResults([]);
+                setSearchHint(
+                    content.message ||
+                        'Book search failed. Check GOOGLE_BOOKS_API_KEY on the server and try again.'
+                );
+                return;
+            }
+
+            if (content.error) {
+                const msg =
+                    typeof content.error === 'object' && content.error.message
+                        ? content.error.message
+                        : String(content.error);
+                console.error('Google Books:', content.error);
+                setSearchResults([]);
+                setSearchHint(msg);
+                return;
+            }
+
+            const items = Array.isArray(content.items) ? content.items : [];
+            setSearchResults(items);
+            setQueryText('');
+            if (items.length === 0) {
+                setSearchHint(
+                    'No volumes matched. Try title + author, or add manually on the right.'
+                );
+            }
+        } catch (err) {
             console.error(err);
-        });
+            setSearchResults([]);
+            setSearchHint(
+                'Could not reach the app server. For local dev, run npm run server on port 3001.'
+            );
+        }
     }
 
     function handlePopulateForm(book){        
@@ -93,22 +144,25 @@ export default function NewBook({ user, library, setLibrary, bookshelves, setBoo
                         <button type="submit" className="button-primary">Search!</button>
                     </form>
                     <div>
-                        { searchResults ?
+                        {searchResults === null ? (
+                            <div className="manual-instructions">
+                                <p className="manual-instructions-text">Or add it manually</p><img className="manual-instructions-arrow" src="https://icones.pro/wp-content/uploads/2021/06/icone-fleche-droite-orange.png" alt="arrow"/>
+                            </div>
+                        ) : searchResults.length === 0 ? (
+                            <p className="search-results-empty">
+                                {searchHint ||
+                                    'No books found. Try different keywords, or add manually on the right.'}
+                            </p>
+                        ) : (
                             <div className="search-results">
                                 {searchResults.map(book => (
-                                    <SearchResultItem book={book} handlePopulateForm={handlePopulateForm} key={book.id}/>                                
+                                    <SearchResultItem book={book} handlePopulateForm={handlePopulateForm} key={book.id}/>
                                 ))}
                             </div>
-                        :
-                            <>
-                                <div className="manual-instructions">
-                                    <p className="manual-instructions-text">Or add it manually</p><img className="manual-instructions-arrow" src="https://icones.pro/wp-content/uploads/2021/06/icone-fleche-droite-orange.png" alt="arrow"/>
-                                </div>
-                            </>
-                        }
+                        )}
                     </div>
                 </div>
-                <NewBookForm user={user} selectedBook={selectedBook} setSelectedBook={setSelectedBook} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} scrollToForm= {scrollToForm}handlePopulateForm={handlePopulateForm}/>
+                <NewBookForm user={user} selectedBook={selectedBook} setSelectedBook={setSelectedBook} library={library} setLibrary={setLibrary} bookshelves={bookshelves} setBookshelves={setBookshelves} shelvesInclBook={shelvesInclBook} setShelvesInclBook={setShelvesInclBook} scrollToForm={scrollToForm} handlePopulateForm={handlePopulateForm}/>
             </div>
         </div>
     )

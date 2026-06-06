@@ -2,7 +2,7 @@
 
 ## Helping people finish what they're reading
 
-<a href="https://book-it-reading.herokuapp.com/" target="_blank">BookIt!</a> is a React app to help users track and motivate their reading progress and find their next great read with AI-generated book recommendations. Users can create an account to access full CRUD functionality using RESTful APIs to create books and bookshelves, pin them to prioritize, see their progress and cumulative reading stats, and be motivated to pick up that book! Google Books API provides full book information and beautiful cover images. Users can even get custom, AI-generated recommendations using the OpenAI API!
+<a href="https://book-it-reading.herokuapp.com/" target="_blank">BookIt!</a> is a React app to help users track and motivate their reading progress and find their next great read with AI-generated book recommendations. Users can create an account to access full CRUD functionality using RESTful APIs to create books and bookshelves, pin them to prioritize, see their progress and cumulative reading stats, and be motivated to pick up that book! Google Books API provides full book information and beautiful cover images. Users can even get custom, AI-generated recommendations using the Claude API!
 
 <img src="./public/home_shot.png" width="500"/>
 
@@ -15,7 +15,7 @@
   <img  src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/nodejs/nodejs-plain.svg" alt="NodeJS" width="50" height="50"/> &nbsp;
   <img  src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/express/express-original.svg" alt="ExpressJS" width="50" height="50"/> &nbsp;
   <img  src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/mongodb/mongodb-original.svg" alt="MongoDB" width="50" height="50"/> &nbsp;
-- <a href="https://openai.com/api/">OpenAI API</a>
+- <a href="https://docs.anthropic.com/">Claude API (Anthropic)</a>
 - <a href="https://developers.google.com/books/docs/v1/getting_started">Google Books API</a>
 - <a href="https://react-select.com/">React-Select</a>
 - <a href="https://adminjs.co/">AdminJS</a>
